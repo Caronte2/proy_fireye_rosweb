@@ -1,0 +1,502 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #f2f2f2;
+  font-family: 'Rajdhani', sans-serif;
+  color: #111;
+}
+
+.page-wrapper {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.main-panel {
+  width: 100%;
+  max-width: nonepx;
+  background-color: #efefef;
+  margin: 0 auto;
+  padding: 12px 0 0 0;
+  overflow: hidden;
+}
+
+/* Texto pequeño superior */
+.small-title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #7a7a7a;
+  padding-left: 28px;
+  margin-bottom: 8px;
+}
+
+/* Cabecera */
+.top-bar {
+  padding: 0 28px;
+  margin-bottom: 8px;
+}
+
+.eye-logo-wrap {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.eye-logo {
+  width: 125px;
+  height: auto;
+}
+
+.user-icon-wrap {
+  width: 60px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Marca */
+.brand-section {
+  padding: 0 20px;
+  margin-bottom: 10px;
+}
+
+.brand-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 5.8rem;
+  line-height: 1;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 3px;
+  color: #000;
+}
+
+.brand-e {
+  color: #b30000;
+}
+
+.brand-subtitle {
+  margin-top: 14px;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #222;
+}
+
+/* Zona roja unificada */
+.red-shape-section {
+  position: relative;
+  margin-top: 10px;
+}
+
+/* Parte superior roja */
+.hero-zone {
+  position: relative;
+  background-color: #b30000;
+  margin: 0 auto;
+  width: 100%;
+  min-height: 75vh;
+  border-top-left-radius: 55% 100%;
+  border-top-right-radius: 55% 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-top: 70px;
+  padding-bottom: 40px;
+}
+
+/* Parte inferior roja */
+.hardware-zone {
+  position: relative;
+  background-color: #b30000;
+  width: 100%;
+  min-height: 75vh;
+  margin-top: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 50% 100%;
+  border-bottom-right-radius: 50% 100%;
+  padding-top: 70px;
+  padding-bottom: 40px;
+  overflow: hidden;
+}
+
+
+.hardware-zone .container,
+.hero-zone .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Hero */
+.hero-row .col-lg-8 {
+  position: relative;
+}
+
+.hero-dashboard {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  width: 100%;
+}
+
+.hero-robot {
+  position: absolute;
+  right: 10%;
+  bottom: -40px;
+  width: 280px;
+  z-index: 5;
+}
+
+.hero-cta {
+  margin-top: 10px;
+}
+
+.protect-btn {
+  background-color: #ffffff;
+  color: #b30000;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 28px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+}
+
+.protect-btn:hover {
+  background-color: #f7f7f7;
+  color: #8f0000;
+}
+
+.arrow-down {
+  color: #ffffff;
+  font-size: 5rem;
+  line-height: 1;
+  margin-top: -12px;
+  font-weight: 700;
+}
+
+/* Hardware */
+.hardware-header {
+  margin-bottom: 20px;
+}
+
+.hardware-eye {
+  width: 100px;
+  height: auto;
+  margin-top: -110px;
+}
+
+.hardware-content {
+  color: white;
+  position: relative;
+
+}
+
+.hardware-robot {
+  max-width: 260px;
+  width: 100%;
+}
+
+.hardware-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 22px;
+  color: #fff;
+  margin-top: -20px;
+}
+
+.hardware-item {
+  margin-bottom: 18px;
+}
+
+.hardware-item h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+  color: #fff;
+}
+
+.hardware-item p {
+  font-size: 1.55rem;
+  line-height: 1.1;
+  margin: 0;
+  color: #fff;
+}
+
+/* Parte inferior blanca */
+.info-section {
+  padding: 42px 34px 36px 34px;
+  background-color: #efefef;
+  margin-top: -10px;
+}
+
+.info-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 16px;
+}
+
+.info-text {
+  font-size: 1.65rem;
+  font-weight: 500;
+  line-height: 1.15;
+  color: #222;
+  margin-bottom: 14px;
+}
+
+.info-list {
+  padding-left: 24px;
+  margin-top: 10px;
+}
+
+.info-list li {
+  font-size: 1.55rem;
+  line-height: 1.15;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.store-box {
+  margin-top: 18px;
+}
+
+.store-icon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+
+}
+
+.hardware-item {
+  position: relative;
+  margin-left: 60px;
+}
+.hardware-item.lidar::before {/* 第一条横线*/
+  content: "";
+  position: absolute;
+  left: -285px;
+  top: 12px;
+  width: 268px;
+  height: 2px;
+  background: white;
+}
+.hardware-item.raspberry::before {/* 第二条横线*/
+  content: "";
+  position: absolute;
+  left: -200px;
+  top: 11px;
+  width: 180px;
+  height: 2px;
+  background: white;
+}
+.hardware-item.battery::before {/* 第三条横线*/
+  content: "";
+  position: absolute;
+  left: -300px;
+  top: 30px;
+  width: 285px;
+  height: 2px;
+  background: white;
+}
+.hardware-item.raspberry::after {/* 第二条斜线段*/
+  content: "";
+  position: absolute;
+  left: -200px;
+  top: 11px;
+  width: 2px;
+  height: 57px;
+  background: white;
+
+  transform: rotate(69deg);   
+  transform-origin: top left; 
+}
+.hardware-item.battery::after {/* 第三条斜线段*/
+  content: "";
+  position: absolute;
+  left: -299px;
+  top: 30px;
+  width: 2px;
+  height: 62px;
+  background: white;
+
+  transform: rotate(110deg);   
+  transform-origin: top left; 
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .brand-title {
+    font-size: 4.8rem;
+  }
+
+  .brand-subtitle {
+    font-size: 1.6rem;
+    max-width: 860px;
+  }
+
+  .hardware-title {
+    font-size: 2.2rem;
+  }
+
+  .hardware-item h3 {
+    font-size: 1.7rem;
+  }
+
+  .hardware-item p,
+  .info-text,
+  .info-list li {
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .small-title {
+    font-size: 1.4rem;
+    padding-left: 18px;
+  }
+
+  .brand-title {
+    font-size: 3.8rem;
+  }
+
+  .brand-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .top-bar {
+    padding: 0 18px;
+  }
+
+  .hero-zone {
+    min-height: auto;
+    padding-top: 40px;
+  }
+
+  .hardware-zone {
+    min-height: auto;
+    padding-bottom: 50px;
+  }
+
+  .hero-dashboard {
+    max-width: 420px;
+  }
+
+  .hero-robot {
+    max-width: 220px;
+    margin-top: 20px;
+  }
+
+  .hardware-robot {
+    max-width: 210px;
+    margin-bottom: 24px;
+     position: relative;
+  z-index: 5;
+  }
+
+  .hardware-title {
+    text-align: center;
+  }
+
+  .hardware-item {
+    text-align: center;
+  }
+
+  .info-section {
+    padding: 28px 20px 28px 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-panel {
+    width: 100%;
+  }
+
+  .small-title {
+    font-size: 1rem;
+  }
+
+  .eye-logo {
+    width: 120px;
+  }
+
+  .user-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .brand-title {
+    font-size: 2.4rem;
+  }
+
+  .brand-subtitle {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .protect-btn {
+    font-size: 0.95rem;
+    padding: 10px 18px;
+  }
+
+  .arrow-down {
+    font-size: 3rem;
+  }
+
+  .hardware-title {
+    font-size: 1.5rem;
+  }
+
+  .hardware-item h3 {
+    font-size: 1.2rem;
+  }
+
+  .hardware-item p,
+  .info-text,
+  .info-list li {
+    font-size: 1rem;
+  }
+
+  .info-title {
+    font-size: 1.4rem;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
+.arrow-down {
+  display: inline-block;
+  color: #ffffff;
+  font-size: 5rem;
+  line-height: 1;
+  margin-top: -12px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.arrow-down:hover {
+  transform: translateY(6px);
+  opacity: 0.7;
+}
+.hero-cta {
+  margin-top: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.arrow-down {
+  margin-top: 12px; /* 控制按钮和箭头间距 */
+}

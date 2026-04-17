@@ -1,0 +1,137 @@
+/* Fondo general */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #d9d9d9;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Contenedor principal */
+.main-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/* Logo superior */
+.top-logo {
+  margin-bottom: 30px;
+}
+
+.top-logo img {
+  width: 150px;
+  height: auto;
+  display: block;
+}
+
+/* Círculo rojo */
+.login-circle {
+  width: 700px;
+  height: 700px;
+  background-color: #a80000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Contenido interno */
+.login-content {
+  width: 55%;
+  color: white;
+}
+
+/* Título */
+.login-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+/* Labels */
+.custom-label {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+}
+
+/* Inputs */
+.custom-input {
+  height: 55px;
+  border-radius: 30px;
+  border: 3px solid white;
+  background-color: transparent;
+  color: white;
+  font-size: 1.2rem;
+  padding-left: 20px;
+}
+
+.custom-input:focus {
+  background-color: transparent;
+  color: white;
+  border-color: white;
+  box-shadow: none;
+}
+
+/* Placeholder */
+.custom-input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Botón */
+.custom-btn {
+  background-color: white;
+  color: #a80000;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 30px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.custom-btn:hover {
+  background-color: #f2f2f2;
+  color: #8a0000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-circle {
+    width: 90vw;
+    height: 90vw;
+    min-width: 320px;
+    min-height: 320px;
+  }
+
+  .login-content {
+    width: 70%;
+  }
+
+  .login-title {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  .custom-label {
+    font-size: 1.1rem;
+  }
+
+  .custom-input {
+    height: 45px;
+    font-size: 1rem;
+  }
+
+  .top-logo img {
+    width: 70px;
+  }
+}
