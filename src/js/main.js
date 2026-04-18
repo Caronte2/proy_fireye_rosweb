@@ -35,7 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Mapa recibido");
         drawMap(msg);
       });
-  });
+        const poseListener = new ROSLIB.Topic({
+  ros: ros,
+  name: '/amcl_pose',
+  messageType: 'geometry_msgs/PoseWithCovarianceStamped'
+});
+
+poseListener.subscribe(function(msg) {
+  console.log("Posición recibida:", msg);
+  drawRobotPosition(msg);
+});
+});
+
 
   ros.on('error', (error) => {
     console.log("Error:", error);
@@ -59,7 +70,21 @@ function updateCameraFeed() {
 }
 
 
+function drawRobotPosition(msg) {
+  const canvas = document.getElementById("mapCanvas");
+  const ctx = canvas.getContext("2d");
 
+  const x = msg.pose.pose.position.x;
+  const y = msg.pose.pose.position.y;
+
+  console.log("Robot X:", x, "Robot Y:", y);
+
+  
+  const posText = document.getElementById("robotPosition");
+  if (posText) {
+    posText.innerText = `X: ${x.toFixed(2)} | Y: ${y.toFixed(2)}`;
+  }
+}
 
 function drawMap(msg) {
 
@@ -70,7 +95,7 @@ function drawMap(msg) {
   const height = msg.info.height;
   const data = msg.data;
 
-  const scale = 10;  //  放大倍数（关键）
+  const scale = 10;  
 
   canvas.width = width * scale;
   canvas.height = height * scale;
@@ -93,7 +118,7 @@ function drawMap(msg) {
     imageData.data[idx + 3] = 255;
   }
 
-  // 创建临时canvas
+  
   const tempCanvas = document.createElement("canvas");
   const tempCtx = tempCanvas.getContext("2d");
 
@@ -102,7 +127,7 @@ function drawMap(msg) {
 
   tempCtx.putImageData(imageData, 0, 0);
 
-  // 翻转 + 放大
+ 
   ctx.setTransform(scale, 0, 0, -scale, 0, height * scale);
   ctx.drawImage(tempCanvas, 0, 0);
 }
