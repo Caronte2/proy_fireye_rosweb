@@ -39,14 +39,16 @@ body {
 }
 
 .eye-logo-wrap {
+  width: 11rem;
+  height: 8rem;
   flex: 1;
   display: flex;
   justify-content: center;
 }
 
 .eye-logo {
-  width: 125px;
-  height: auto;
+  width: 11rem;
+  height: 8rem;
 }
 
 .user-icon-wrap {
