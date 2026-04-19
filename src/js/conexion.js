@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', event => {
       let service = new ROSLIB.Service({
         ros : data.ros,
         name : '/iniciar_mision',
-        serviceType : 'std_srvs/Trigger', // ✅ corregido
+        serviceType : 'std_srvs/Trigger', 
       });
-
+    console.log("Clic en botón de iniciar misión");
       service.callService(new ROSLIB.ServiceRequest({}), function(result) {
         console.log('Resultado de la misión: ' + result.message);
       });
