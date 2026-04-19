@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', event => {
     document.getElementById("btn_con").addEventListener("click", connect)
     document.getElementById("btn_dis").addEventListener("click", disconnect)
     document.getElementById("btn_mision").addEventListener("click", empezarMision);
+    document.getElementById("btn_delante").addEventListener("click", movimientoAdelante)
+    document.getElementById("btn_atras").addEventListener("click", movimientoAtras)
+    document.getElementById("btn_derecha").addEventListener("click", movimientoDerecha)
+    document.getElementById("btn_izquierda").addEventListener("click", movimientoIzquierda)
 
     data = {
         // ros connection
@@ -45,15 +49,52 @@ document.addEventListener('DOMContentLoaded', event => {
     }
 
     function empezarMision(){
-      let service = new ROSLIB.Service({
+        let service = new ROSLIB.Service({
         ros : data.ros,
         name : '/iniciar_mision',
         serviceType : 'std_srvs/Trigger', 
-      });
-    console.log("Clic en botón de iniciar misión");
-      service.callService(new ROSLIB.ServiceRequest({}), function(result) {
+        });
+
+        console.log("Clic en botón de iniciar misión");
+        service.callService(new ROSLIB.ServiceRequest({}), function(result) {
         console.log('Resultado de la misión: ' + result.message);
-      });
+        });
+    }
+
+    function movimientoAdelante(){
+    	data.service_busy = true
+	    data.service_response = ''
+
+        //definimos los datos del servicio
+	    let service = new ROSLIB.Service({
+	        ros: data.ros,
+	        name: '/movimiento_servicio',
+	        serviceType: 'custom_interface/srv/MyMoveMsg'
+	    })
+
+	    let request = new ROSLIB.ServiceRequest({
+	        move: 'delante'
+	    })
+
+	    service.callService(request, (result) => {
+	        data.service_busy = false
+	        data.service_response = JSON.stringify(result)
+	    }, (error) => {
+	        data.service_busy = false
+	        console.error(error)
+	    })
+    }
+
+    function movimientoAtras(){
+        
+    }
+
+    function movimientoDerecha(){
+        
+    }
+
+    function movimientoIzquierda(){
+        
     }
 
 });
