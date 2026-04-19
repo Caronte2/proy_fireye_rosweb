@@ -1,0 +1,150 @@
+/**
+ * @file configuracion.css
+ * @brief Estilos finales corregidos: posicionamiento de botón, iconos y ocultación de pestañas.
+ */
+
+:root {
+    --primary-red: #8b0000;
+    --bg-gray: #cfcfcf;
+    --panel-gray: #b7b7b7;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-gray);
+    margin: 0;
+    padding: 20px;
+}
+
+/* HEADER: Logo a la izquierda, iconos a la derecha */
+.header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 10px 40px;
+    margin-bottom: 20px;
+}
+
+.header-icons {
+    display: flex;
+    gap: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.main-title {
+    font-family: 'Arial Black', sans-serif;
+    letter-spacing: -1px;
+    margin-left: 40px;
+}
+
+/* TABS */
+.tabs {
+    margin-left: 40px;
+    display: flex;
+}
+
+.tab-link {
+    background: var(--panel-gray);
+    border: 2px solid var(--primary-red);
+    border-bottom: none;
+    padding: 10px 30px;
+    border-radius: 15px 15px 0 0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab-link.active {
+    background: var(--panel-gray);
+    box-shadow: inset 0px 4px 0px var(--primary-red);
+}
+
+/* --- LÓGICA DE VISIBILIDAD DE SECCIONES --- */
+.tab-content {
+    display: none; /* Oculta todas las secciones por defecto */
+}
+
+.tab-content.active {
+    display: block; /* Solo muestra la que tiene la clase .active */
+}
+
+/* PANEL PRINCIPAL */
+.content-wrapper {
+    background: var(--panel-gray);
+    border: 2px solid var(--primary-red);
+    border-radius: 0 25px 25px 25px;
+    margin: 0 40px;
+    padding: 30px;
+    padding-bottom: 90px; /* Espacio para que el botón no pise el contenido */
+    position: relative;   /* Necesario para posicionar el botón GUARDAR */
+    min-height: 400px;
+}
+
+.settings-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    align-items: flex-start;
+}
+
+.settings-info { flex: 1.2; }
+.description { font-size: 0.85rem; line-height: 1.3; color: #333; }
+
+.settings-actions {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+
+/* BOTÓN GUARDAR: Dentro del recuadro gris, esquina inferior derecha */
+.btn-save {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    background: var(--primary-red);
+    color: white;
+    border: none;
+    padding: 12px 50px;
+    border-radius: 20px;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+}
+
+.btn-save:hover {
+    background: #a00000;
+}
+
+/* Estilos de botones de opciones */
+.btn {
+    border: 2px solid var(--primary-red);
+    border-radius: 25px;
+    padding: 8px 25px;
+    font-weight: bold;
+    min-width: 120px;
+    cursor: pointer;
+    background: white;
+}
+
+.btn-red { background: var(--primary-red); color: white; }
+.btn-white { background: white; color: black; }
+
+/* Otros elementos específicos */
+.flex-col { flex-direction: column; align-items: flex-end; }
+.status-icons { font-size: 0.85rem; display: flex; gap: 15px; font-weight: bold; }
+
+.map-container {
+    background: white;
+    border: 2px solid var(--primary-red);
+    border-radius: 20px;
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+}
+
+.map-img { width: 100%; height: 100%; object-fit: cover; }
