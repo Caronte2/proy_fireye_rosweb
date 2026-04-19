@@ -12,8 +12,9 @@
     <!-- <script src="../js/camara.js"></script> -->
     <link rel="stylesheet" href="../css/paginaRobot.css">
     <link rel="stylesheet" href="../css/main.css">
-    
+    <link rel="stylesheet" href="../css/menu.css">
 </head>
+
 <body>
     <header class="container-fluid">
         <div class="row">
@@ -21,8 +22,13 @@
                 <img src="../img/logoFireyeNegro.png" alt="Logo" id="logo">
             </div>
             <div class="col d-flex justify-content-end align-items-center">
-                <button type="button"><img src="../img/bell-svgrepo-com.svg" alt=""></button>
-                <button type="button"><img src="../img/menu-svgrepo-com.svg" alt=""></button>
+                <button id="toggleMenuBtn" class="toggle-menu-btn">
+                ☰ 
+            </button>
+
+            <button id="notificationBtn" class="notification-btn">
+                🔔 
+            </button>
             </div>
         </div>
     </header>
@@ -72,5 +78,74 @@
     <footer class="container-fluid text-center">
         Copyright © 2024 Fireye. Todos los derechos reservados.
     </footer>
+     <!-- Contenedor principal del menú lateral (posicionado a la derecha) -->
+    <aside class="menu-container" id="mainMenu" aria-label="Menú principal de la aplicación">
+        <header class="menu-header">
+            <button class="close-btn" id="closeMenuBtn" aria-label="Cerrar menú">×</button>
+            <h3 class="menu-title">menú</h3>
+        </header>
+        <nav class="menu-navigation" aria-label="Navegación del menú">
+            <ul class="menu-options">
+                <li class="menu-option has-submenu">
+                    <div class="menu-option-header" role="button" tabindex="0">
+                        <span>Perfil</span>
+                        <span class="submenu-toggle" aria-expanded="false">+</span>
+                    </div>
+                    <ul class="submenu">
+                        <li class="submenu-item"><a href="#perfil/editar">Editar Perfil</a></li>
+                        <li class="submenu-item"><a href="#perfil/contraseña">Cambiar Contraseña</a></li>
+                        <li class="submenu-item"><a href="#perfil/datos">Mis Datos</a></li>
+                    </ul>
+                </li>
+                <li class="menu-option has-submenu">
+                    <div class="menu-option-header" role="button" tabindex="0">
+                        <span>Configuración</span>
+                        <span class="submenu-toggle" aria-expanded="false">+</span>
+                    </div>
+                    <ul class="submenu">
+                        <li class="submenu-item"><a href="#config/notificaciones">Notificaciones</a></li>
+                        <li class="submenu-item"><a href="#config/idioma">Idioma</a></li>
+                        <li class="submenu-item"><a href="#config/privacidad">Privacidad</a></li>
+                    </ul>
+                </li>
+                <li class="menu-option has-submenu">
+                    <div class="menu-option-header" role="button" tabindex="0">
+                        <span>Soporte Técnico</span>
+                        <span class="submenu-toggle" aria-expanded="false">+</span>
+                    </div>
+                    <ul class="submenu">
+                        <li class="submenu-item"><a href="#soporte/faq">FAQ</a></li>
+                        <li class="submenu-item"><a href="#soporte/contacto">Contactar Soporte</a></li>
+                        <li class="submenu-item"><a href="#soporte/tickets">Mis Tickets</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <button class="logout-btn" aria-label="Cerrar sesión de la cuenta">
+            cerrar sesión
+        </button>
+    </aside>
+
+
+    <aside class="menu-container notification-menu" id="notificationMenu">
+        <header class="menu-header notification-header">
+            <button class="close-btn close-notification-btn" id="closeNotificationBtn">×</button>
+            <h3 class="menu-title notification-title">NOTIFICACIONES</h3>
+        </header>
+        <ul class="menu-options notification-list">
+            <li class="notification-item">
+                <span class="notification-label">EMERGENCIA:</span>
+                <p class="notification-text">Foco de incendio confirmado<br>Protocolo de Aviso y Emergencias activado automáticamente. 01:20</p>
+            </li>
+            <li class="notification-item">
+                <span class="notification-label">ERROR DE SISTEMA:</span>
+                <p class="notification-text">Conexión perdida con el Módulo GPS. Por favor, compruebe la ubicación del robot. 20:54</p>
+            </li>
+        </ul>
+        <div class="notification-footer">
+            <button class="logout-btn clear-notifications-btn" id="clearNotificationsBtn">LIMPIAR</button>
+        </div>
+    </aside>
+    <script src="../js/menu.js"></script>
 </body>
 </html>

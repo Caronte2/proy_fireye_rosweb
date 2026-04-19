@@ -1,0 +1,238 @@
+/* Reset general de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Botón para abrir/cerrar el menú principal */
+.toggle-menu-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;   
+    z-index: 9998;
+    padding: 10px 20px;
+    background-color: #900;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease; /* Transición suave al pasar el cursor */
+}
+.toggle-menu-btn:hover {
+    background-color: #b00; /* Color de fondo al pasar el cursor */
+}
+
+/* 通知按钮（与主菜单按钮同样式） */
+.notification-btn {
+    position: absolute;
+    top: 70px; /* Debajo del botón del menú principal */
+    right: 20px;   
+    z-index: 9998;
+    padding: 10px 20px;
+    background-color: #900;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease; /* Transición suave al pasar el cursor */
+}
+.notification-btn:hover {
+    background-color: #b00; /* Color de fondo al pasar el cursor */
+}
+
+/* 通用菜单容器样式（侧边菜单+通知弹窗共用） */
+.menu-container {
+    position: absolute;
+    top: 0;
+    right: 0;        
+    left: auto;      
+    width: 280px; /* Ancho uniforme para menú y notificaciones */
+    height: 100vh; /* Altura completa de la ventana */
+    background-color: #c4c4c4; /* Color de fondo principal (gris) */
+    border: 2px solid #900; /* Borde rojo característico */
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+    transform: translateX(100%); /* Oculto por defecto (fuera de pantalla) */
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease; /* Animación de aparición/desaparición */
+}
+
+/* 菜单/通知弹窗 abierto */
+.menu-container.open {
+    transform: translateX(0); /* Mostrar elemento (posición original) */
+    opacity: 1;
+}
+
+/* Encabezado general del menú (compartido) */
+.menu-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 2px solid #900; /* Borde inferior rojo */
+    margin-bottom: 10px;
+}
+/* Encabezado de notificaciones (fondo rojo según diseño) */
+.notification-header {
+    background-color: #900; /* Fondo rojo para título de notificaciones */
+    color: white; /* Texto blanco en encabezado rojo */
+    border-bottom: 2px solid white; /* Línea separadora blanca */
+}
+
+/* Botón de cierre general (compartido) */
+.close-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Forma circular */
+    background-color: #900;
+    color: white;
+    border: none;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+/* Adaptación del botón de cierre en encabezado rojo */
+.notification-header .close-btn {
+    background-color: white; /* Fondo blanco en botón */
+    color: #900; /* Texto rojo en botón */
+}
+
+/* Título general del menú (compartido) */
+.menu-title {
+    font-weight: bold;
+    color: #000;
+    text-transform: uppercase; /* Texto en mayúsculas */
+}
+/* Adaptación del título de notificaciones (texto blanco) */
+.notification-title {
+    color: white;
+}
+
+/* Contenedor de lista general (compartido) */
+.menu-options {
+    list-style: none; /* Sin viñetas */
+    flex-grow: 1; /* Ocupar espacio disponible */
+    padding: 0 20px;
+    overflow-y: auto; /* Scroll vertical si hay mucho contenido */
+}
+
+/* Opciones del menú principal */
+.menu-option {
+    border-bottom: 2px solid #900; /* Separador rojo entre opciones */
+    margin-bottom: 8px;
+}
+.menu-option-header {
+    padding: 18px 0;
+    display: flex;
+    justify-content: space-between; /* Distribuir texto e icono */
+    align-items: center;
+    cursor: pointer; /* Cursor de clic */
+}
+.menu-option-header span:first-child {
+    font-size: 20px;
+}
+
+/* Icono de toggle del submenú (+ / ✖) */
+.submenu-toggle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #900; /* Color rojo */
+    transition: transform 0.2s ease; /* Rotación suave */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.menu-option.open .submenu-toggle {
+    transform: rotate(45deg); /* Rotar + a ✖ cuando está abierto */
+}
+
+/* Contenedor del submenú */
+.submenu {
+    list-style: none;
+    padding: 0 !important;
+    margin: 0 15px !important;
+    background: #c4c4c4 !important; /* Fondo igual al menú principal */
+    max-height: 0; /* Oculto por defecto */
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease; /* Animación de apertura */
+    border-bottom: 2px solid #900; /* Borde inferior rojo */
+}
+.menu-option.open .submenu {
+    max-height: 300px; /* Altura máxima del submenú */
+    opacity: 1; /* Mostrar submenú */
+}
+.submenu-item {
+    padding: 12px 20px !important; /* Espaciado interno */
+    border-bottom: 1px solid #eee !important; /* Separador claro entre ítems */
+}
+.submenu-item:last-child {
+    border-bottom: none !important; /* Sin separador en último ítem */
+}
+.submenu-item a {
+    text-decoration: none; /* Sin subrayado en enlaces */
+    color: #000 !important;
+    font-size: 18px !important;
+}
+
+/* Ítems de notificación (adaptados al contenedor) */
+.notification-item {
+    padding: 18px 0; /* Mismo espaciado que opciones del menú */
+    border-bottom: 2px solid #900; /* Separador rojo entre notificaciones */
+    margin-bottom: 8px;
+}
+.notification-item:last-child {
+    margin-bottom: 0; /* Sin margen en última notificación */
+}
+.notification-label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #900; /* Etiqueta en rojo */
+    margin-bottom: 5px;
+    text-transform: uppercase; /* Mayúsculas en etiqueta */
+}
+.notification-text {
+    font-size: 14px;
+    color: #000;
+    line-height: 1.4; /* Altura de línea legible */
+}
+
+/* Botón general de pie de página (cerrar sesión / limpiar) */
+.logout-btn {
+    margin: auto auto 30px; /* Centrado vertical y horizontal */
+    padding: 12px 40px;
+    background-color: #900;
+    color: white;
+    border: none;
+    border-radius: 30px; /* Botón redondeado */
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase; /* Texto en mayúsculas */
+    cursor: pointer;
+}
+/* Adaptación del botón LIMPIAR (fondo blanco + borde rojo) */
+.clear-notifications-btn {
+    background-color: white;
+    color: #900;
+    border: 2px solid #900;
+}
+.clear-notifications-btn:hover {
+    background-color: #f0f0f0; /* Color de fondo al pasar el cursor */
+}
+
+/* Contenedor del pie de notificaciones (alineación del botón) */
+.notification-footer {
+    flex-grow: 0; /* No expandir */
+    display: flex;
+    width: 100%;
+}
