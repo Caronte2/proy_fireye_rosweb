@@ -8,29 +8,33 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/roslib@1/build/roslib.min.js"></script>
-    <script src="js/conexion.js"></script>
-    <link rel="stylesheet" href="/src/css/paginaRobot.css">
-    <link rel="stylesheet" href="/src/css/main.css">
-
+    <script src="../js/conexion.js"></script>
+    <!-- <script src="../js/camara.js"></script> -->
+    <link rel="stylesheet" href="../css/paginaRobot.css">
+    <link rel="stylesheet" href="../css/main.css">
+    
 </head>
 <body>
     <header class="container-fluid">
         <div class="row">
             <div class="col">
-                <img src="/src/img/logoFireyeNegro.png" alt="Logo" id="logo">
+                <img src="../img/logoFireyeNegro.png" alt="Logo" id="logo">
             </div>
             <div class="col d-flex justify-content-end align-items-center">
-                <button type="button"><img src="/src/img/bell-svgrepo-com.svg" alt=""></button>
-                <button type="button"><img src="/src/img/menu-svgrepo-com.svg" alt=""></button>
+                <button type="button"><img src="../img/bell-svgrepo-com.svg" alt=""></button>
+                <button type="button"><img src="../img/menu-svgrepo-com.svg" alt=""></button>
             </div>
         </div>
     </header>
     <main class="container-fluid">
         <div class="row">
-            <div class="col">
+            <div class="col" >
                 <h3>FireyeCamara</h3>
-                <button>Conectar</button>
-                <button>Desconectar</button>
+                <div id="divCamera">
+                    <img src="http://localhost:8080/stream?topic=/camera/image_raw" alt="" id="cameraFeed">
+                </div>
+                <button id="btn_con">Conectar</button>
+                <button id="btn_dis">Desconectar</button>
             </div>
             <div class="col">
                 <h3>Análisis de Imágenes</h3>
@@ -43,11 +47,12 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button>Adelante</button>
-                        <button>Atrás</button>
-                        <button>Izquierda</button>
-                        <button>Derecha</button>
-                        <button>Ir a punto</button>
+                        <button id="btn_delante">Adelante</button>
+                        <button id="btn_atras">Atrás</button>
+                        <button id="btn_izquierda">Izquierda</button>
+                        <button id="btn_derecha">Derecha</button>
+                        <button id="btn_parar">Parar</button>
+                        <button id="btn_mision">Ir a punto</button>
                     </div>
                 </div>
                 <div class="row">
