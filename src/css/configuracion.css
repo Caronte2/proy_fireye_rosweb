@@ -25,17 +25,51 @@ body {
     align-items: center;
     padding: 10px 40px;
     margin-bottom: 20px;
+    height: 70px; /* Ajusta esta altura según necesites */
 }
 .main-logo {
     width: 11rem;
   height: 8rem;
 }
 
+/* Ajuste para el contenedor del logo */
+.logo-container {
+    max-width: 90px; /* Ajusta este ancho a tu gusto */
+    display: flex;
+    align-items: center;
+}
+
+/* Ajuste para la imagen dentro del contenedor */
+.main-logo {
+    width: 11rem;      /* Obliga a la imagen a no ser más ancha que el contenedor */
+    height: 8rem;     /* Mantiene la proporción para que no se vea estirada */
+    display: block;
+}
+
+h1 {
+    font-family: 'Arial Black', sans-serif;
+    margin-left: 40px; /* Igual que tus pestañas y el panel */
+    color: #333;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+/* Forzamos el tamaño de los iconos del header */
+.icon-img {
+    width: 3rem ; 
+    height: 3rem ;
+    
+    object-fit: contain;
+    display: inline-block; /* Cambiado de block para mejor alineación */
+    cursor: pointer;
+}
+
+/* Aseguramos que el contenedor no deje que las imágenes se desborden */
 .header-icons {
     display: flex;
     gap: 20px;
-    font-size: 1.5rem;
-    cursor: pointer;
+    align-items: center;
+    max-height: 70px; /* No permite que el contenedor sea más alto que el header */
 }
 
 .main-title {
