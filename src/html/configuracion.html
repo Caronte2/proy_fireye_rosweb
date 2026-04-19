@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuración - Dashboard</title>
     <link rel="stylesheet" href="../css/configuracion.css">
 </head>
+
 <body>
 
     <header class="header">
@@ -13,8 +15,9 @@
             <img src="../img/logoFireyeNegro.png" alt="Logo de la empresa" class="main-logo">
         </div>
         <div class="header-icons">
-            <span class="icon">🔔</span>
-            <span class="icon">☰</span>
+            <img src="../img/bell-svgrepo-com.svg" alt="Notificaciones" class="icon-img">
+
+            <img src="../img/menu-svgrepo-com.svg" alt="Menú" class="icon-img">
         </div>
     </header>
 
@@ -28,25 +31,29 @@
         </nav>
 
         <div class="content-wrapper">
-            
+
             <section id="patrullaje" class="tab-content active">
-                
+
                 <div class="settings-row">
                     <div class="settings-info">
                         <h3>MODO DE OPERACIÓN</h3>
-                        <p class="description">Aquí eliges si Fineye patrulla de forma Automática siguiendo una ruta, si lo manejas tú mismo en Manual, o si lo dejas fijo como un Centinela vigilando un punto específico.</p>
+                        <p class="description">Aquí eliges si Fineye patrulla de forma Automática siguiendo una ruta, si
+                            lo manejas tú mismo en Manual, o si lo dejas fijo como un Centinela vigilando un punto
+                            específico.</p>
                     </div>
                     <div class="settings-actions">
-                        <button class="btn btn-red">Automático</button>
-                        <button class="btn btn-white">Manual</button>
-                        <button class="btn btn-white">Centinela</button>
+                        <button class="btn btn-red" data-type="modo" data-value="auto">Automático</button>
+                        <button class="btn btn-white" data-type="modo" data-value="manual">Manual</button>
+                        <button class="btn btn-white" data-type="modo" data-value="sentinel">Centinela</button>
                     </div>
                 </div>
 
                 <div class="settings-row">
                     <div class="settings-info">
                         <h3>ESTACIÓN DE CARGA</h3>
-                        <p class="description">En este apartado puedes ver si la Placa Solar está recibiendo suficiente luz y programar las horas en las que el robot debe volver a descansar y recargar sus baterías.</p>
+                        <p class="description">En este apartado puedes ver si la Placa Solar está recibiendo suficiente
+                            luz y programar las horas en las que el robot debe volver a descansar y recargar sus
+                            baterías.</p>
                     </div>
                     <div class="settings-actions status-icons">
                         <div class="status-item">🔋 Batería de Fireye <strong>90%</strong></div>
@@ -58,8 +65,9 @@
                 <div class="settings-row no-border">
                     <div class="settings-info">
                         <h3>SECTORES PRIORITARIOS</h3>
-                        <p class="description">Aquí marcas en el mapa las zonas de tu finca que más te preocupan. El robot pasará más veces por estas áreas para asegurar una Vigilancia Extra.</p>
-                        
+                        <p class="description">Aquí marcas en el mapa las zonas de tu finca que más te preocupan. El
+                            robot pasará más veces por estas áreas para asegurar una Vigilancia Extra.</p>
+
                         <div class="zone-selector">
                             <label>Zonas de prioridad</label>
                             <div class="zone-input">Zona 6, Zona 1 <span>✎</span></div>
@@ -75,11 +83,12 @@
                 <div class="settings-row">
                     <div class="settings-info">
                         <h3>CIFRADO DE DATOS</h3>
-                        <p class="description">Este sistema asegura que solo tú puedas ver las imágenes de tu finca, protegiendo toda la información con un Cifrado de Extremo a Extremo.</p>
+                        <p class="description">Este sistema asegura que solo tú puedas ver las imágenes de tu finca,
+                            protegiendo toda la información con un Cifrado de Extremo a Extremo.</p>
                     </div>
                     <div class="settings-actions">
-                        <button class="btn btn-red">Activo</button>
-                        <button class="btn btn-white">Inactivo</button>
+                        <button class="btn btn-red" data-type="cifrado" data-value="on">Activo</button>
+                        <button class="btn btn-white" data-type="cifrado" data-value="off">Inactivo</button>
                     </div>
                 </div>
 
@@ -92,8 +101,8 @@
                         <p class="small-text">Configura si quieres que el sistema envíe alertas automáticas.</p>
                     </div>
                     <div class="settings-actions">
-                        <button class="btn btn-red">Activo</button>
-                        <button class="btn btn-white">Inactivo</button>
+                        <button class="btn btn-red" data-type="protocolo" data-value="on">Activo</button>
+                        <button class="btn btn-white" data-type="protocolo" data-value="off">Inactivo</button>
                     </div>
                 </div>
 
@@ -103,9 +112,9 @@
                         <p class="small-text">Calibra qué cantidad de humo o calor debe detectar el robot.</p>
                     </div>
                     <div class="settings-actions">
-                        <button class="btn btn-red">Alto</button>
-                        <button class="btn btn-white">Medio</button>
-                        <button class="btn btn-white">Bajo</button>
+                        <button class="btn btn-red" data-type="sensibilidad" data-value="alto">Alto</button>
+                        <button class="btn btn-white" data-type="sensibilidad" data-value="medio">Medio</button>
+                        <button class="btn btn-white" data-type="sensibilidad" data-value="bajo">Bajo</button>
                     </div>
                 </div>
 
@@ -118,8 +127,8 @@
                         </ul>
                     </div>
                     <div class="settings-actions">
-                        <button class="btn btn-red">Llamada</button>
-                        <button class="btn btn-red">SMS</button>
+                        <button class="btn btn-red" data-type="contacto" data-value="llamada">Llamada</button>
+                        <button class="btn btn-red" data-type="contacto" data-value="sms">SMS</button>
                     </div>
                 </div>
             </section>
@@ -131,27 +140,30 @@
                         <p class="small-text">El sistema revisará la cámara o el sensor LiDAR.</p>
                     </div>
                     <div class="settings-actions flex-col">
-                        <button class="btn btn-white">Hacer autodiagnóstico</button>
-                        <button class="btn btn-white">Solicitar limpieza profunda</button>
+                        <button class="btn btn-white" data-type="mantenimiento" data-value="autodiagnostico">Hacer
+                            autodiagnóstico</button>
+                        <button class="btn btn-white" data-type="mantenimiento" data-value="limpieza">Solicitar limpieza
+                            profunda</button>
                     </div>
                 </div>
-                
+
                 <div class="settings-row">
                     <div class="settings-info">
                         <h3>ACTUALIZACIÓN DE SOFTWARE</h3>
                         <p class="small-text">Actualización pendiente: 22/03/2026</p>
                     </div>
                     <div class="settings-actions">
-                        <button class="btn btn-red">Actualizar</button>
+                        <button class="btn btn-red" data-type="mantenimiento" data-value="update">Actualizar</button>
                     </div>
                 </div>
             </section>
-            
+
             <button class="btn-save">GUARDAR</button>
 
         </div>
     </main>
 
-    <script src="configuracion.js"></script>
+    <script src="../js/configuracion.js"></script>
 </body>
+
 </html>
