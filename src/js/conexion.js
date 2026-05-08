@@ -17,8 +17,13 @@ document.addEventListener('DOMContentLoaded', event => {
         rosbridge_address: 'ws://127.0.0.1:9090/',
         connected: false,
 	    service_busy: false,
-	    service_response: ''
+	    service_response: '',
+		topic: null,
+    	position: {x: 0, y: 0}
     }
+
+	const mapYamlUrl = '../mapas/my_map.yaml'; // poner ubicación
+	const mapImageUrl = '../mapas/my_map.png'; 
 
     function connect(){
 	    console.log("Clic en connect")
@@ -40,7 +45,46 @@ document.addEventListener('DOMContentLoaded', event => {
             data.connected = false
             console.log("Conexion con ROSBridge cerrada")
         })
+
+    	let topic = new ROSLIB.Topic({
+        	ros: data.ros,
+        	name: '/odom',
+        	messageType: 'nav_msgs/msg/Odometry'
+    	})
+
+    	topic.subscribe((message) => {
+			console.log("Recibiendo mensaje de /odom")
+        	data.position = message.pose.pose.position
+        	document.getElementById("pos_x").innerHTML = data.position.x.toFixed(2)
+        	document.getElementById("pos_y").innerHTML = data.position.y.toFixed(2)
+			robotPosition.x = message.pose.pose.position.x;
+			robotPosition.y = message.pose.pose.position.y;
+			draw()  // redibuja mapa + posición del robot
+    	})
     }
+
+	// Función para redibujar mapa y robot
+	function draw() {
+  		if (!mapInfo || !image.complete) return;
+
+  		// Redibujar el mapa
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(image, 0, 0);
+
+		// Transformar coordenadas ROS -> imagen
+  		const res = mapInfo.resolution;
+  		const origin = mapInfo.origin;
+
+		// Transformar odom -> pixeles
+  		let pixelX = (robotPosition.x - origin[0]) / res;
+		let pixelY = canvas.height - ((robotPosition.y - origin[1]) / res); // invertido en Y
+
+  		// Dibujar robot
+  		ctx.beginPath();
+		ctx.fillStyle = 'green';
+  		ctx.arc(pixelX, pixelY, 5, 0, 2 * Math.PI);
+		ctx.fill();
+	}
 
     function disconnect(){
 	      data.ros.close()
@@ -48,6 +92,7 @@ document.addEventListener('DOMContentLoaded', event => {
         console.log('Clic en botón de desconexión')
     }
 
+	//Serivicios
     function empezarMision(){
         let service = new ROSLIB.Service({
         ros : data.ros,
@@ -181,5 +226,52 @@ document.addEventListener('DOMContentLoaded', event => {
 	    })
     }
 
+	// Código de ayuda para cargar canvas y marcar robot en el mapa
+
+	let mapInfo = null;
+	let canvas = document.getElementById("mapCanvas");
+	let ctx = canvas.getContext("2d");
+	let image = new Image();
+	let robotPosition = {x: 0, y: 0};
+
+	// Leer YAML del mapa
+	fetch(mapYamlUrl)
+  	.then(response => response.text())
+  	.then(yamlText => {
+    	const doc = jsyaml.load(yamlText);
+    	mapInfo = doc;
+    	image.src = mapImageUrl;
+  	});
+
+	// Dibujar mapa una vez cargada la imagen
+	image.onload = () => {
+  		canvas.width = image.width;
+  		canvas.height = image.height;
+  		ctx.drawImage(image, 0, 0);
+	};
+
+	// Función para redibujar mapa y robot
+	function draw() {
+  		if (!mapInfo || !image.complete) return;
+
+  		// Redibujar el mapa
+  		ctx.clearRect(0, 0, canvas.width, canvas.height);
+  		ctx.drawImage(image, 0, 0);
+
+  		// Transformar coordenadas ROS -> imagen
+  		const res = mapInfo.resolution;
+  		const origin = mapInfo.origin;
+
+  		// Transformar odom -> pixeles
+  		let pixelX = (robotPosition.x - origin[0]) / res;
+  		let pixelY = canvas.height - ((robotPosition.y - origin[1]) / res); // invertido en Y
+
+  		// Dibujar robot
+  		ctx.beginPath();
+  		ctx.fillStyle = 'green';
+  		ctx.arc(pixelX, pixelY, 5, 0, 2 * Math.PI);
+  		ctx.fill();
+	}
 
 });
+
