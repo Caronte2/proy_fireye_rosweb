@@ -1,0 +1,26 @@
+A. PASOS PARA LA INSTALACIÓN (Terminal en VS Code)
+--------------------------------------------------
+Paso 1: Inicializar el proyecto (si no existe package.json)(Esto se usa en la raiz del proyecto)
+    npm init -y
+
+Paso 2: Instalar librerías base
+    npm install express pg cors
+
+Paso 3: (Opcional) Instalar Nodemon para desarrollo fluido
+    npm install -g nodemon
+
+B. EJECUCIÓN
+------------
+Opción A (Con nodemon - se reinicia solo al guardar):
+    nodemon api/endpoints.js
+
+Opción B (Normal):
+    node api/endpoints.js
+
+
+C. NOTAS PARA EL DESARROLLO
+---------------------------
+- Cada vez que crees un archivo en /consultas/, asegúrate de exportar 
+  la función: module.exports = { nombre_funcion };
+- El nombre del archivo .js será el que uses como 'script' en el método run().
+- Para peticiones desde la Web (Frontend), usa: http://localhost:3000/api/...
