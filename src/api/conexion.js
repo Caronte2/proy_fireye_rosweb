@@ -1,10 +1,10 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  host: 'tu-instancia.aws.com',
-  user: 'admin',
-  password: 'tu_password',
-  database: 'fireye_db',
+  host: 'localhost',
+  user: 'postgres',
+  password: '1234',
+  database: 'postgres',
   port: 5432,
   // Configuración recomendada para AWS
   max: 10,
