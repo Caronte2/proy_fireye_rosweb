@@ -57,4 +57,10 @@ header button img{
     width: 10rem;
     height: 10rem;
 }
-
+#detectionFeed {
+    width: 320px;
+    height: 240px;
+    border: 8px solid #990000;
+    border-radius: 25px;
+    object-fit: cover;
+}

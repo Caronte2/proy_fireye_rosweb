@@ -82,10 +82,13 @@
                 <div class="row"></div>
             </div>
             <div class="col" id="radar">
-                <h3>Detección de Objetos</h3>
-                <img src="../img/radar.jpeg" alt="">
-            </div>
-        </div>
+    <h3>Detección de Objetos</h3>
+    <img 
+        id="detectionFeed"
+        src="http://localhost:8080/stream?topic=/camera/detection_output"
+        alt="Detección de objetos"
+    >
+    </div>
         <div class="row">
     <div class="col">
         <h3>Posición del Robot</h3>
