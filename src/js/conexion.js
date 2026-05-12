@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', event => {
 
     document.getElementById("btn_con").addEventListener("click", connect)
     document.getElementById("btn_dis").addEventListener("click", disconnect)
-    document.getElementById("btn_mision").addEventListener("click", empezarMision);
+    document.getElementById("btn_mision").addEventListener("click", empezarMisionService);
     document.getElementById("btn_delante").addEventListener("click", movimientoAdelante)
     document.getElementById("btn_atras").addEventListener("click", movimientoAtras)
     document.getElementById("btn_derecha").addEventListener("click", movimientoDerecha)
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', event => {
     data = {
         // ros connection
         ros: null,
-        rosbridge_address: 'ws://127.0.0.1:9090/',
+        rosbridge_address: 'ws://localhost:9090',
         connected: false,
 	    service_busy: false,
 	    service_response: '',
@@ -127,6 +127,50 @@ document.addEventListener('DOMContentLoaded', event => {
 
     	goal.send()
 	}
+
+
+	function empezarMisionService() {
+    if (!data.connected) {
+        console.warn('No hay conexión con ROS.')
+        alert('No hay conexión con ROSBridge.')
+        return
+    }
+
+    if (data.service_busy) {
+        console.warn('Ya hay un servicio en curso.')
+        return
+    }
+
+    console.log('Llamando al servicio /fireye/start_mission...')
+
+    data.service_busy = true
+    data.service_response = ''
+
+    const startMissionService = new ROSLIB.Service({
+        ros: data.ros,
+        name: '/fireye/start_mission',
+        serviceType: 'std_srvs/srv/Trigger'
+    })
+
+    const request = new ROSLIB.ServiceRequest({})
+
+    startMissionService.callService(request, (result) => {
+        data.service_busy = false
+        data.service_response = JSON.stringify(result)
+
+        console.log('Respuesta de /fireye/start_mission:', result)
+
+        if (result.success) {
+            alert('Misión completada correctamente: ' + result.message)
+        } else {
+            alert('Error en la misión: ' + result.message)
+        }
+
+    }, (error) => {
+        console.error('Error llamando a /fireye/start_mission:', error)
+        alert('Error llamando a /fireye/start_mission: ' + error)
+    }, 30000)
+}
 
     function movimientoAdelante(){
     	data.service_busy = true
