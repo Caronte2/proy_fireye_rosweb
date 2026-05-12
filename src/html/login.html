@@ -1,51 +1,99 @@
 <!DOCTYPE html>
+<!-- Declaración del idioma del documento (Español) para mejorar el SEO y la accesibilidad -->
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acceso al Dashboard</title>
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- CSS propio -->
- <link rel="stylesheet" href="../css/logincss.css">
+    <!-- Metadatos básicos y configuración del viewport para diseño responsivo en dispositivos móviles -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Privado - Fireye</title>
+    
+    <!-- ========================================== -->
+    <!-- PRECARGA Y ENLACES DE RECURSOS EXTERNOS    -->
+    <!-- ========================================== -->
+    
+    <!-- Conexión anticipada a los servidores de Google para optimizar la carga de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Importación de la tipografía 'Rajdhani' (Solo pesos 600 y 700 para encabezados y énfasis) -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Importación de la librería de iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Importación del framework CSS Bootstrap 5 (versión minificada) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Hoja de estilos exclusiva para la vista de login (sobrescribe o añade estilos al formulario) -->
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
 
-  <div class="main-wrapper">
+    <!-- ========================================== -->
+    <!-- ENCABEZADO SIMPLIFICADO (HEADER)           -->
+    <!-- ========================================== -->
+    <!-- A diferencia del resto de páginas, el login usa un header minimalista sin menú para evitar distracciones -->
+    <header class="custom-header">
+        <nav class="navbar navbar-light">
+            <!-- Utilidades Flexbox de Bootstrap: 'd-flex' y 'justify-content-center' centran el logo horizontalmente -->
+            <!-- 'pt-3 pb-3' añaden padding superior e inferior (espaciado interior) -->
+            <div class="container-fluid d-flex justify-content-center pt-3 pb-3">
+                <a class="navbar-brand m-0 p-0" href="../index.html" aria-label="Volver al inicio">
+                    <img src="../img/logo-ojo.png" alt="FireEye Logo" class="logo-image">
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- CONTENIDO PRINCIPAL: FORMULARIO DE ACCESO  -->
+    <!-- ========================================== -->
+    <!-- 'd-flex align-items-center justify-content-center' logra un centrado absoluto (vertical y horizontal) del formulario en la pantalla -->
+    <main class="login-main d-flex align-items-center justify-content-center">
+        
+        <!-- Contenedor visual del formulario (con diseño circular o caja personalizada según el CSS) -->
+        <div class="login-circle">
+            
+            <h1 class="login-title text-white text-center">Acceso al dashboard</h1>
+            
+            <!-- Inicio del formulario -->
+            <form action="#" class="login-form">
+                
+                <!-- Campo 1: Identificador de Usuario (ID) -->
+                <div class="mb-3">
+                    <!-- El atributo 'for' enlaza el label con el 'id' del input para accesibilidad (lectores de pantalla y clic en la etiqueta) -->
+                    <label for="inputId" class="form-label text-white">ID:</label>
+                    <!-- El atributo 'required' activa la validación nativa del navegador (HTML5) impidiendo el envío si está vacío -->
+                    <input type="text" class="form-control login-input" id="inputId" required>
+                </div>
+                
+                <!-- Campo 2: Contraseña de Seguridad -->
+                <div class="mb-4">
+                    <label for="inputPassword" class="form-label text-white">Contraseña:</label>
+                    <!-- type="password" oculta los caracteres ingresados por el usuario por seguridad -->
+                    <input type="password" class="form-control login-input" id="inputPassword" required>
+                </div>
+                
+                <!-- Botón de Envío del Formulario -->
+                <!-- mt-5 añade un margen superior grande para separar el botón de los campos de texto -->
+                <div class="text-center mt-5">
+                    <button type="submit" class="btn login-submit-btn">Cerrar sesión</button> <!-- Nota para revisión: El texto dice "Cerrar sesión", aunque por el contexto de los inputs parece un inicio de sesión -->
+                </div>
+                
+            </form>
+            
+        </div>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- SCRIPTS DE LA PÁGINA                       -->
+    <!-- ========================================== -->
     
-    <!-- Logo superior -->
-    <div class="top-logo">
-      <a href="../index.html">
-      <img src="../img/logoFireyeNegro.png" alt="Logo ojo">
-      </a>
-    </div>
-
-    <!-- Círculo rojo central -->
-    <div class="login-circle">
-      <div class="login-content">
-        <h1 class="login-title">ACCESO AL DASHBOARD</h1>
-
-        <form id="loginForm">
-          <div class="mb-4">
-            <label for="userId" class="form-label custom-label">ID:</label>
-            <input type="text" class="form-control custom-input" id="userId" name="userId">
-          </div>
-
-          <div class="mb-4">
-            <label for="password" class="form-label custom-label">Contraseña:</label>
-            <input type="password" class="form-control custom-input" id="password" name="password">
-          </div>
-
-          <div class="text-center mt-4">
-            <button type="submit" class="btn custom-btn">INICIAR SESIÓN</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-  </div>
-<script src="../js/fakelogin.js"></script>
+    <!-- Librería JavaScript de Bootstrap para componentes interactivos -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script personalizado para gestionar la lógica del formulario de acceso (simulación de login, validaciones extra, etc.) -->
+    <script src="../js/fakelogin.js"></script>
+    
 </body>
 </html>

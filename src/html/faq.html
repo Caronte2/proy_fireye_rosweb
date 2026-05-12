@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!-- Declaración del idioma para accesibilidad y SEO -->
+<html lang="es">
+<head>
+    <!-- Metadatos de codificación y responsividad -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Fireye</title>
+    
+    <!-- ========================================== -->
+    <!-- PRECARGA Y ENLACES DE RECURSOS EXTERNOS    -->
+    <!-- ========================================== -->
+    
+    <!-- Optimización de carga para Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fuente tipográfica principal del proyecto: Rajdhani -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Librería de iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Framework CSS: Bootstrap 5 (Core) para layout y utilidades responsive -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Hoja de estilos personalizada para la sección de Preguntas Frecuentes -->
+    <link rel="stylesheet" href="../css/faq.css">
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- ENCABEZADO Y NAVEGACIÓN PRINCIPAL          -->
+    <!-- ========================================== -->
+    <header class="custom-header">
+        <nav class="navbar navbar-light">
+            <!-- Contenedor fluido con padding horizontal y visualización flex -->
+            <div class="container-fluid px-4 header-container d-flex">
+                
+                <!-- Sección Izquierda/Central: Logo interactivo y menú de navegación -->
+                <div class="header-interactive-menu">
+                    <a class="navbar-brand m-0 p-0" href="index.html">
+                        <img src="../img/logo-ojo.png" alt="FireEye Logo" class="logo-image">
+                    </a>
+                    
+                    <!-- Enlaces de navegación internos -->
+                    <div class="header-links">
+                        <a href="quien-es.html" class="nav-link-custom">¿Quién es Fireye?</a>
+                        <a href="equipo-fireye.html" class="nav-link-custom">Equipo Fireye</a>
+                        <!-- La clase 'nav-link-active' indica visualmente la página actual -->
+                        <a href="faq.html" class="nav-link-custom nav-link-active">Preguntas Frecuentes</a>
+                    </div>
+                </div>
+                
+                <!-- Sección Derecha: Acceso de usuario -->
+                <div class="header-actions">
+                    <a href="login.html" class="btn border-0 text-dark user-icon-btn d-flex align-items-center justify-content-center" aria-label="Área de usuario">
+                        <i class="bi bi-person-circle fs-2"></i>
+                    </a>
+                </div>
+                
+            </div>
+        </nav>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- CONTENIDO PRINCIPAL: PREGUNTAS FRECUENTES  -->
+    <!-- ========================================== -->
+    <main class="faq-section container">
+        <h1 class="faq-title mb-5">PREGUNTAS FRECUENTES</h1>
+
+        <!-- Contenedor principal con diseño en forma de carpeta (folder) -->
+        <div class="folder-container">
+            
+            <!-- NAVEGACIÓN DE PESTAÑAS (Bootstrap Tabs) -->
+            <!-- Utilizamos roles ARIA (role="tablist") para mejorar la accesibilidad -->
+            <ul class="nav nav-tabs border-0" id="faqTabs" role="tablist">
+                
+                <!-- Pestaña 1: Dudas Resueltas (Activa por defecto) -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active tab-folder" id="dudas-tab" data-bs-toggle="tab" data-bs-target="#dudas" type="button" role="tab">Dudas Resueltas</button>
+                </li>
+                
+                <!-- Pestaña 2: Formulario de contacto -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link tab-folder" id="haznos-tab" data-bs-toggle="tab" data-bs-target="#haznos" type="button" role="tab">Haznos tu pregunta</button>
+                </li>
+            </ul>
+
+            <!-- CONTENIDO DE LAS PESTAÑAS -->
+            <div class="tab-content folder-body" id="faqTabsContent">
+                
+                <!-- Panel 1: Lista de dudas resueltas -->
+                <!-- Clases 'show active' indican que este panel es visible al cargar la página -->
+                <div class="tab-pane fade show active p-4" id="dudas" role="tabpanel">
+                    <!-- Contenedor interno del panel -->
+                    <div class="tab-pane fade show active p-4" id="dudas" role="tabpanel">
+    
+                        <!-- Ítem de FAQ 1 -->
+                        <div class="duda-item mb-4">
+                            <h4 class="about-subtitle">¿Cómo recibo las alertas de intrusión?</h4>
+                            <p class="about-text">Las alertas se envían en tiempo real mediante notificaciones push, SMS o correo electrónico, según tu configuración de urgencia.</p>
+                        </div>
+
+                        <!-- Ítem de FAQ 2 -->
+                        <div class="duda-item mb-4">
+                            <h4 class="about-subtitle">¿El sistema funciona en zonas con mala cobertura de internet?</h4>
+                            <p class="about-text">Sí. Hemos diseñado el ecosistema Fireye para operar con protocolos de bajo ancho de banda y redes satelitales, asegurando protección incluso en las zonas más remotas.</p>
+                        </div>
+
+                        <!-- Ítem de FAQ 3 -->
+                        <div class="duda-item mb-4">
+                            <h4 class="about-subtitle">¿Los robots de Fireye pueden operar bajo condiciones climáticas extremas?</h4>
+                            <p class="about-text">Nuestras unidades están certificadas con protección IP67, lo que les permite patrullar bajo lluvia intensa, barro y temperaturas de hasta 50°C sin comprometer sus sensores internos.</p>
+                        </div>
+
+                        <!-- Ítem de FAQ 4 -->
+                        <div class="duda-item mb-4">
+                            <h4 class="about-subtitle">¿Cómo cumple Fireye con la Ley de Protección de Datos (RGPD)?</h4>
+                            <p class="about-text">Nuestros sistemas están diseñados desde la base para la privacidad. Esto incluye el difuminado automático de rostros en espacios públicos y la gestión de permisos para que cumplas con la normativa vigente sin esfuerzo técnico.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Panel 2: Formulario de contacto para nuevas dudas -->
+                <div class="tab-pane fade p-5" id="haznos" role="tabpanel">
+                    <form class="faq-form">
+                        
+                        <!-- Campo de Correo Electrónico (Validación HTML5 type="email") -->
+                        <div class="mt-4 mb-4">
+                            <label class="form-label text-label">Correo Electrónico:</label>
+                            <input type="email" class="form-control custom-input" required>
+                        </div>
+                        
+                        <!-- Campo de Consulta (Área de texto de 4 filas) -->
+                        <div class="mt-4 mb-4">
+                            <label class="form-label text-label">Consulta:</label>
+                            <textarea class="form-control custom-textarea" rows="4" required></textarea>
+                        </div>
+                        
+                        <!-- Botón de envío alineado a la derecha -->
+                        <div class="text-end">
+                            <button type="submit" class="btn-enviar">ENVIAR</button>
+                        </div>
+                        
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- PIE DE PÁGINA (FOOTER)                     -->
+    <!-- ========================================== -->
+    <footer class="custom-footer">
+        <div class="container">
+            
+            <!-- Alineación adaptativa: En columna para móviles y en fila para escritorio (md) -->
+            <div class="footer-content d-flex flex-column flex-md-row align-items-center justify-content-center">
+                
+                <!-- Contenedor del logo -->
+                <div class="footer-logo-container me-md-4 mb-4 mb-md-0">
+                    <img src="../img/logo.png" alt="FireEye Logo" class="footer-logo">
+                </div>
+                
+                <!-- Enlaces rápidos del footer -->
+                <div class="footer-links-container ps-md-4">
+                    <ul class="footer-links list-unstyled mb-0">
+                        <li><a href="quien-es.html">¿Quién es Fireye?</a></li>
+                        <li><a href="equipo-fireye.html">Equipo Fireye</a></li>
+                        <li><a href="faq.html">Preguntas frecuentes</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+            
+            <!-- Información de Copyright -->
+            <div class="footer-copyright text-center mt-5">
+                <p>&copy; 2026 Fireye. Todos los derechos reservados.</p>
+            </div>
+            
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- SCRIPTS DE LA PÁGINA                       -->
+    <!-- ========================================== -->
+    
+    <!-- Script de Bootstrap (Bundle que incluye funcionalidades necesarias para las Pestañas/Tabs) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

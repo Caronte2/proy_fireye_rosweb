@@ -1,0 +1,200 @@
+/* =========================================
+FUENTES Y VARIABLES GLOBALES
+========================================= */
+
+@font-face {
+    font-family: 'EFour Digital';
+    src: url('../fonts/EFourDigital.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --primary-color: #800000; /* Borgoña oscuro */
+    --background-gray: #e6e6e6; /* Gris de fondo igual al de tu imagen */
+    --text-color-dark: #111;
+}
+
+body {
+    background-color: var(--background-gray);
+    color: var(--text-color-dark);
+    font-family: 'Rajdhani', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: clip;
+}
+
+/* =========================================
+HEADER FIJO NORMAL (ALINEADO A LA IZQUIERDA)
+========================================= */
+
+.custom-header {
+    background-color: var(--background-gray);
+    width: 100%;
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+    padding: 10px 30px; /* Un poco más compacto */
+}
+
+/* Forzamos que el contenido se pegue a la izquierda */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Logo/links a la izquierda, icono usuario a la derecha */
+    align-items: center;
+}
+
+/* Quitamos el espaciador que empujaba desde la izquierda */
+.header-left-spacer {
+    display: none !important;
+}
+
+.header-interactive-menu {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* Espacio generoso entre logo y menú */
+    flex-grow: 1; /* Esto hace que ocupe el espacio sobrante */
+}
+
+.logo-image {
+    max-height: 60px; /* Reducido un poco para que sea menos intrusivo al ser fijo */
+    width: auto;
+}
+
+.header-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-link-custom {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 800;
+    color: #000;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.nav-link-custom:hover {
+    color: var(--primary-color);
+}
+
+.nav-link-active {
+    color: var(--primary-color) !important;
+    border-bottom: 2px solid var(--primary-color); /* Un detalle visual para la página activa */
+}
+
+/* El icono de usuario se queda a la derecha */
+.header-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* =========================================
+SECCIÓN PRINCIPAL: TEXTO E IMAGEN
+========================================= */
+
+.about-section {
+    padding-bottom: 80px;
+    min-height: 80vh; /* ¡ESTA ES LA CLAVE! Obliga a la sección a medir el 100% de la pantalla */
+    display: flex;
+    align-items: center; /* Centra el extintor y el texto verticalmente para que quede elegante */
+}
+
+/* Título Principal (EFour Digital) */
+.about-title {
+    font-family: 'EFour Digital', sans-serif;
+    font-size: 2.5rem;
+    color: #000;
+    letter-spacing: 1px;
+}
+
+/* Subtítulos (Misión, Visión, Valores) */
+.about-subtitle {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 800; /* Negrita fuerte para que resalte */
+    font-size: 1.4rem;
+    color: #000;
+}
+
+/* Texto de los párrafos */
+.about-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 500;
+    font-size: 1.25rem; /* Tamaño de lectura cómodo */
+    color: #111;
+    line-height: 1.4;
+}
+
+/* Imagen del extintor */
+.about-image {
+    max-height: 600px; /* Para asegurarnos de que la imagen sea grande y destaque */
+    width: auto;
+    filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.3)); /* Una pequeña sombra para darle profundidad */
+}
+/* =========================================
+FOOTER (PIE DE PÁGINA)
+========================================= */
+.custom-footer {
+    background-color: #a8a8a8; /* Fondo blanco puro */
+    padding: 20px 0 0 0;
+}
+
+.footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Estructura del logo y el texto FIREYE debajo */
+.footer-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo {
+    max-height: 130px;
+    width: auto;
+}
+
+/* La línea roja que separa el logo de los enlaces */
+.footer-links-container {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 800;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 25px;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #000;
+    font-weight: 800;
+    text-decoration: underline;
+    font-size: 1.1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.footer-copyright p {
+    font-size: 0.8rem;
+    color: #555;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Ajustes para móviles */
+@media (max-width: 991px) {
+    .about-title {
+        font-size: 2.5rem;
+    }
+    .about-image {
+        max-height: 400px;
+    }
+}
