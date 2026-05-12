@@ -62,6 +62,10 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1.4rem;
     padding: 1.2rem 1.4rem;
+    background: var(--white);
+    border-radius: 14px;
+    margin: 1rem 1.2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.09);
 }
 
 .fr-col {
@@ -129,23 +133,21 @@ body {
     width: 100%;
 }
 
-/* Overlay batería/señal: esquina superior derecha de la cámara */
-.fr-cam-status {
-    position: absolute;
-    top: 6px;
-    right: 8px;
-    z-index: 10;
+/* Batería/señal: encima del recuadro de cámara, fuera del negro */
+.fr-cam-status-top {
     display: flex;
     gap: 0.5rem;
-    background: rgba(0,0,0,0.45);
-    border-radius: 6px;
-    padding: 3px 8px;
+    justify-content: flex-end;
+    margin-bottom: 3px;
 }
-.fr-cam-status span {
+.fr-cam-status-top span {
     font-family: Arial, sans-serif;
-    font-size: 0.7rem;
-    color: #fff;
+    font-size: 0.75rem;
+    color: #333;
     white-space: nowrap;
+    background: rgba(0,0,0,0.08);
+    border-radius: 5px;
+    padding: 2px 7px;
 }
 
 .fr-camera-label {
@@ -285,11 +287,10 @@ body {
 }
 
 /* ═════════════════════════════════════
-   MAPA (un poco más pequeño)
+   MAPA (más grande, ocupa el ancho de la card)
 ═════════════════════════════════════ */
 .fr-map-canvas {
     width: 100%;
-    max-width: 220px;   /* limitado */
     aspect-ratio: 1;
     background: #e0e0e0;
     border: 2px solid var(--red);
@@ -331,6 +332,15 @@ body {
     min-width: 50px;
     text-align: left;
 }
+
+/* fr-right-card: wrapper neutro, el fondo lo da el main */
+.fr-right-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.fr-right-card .fr-mt { margin-top: 1.6rem; }
+.fr-right-card .fr-btn-sos { margin-top: 1rem; }
 
 /* ═════════════════════════════════════
    ÍNDICE DE RIESGO (más grande)
