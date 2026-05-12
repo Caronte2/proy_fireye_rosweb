@@ -35,17 +35,17 @@ HEADER FIJO NORMAL (ALINEADO A LA IZQUIERDA)
     position: sticky; 
     top: 0;
     z-index: 1000;
-    padding: 10px 30px; /* Un poco más compacto */
+    padding: 10px 30px; 
 }
 
 /* Forzamos que el contenido se pegue a la izquierda */
 .header-container {
     display: flex;
-    justify-content: space-between; /* Logo/links a la izquierda, icono usuario a la derecha */
+    justify-content: space-between; 
     align-items: center;
 }
 
-/* Quitamos el espaciador que empujaba desde la izquierda */
+
 .header-left-spacer {
     display: none !important;
 }
@@ -53,12 +53,12 @@ HEADER FIJO NORMAL (ALINEADO A LA IZQUIERDA)
 .header-interactive-menu {
     display: flex;
     align-items: center;
-    gap: 40px; /* Espacio generoso entre logo y menú */
-    flex-grow: 1; /* Esto hace que ocupe el espacio sobrante */
+    gap: 40px; 
+    flex-grow: 1; 
 }
 
 .logo-image {
-    max-height: 60px; /* Reducido un poco para que sea menos intrusivo al ser fijo */
+    max-height: 60px;
     width: auto;
 }
 
@@ -83,7 +83,7 @@ HEADER FIJO NORMAL (ALINEADO A LA IZQUIERDA)
 
 .nav-link-active {
     color: var(--primary-color) !important;
-    border-bottom: 2px solid var(--primary-color); /* Un detalle visual para la página activa */
+    border-bottom: 2px solid var(--primary-color); 
 }
 
 /* El icono de usuario se queda a la derecha */
@@ -123,7 +123,7 @@ FOOTER (PIE DE PÁGINA)
 ========================================= */
 .custom-footer {
     background-color: #a8a8a8; /* Fondo blanco puro */
-    padding: 20px 0 0 0;
+    padding: 20px 0 20px 0;
 }
 
 .footer-content {

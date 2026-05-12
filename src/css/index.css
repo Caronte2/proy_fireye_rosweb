@@ -41,6 +41,7 @@ body {
     width: 100%;
     position: sticky; /* Se adhiere a la parte superior al hacer scroll */
     top: 0;
+    padding: 25px 0;
     z-index: 1000; /* Asegura que el header esté siempre por encima del contenido */
     /* Transiciones suaves para el cambio de estado mediante JavaScript */
     transition: background-color 0.5s ease, box-shadow 0.5s ease, padding 0.5s ease;
@@ -342,7 +343,7 @@ body {
    ========================================= */
 .custom-footer {
     background-color: #a8a8a8; /* Gris medio para delimitar el fin de la página */
-    padding: 20px 0 0 0;
+    padding: 20px 0 20px 0;
 }
 
 .footer-content {

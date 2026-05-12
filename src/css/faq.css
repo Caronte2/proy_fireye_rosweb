@@ -178,7 +178,7 @@ FOOTER (PIE DE PÁGINA)
 ========================================= */
 .custom-footer {
     background-color: #a8a8a8; /* Fondo blanco puro */
-    padding: 20px 0 0 0;
+    padding: 20px 0 20px 0;
 }
 
 .footer-content {
