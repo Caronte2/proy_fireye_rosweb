@@ -19,7 +19,10 @@ document.addEventListener('DOMContentLoaded', event => {
 	    service_busy: false,
 	    service_response: '',
 		topic: null,
-    	position: {x: 0, y: 0}
+    	position: {x: 0, y: 0},
+		action_client: null,
+    	mision_activa: false,
+    	mision_goal_handle: null,
     }
 
 	const mapYamlUrl = '../mapas/my_map.yaml'; // poner ubicación
@@ -93,18 +96,37 @@ document.addEventListener('DOMContentLoaded', event => {
     }
 
 	//Serivicios
-    function empezarMision(){
-        let service = new ROSLIB.Service({
-        ros : data.ros,
-        name : '/iniciar_mision',
-        serviceType : 'std_srvs/Trigger', 
-        });
+    function empezarMision() {
+    	if (!data.connected) {
+        	console.warn('No hay conexión con ROS.')
+        	return
+    	}
 
-        console.log("Clic en botón de iniciar misión");
-        service.callService(new ROSLIB.ServiceRequest({}), function(result) {
-        console.log('Resultado de la misión: ' + result.message);
-        });
-    }
+    	console.log('Enviando misión: inspeccion_a')
+
+    	const actionClient = new ROSLIB.ActionClient({
+        	ros: data.ros,
+        	serverName: '/ejecutar_mision',
+        	actionName: 'proy_fireye_interfaces/action/Mision'
+    	})
+
+    	const goal = new ROSLIB.Goal({
+        	actionClient: actionClient,
+        	goalMessage: {
+            	nombre_ruta: 'inspeccion_a'
+        	}	
+    	})
+
+    	goal.on('feedback', function(feedback) {
+        	console.log('[Feedback] ' + feedback.etapa_actual + ' — ' + (feedback.progreso * 100).toFixed(0) + '%')
+    	})
+
+    	goal.on('result', function(result) {
+        	console.log('Resultado: ' + result.mensaje)
+    	})
+
+    	goal.send()
+	}
 
     function movimientoAdelante(){
     	data.service_busy = true
