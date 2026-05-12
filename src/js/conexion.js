@@ -114,11 +114,12 @@ document.addEventListener('DOMContentLoaded', event => {
         	actionClient: actionClient,
         	goalMessage: {
             	nombre_ruta: 'inspeccion_a'
-        	}	
+        	}
     	})
 
     	goal.on('feedback', function(feedback) {
-        	console.log('[Feedback] ' + feedback.etapa_actual + ' — ' + (feedback.progreso * 100).toFixed(0) + '%')
+        	console.log('[Feedback] ' + feedback.etapa_actual
+            + ' — ' + (feedback.progreso * 100).toFixed(0) + '%')
     	})
 
     	goal.on('result', function(result) {
