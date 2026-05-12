@@ -24,3 +24,12 @@ C. NOTAS PARA EL DESARROLLO
   la función: module.exports = { nombre_funcion };
 - El nombre del archivo .js será el que uses como 'script' en el método run().
 - Para peticiones desde la Web (Frontend), usa: http://localhost:3000/api/...
+
+
+Linux
+
+cd ~/github/proy-fireye-rosweb
+npm install
+npm start
+
+node src/api/endpoints.js
