@@ -21,12 +21,25 @@ body {
     display: flex;
     flex-direction: column;
 }
+.fr-detection-feed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #111;
+    border: 2px solid var(--red);
+    border-radius: 10px;
+    overflow: hidden;
+    flex: 1;
+}
+
+.fr-detection-feed img,
 #detectionFeed {
-    width: 320px;
-    height: 240px;
-    border: 8px solid #990000;
-    border-radius: 25px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
+    border: none;
+    border-radius: 0;
 }
 
 /* ═════════════════════════════════════
