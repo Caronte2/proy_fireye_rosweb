@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', event => {
 	    let service = new ROSLIB.Service({
 	        ros: data.ros,
 	        name: '/movimiento',
-	        serviceType: 'proy_fireye_interfaces/srv/   ',
+	        serviceType: 'proy_fireye_interfaces/srv/MiMovimientoMsg',
 	    })
 
 	    let request = new ROSLIB.ServiceRequest({
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', event => {
 	    let service = new ROSLIB.Service({
 	        ros: data.ros,
 	        name: '/movimiento',
-	        serviceType: 'proy_fireye_interfaces/srv/   ',
+	        serviceType: 'proy_fireye_interfaces/srv/MiMovimientoMsg',
 	    })
 
 	    let request = new ROSLIB.ServiceRequest({
@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', event => {
 	    let service = new ROSLIB.Service({
 	        ros: data.ros,
 	        name: '/movimiento',
-	        serviceType: 'proy_fireye_interfaces/srv/   ',
+	        serviceType: 'proy_fireye_interfaces/srv/MiMovimientoMsg',
 	    })
 
 	    let request = new ROSLIB.ServiceRequest({
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', event => {
 	    let service = new ROSLIB.Service({
 	        ros: data.ros,
 	        name: '/movimiento',
-	        serviceType: 'proy_fireye_interfaces/srv/   ',
+	        serviceType: 'proy_fireye_interfaces/srv/MiMovimientoMsg',
 	    })
 
 	    let request = new ROSLIB.ServiceRequest({
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', event => {
 	    let service = new ROSLIB.Service({
 	        ros: data.ros,
 	        name: '/movimiento',
-	        serviceType: 'proy_fireye_interfaces/srv/   ',
+	        serviceType: 'proy_fireye_interfaces/srv/MiMovimientoMsg',
 	    })
 
 	    let request = new ROSLIB.ServiceRequest({
