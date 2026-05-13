@@ -5,24 +5,19 @@
 
 -- 1. GESTIÓN DE USUARIOS (OPERADORES Y ADMINISTRADORES)
 -- ----------------------------------------------------------
-
--- Habilitar extensión para tokens UUID 
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 CREATE TABLE operadores (
     id SERIAL PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    token VARCHAR(255), 
-    cuenta_confirmada BOOLEAN DEFAULT FALSE,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    email VARCHAR(100),
+    nombre_completo VARCHAR(100),
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Tabla de administradores como lista de IDs de operadores autorizados
 CREATE TABLE administradores (
     id SERIAL PRIMARY KEY,
     operador_id INTEGER UNIQUE NOT NULL REFERENCES operadores(id) ON DELETE CASCADE,
-    nivel_permisos VARCHAR(20) DEFAULT 'full', -- Reutilizado de tu código
     fecha_asignacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -31,19 +26,16 @@ CREATE TABLE administradores (
 CREATE TABLE robot (
     id SERIAL PRIMARY KEY,
     robot_name VARCHAR(50) UNIQUE DEFAULT 'FirEye_01',
-    modelo VARCHAR(50), 
     online BOOLEAN DEFAULT FALSE,
-    estado_sistema VARCHAR(50), -- 'Patrullando', 'Cargando', 'Emergencia'
-    bateria_porcentaje INTEGER,
+    estado_sistema VARCHAR(50), -- 'Patrullando', 'Emergencia', 'Cargando', 'Offline'
+    bateria_porcentaje INTEGER CHECK (bateria_porcentaje >= 0 AND bateria_porcentaje <= 100),
     ubicacion_x FLOAT,
     ubicacion_y FLOAT,
-    operador_id INT REFERENCES operadores(id) ON DELETE SET NULL, -- Quién lo controla
     ultima_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- 3. NAVEGACIÓN Y RUTAS (NAV2)
 -- ----------------------------------------------------------
--- RUTAS PREDEFINIDAS 
 CREATE TABLE rutas (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -54,53 +46,42 @@ CREATE TABLE rutas (
 CREATE TABLE puntos_ruta (
     id SERIAL PRIMARY KEY,
     ruta_id INTEGER REFERENCES rutas(id) ON DELETE CASCADE,
-    orden INTEGER NOT NULL,
+    orden INTEGER NOT NULL, -- Secuencia de navegación
     pos_x FLOAT NOT NULL,
     pos_y FLOAT NOT NULL,
+    pos_z FLOAT DEFAULT 0.0,
     orientacion_z FLOAT DEFAULT 0.0,
     orientacion_w FLOAT DEFAULT 1.0
 );
 
--- HISTORIAL DE MISIONES (Para análisis posterior)
-CREATE TABLE misiones_historial (
-    id SERIAL PRIMARY KEY,
-    robot_name VARCHAR(50) REFERENCES robot(robot_name),
-    ruta_id INTEGER REFERENCES rutas(id),
-    fecha_inicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_fin TIMESTAMP,
-    estado_final VARCHAR(30) -- 'Completada', 'Abortada', 'Interrumpida por Incendio'
-);
-
-
 -- 4. GESTIÓN DE ALERTAS Y EVENTOS
 -- ----------------------------------------------------------
--- ALERTAS Y EVENTOS (Diversificadas)
 CREATE TABLE tipos_alerta (
     id SERIAL PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL, -- 'Incendio', 'Obstrucción', 'Persona'
-    prioridad INTEGER DEFAULT 1
+    nombre VARCHAR(50) NOT NULL, -- 'Incendio', 'Obstrucción', 'Intrusión', 'Batería Baja'
+    prioridad INTEGER DEFAULT 1  -- 1: Bajo, 2: Medio, 3: Crítico (Pánico)
 );
 
 CREATE TABLE alertas (
     id SERIAL PRIMARY KEY,
     tipo_id INTEGER REFERENCES tipos_alerta(id),
-    mision_id INTEGER REFERENCES misiones_historial(id), -- Vinculada a la misión actual
-    operador_atendio_id INTEGER REFERENCES operadores(id),
+    operador_atendio_id INTEGER REFERENCES operadores(id), -- Null si nadie la ha atendido
     fecha_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    nivel_confianza FLOAT,
+    nivel_confianza FLOAT, -- De la IA (ej. 0.98)
     coord_x FLOAT,
     coord_y FLOAT,
-    estado VARCHAR(20) DEFAULT 'Activa'
+    descripcion TEXT,
+    estado VARCHAR(20) DEFAULT 'Activa', -- 'Activa', 'En proceso', 'Resuelta', 'Falsa Alarma'
+    confirmada_por_humano BOOLEAN DEFAULT FALSE
 );
 
--- MULTIMEDIA (Imágenes de las alertas)
+-- Tabla para múltiples imágenes por alerta (Análisis en directo)
 CREATE TABLE alerta_imagenes (
     id SERIAL PRIMARY KEY,
     alerta_id INTEGER REFERENCES alertas(id) ON DELETE CASCADE,
-    url_imagen TEXT NOT NULL,
+    url_imagen TEXT NOT NULL, -- URL de AWS S3
     fecha_captura TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
 
 -- ==========================================================
 -- DATOS INICIALES PARA PRUEBAS (SEEDS)
