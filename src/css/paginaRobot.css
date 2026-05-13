@@ -1,56 +1,538 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ═══════════════════════════════════════════════════
+   paginaRobot.css  –  Fireye Dashboard  (v2)
+   ═══════════════════════════════════════════════════ */
+
+:root {
+    --red:       #870000;
+    --red-dark:  #5a0000;
+    --red-light: #c0392b;
+    --bg:        #DFDFDF;
+    --white:     #fff;
+    --font:      'DigitalFinal', Arial, sans-serif;
 }
 
-body{
-    height: 100%;
-    background-color: #DFDFDF;
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: var(--bg);
+    font-family: var(--font);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
+/* ═════════════════════════════════════
+   HEADER
+═════════════════════════════════════ */
+.fr-header {
+    height: 68px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.4rem;
+    border-bottom: 2px solid #bbb;
+    position: relative;
+    z-index: 100;
+}
+.fr-logo { height: 50px; width: auto; }
+.fr-logo-link { display: flex; align-items: center; }
 
-header {
-    height: 15vh;
+.fr-header-actions { display: flex; align-items: center; gap: 0.5rem; }
+
+.fr-icon-btn {
+    width: 42px; height: 42px;
+    background: var(--red);
+    border: none; border-radius: 8px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+    padding: 7px;
+}
+.fr-icon-btn:hover { background: var(--red-light); }
+.fr-icon-btn img { width: 22px; height: 22px; filter: invert(1); }
+
+/* ═════════════════════════════════════
+   MAIN – grid 3 columnas, sin cards
+═════════════════════════════════════ */
+.fr-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.4rem;
+    padding: 1.2rem 1.4rem;
+    background: var(--white);
+    border-radius: 14px;
+    margin: 1rem 1.2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.09);
 }
 
-
-button{
-    width: 8rem;
-    height: 2.5rem;
-}
-#logo{
-    width: 11rem;
-    height: 8rem;
+.fr-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;          /* espaciado manual con margin en hijos */
 }
 
-header button{
-    width: 3rem;
-    height: 3rem;
-    margin: 0 0.5rem;
-    border: none;
+/* título de sección compartido */
+.fr-section-title {
+    font-family: var(--font);
+    font-size: 1rem;
+    color: #222;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.45rem;
 }
+.fr-mt { margin-top: 1.1rem; }
 
-header button img{
-    width: 3rem;
-    height: 3rem;
+/* ═════════════════════════════════════
+   BOTONES comunes
+═════════════════════════════════════ */
+.fr-btn {
+    border: 2px solid var(--red);
+    border-radius: 30px;
+    background: var(--bg);
+    font-family: var(--font);
+    font-size: 0.82rem;
+    cursor: pointer;
+    padding: 0.45rem 1rem;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
 }
-#analisis-imagenes{
-    height: 18rem;
-}
-#analisis-imagenes p{
-    border: 2px solid #870000;
-    border-radius: 1rem;
-    background-color: #fff;
-}
+.fr-btn:hover { background: var(--red); color: #fff; }
 
-#sistema-critico img{
-    width: 10rem;
-    height: 10rem;
+.fr-btn-connect {
+    /* más grandes que el resto */
+    font-size: 0.92rem;
+    padding: 0.55rem 1.4rem;
+    min-width: 130px;
 }
+.fr-btn-outline { background: transparent; }
+.fr-btn-dark    { background: #555; color: #fff; border-color: #555; }
+.fr-btn-dark:hover { background: #333; }
 
-#mapCanvas{
+.fr-btn-sos {
     width: 100%;
-    height: 100%;
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red-dark);
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    padding: 0.65rem;
+    border-radius: 8px;
+    margin-top: 0.6rem;
+}
+.fr-btn-sos:hover { background: var(--red-dark); }
+
+/* ═════════════════════════════════════
+   CÁMARA
+═════════════════════════════════════ */
+.fr-camera-wrap {
+    position: relative;
+    width: 100%;
 }
 
+/* Batería/señal: encima del recuadro de cámara, fuera del negro */
+.fr-cam-status-top {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-bottom: 3px;
+}
+.fr-cam-status-top span {
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    color: #333;
+    white-space: nowrap;
+    background: rgba(0,0,0,0.08);
+    border-radius: 5px;
+    padding: 2px 7px;
+}
+
+.fr-camera-label {
+    font-size: 0.68rem;
+    font-family: monospace;
+    color: #888;
+    margin-bottom: 2px;
+}
+
+.fr-camera-feed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: #111;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.fr-camera-feed img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+}
+.fr-camera-timestamp {
+    position: absolute;
+    bottom: 4px; right: 6px;
+    font-size: 0.62rem;
+    color: #ddd;
+    font-family: monospace;
+    background: rgba(0,0,0,0.45);
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+
+/* Botones conectar/desconectar: más grandes, más separados */
+.fr-camera-btns {
+    display: flex;
+    gap: 1.2rem;              /* separación generosa */
+    margin-top: 0.8rem;
+    flex-wrap: wrap;
+}
+
+/* ═════════════════════════════════════
+   ANÁLISIS EN DIRECTO
+═════════════════════════════════════ */
+/* Más espacio encima (alejado de los botones) */
+.fr-col-left .fr-section-title {
+    margin-top: 1.3rem;
+}
+
+.fr-analysis-log {
+    border: 2px solid var(--red);
+    border-radius: 8px;
+    background: var(--white);
+    padding: 0.6rem 0.8rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.76rem;
+    line-height: 1.65;
+    overflow-y: auto;
+    /* más alto que antes */
+    flex: 1;
+    min-height: 180px;
+    max-height: 260px;
+    color: #222;
+}
+.fr-analysis-log p { margin: 0; }
+.fr-analysis-log p.log-risk-high { color: var(--red); font-weight: bold; }
+.fr-analysis-log p.log-risk-med  { color: #b07000; font-weight: bold; }
+
+/* ═════════════════════════════════════
+   D-PAD (cruceta movimiento)
+═════════════════════════════════════ */
+.fr-dpad {
+    display: grid;
+    grid-template-areas:
+        ".    up   ."
+        "left mid  right"
+        ".    down .";
+    grid-template-columns: repeat(3, 48px);
+    grid-template-rows:    repeat(3, 48px);
+    gap: 6px;
+    margin: 0 auto 0.9rem;
+    width: fit-content;
+}
+.fr-dpad-btn {
+    width: 48px; height: 48px;
+    border: 2px solid var(--red);
+    border-radius: 50%;
+    background: var(--bg);
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex; align-items: center; justify-content: center;
+}
+.fr-dpad-btn:hover { background: var(--red); color: #fff; }
+.fr-dpad-up     { grid-area: up; }
+.fr-dpad-left   { grid-area: left; }
+.fr-dpad-center { grid-area: mid; background: #ccc; font-weight: bold; font-size: 0.9rem; }
+.fr-dpad-right  { grid-area: right; }
+.fr-dpad-down   { grid-area: down; }
+
+/* Botones extra de movimiento: más compactos y separados */
+.fr-movement-extra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+}
+.fr-movement-extra .fr-btn {
+    width: 180px;   /* ancho fijo, no 100% */
+    text-align: center;
+}
+
+/* ═════════════════════════════════════
+   DETECCIÓN DE OBJETOS
+═════════════════════════════════════ */
+.fr-detection-feed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #111;
+    border: 2px solid var(--red);
+    border-radius: 10px;
+    overflow: hidden;
+    flex: 1;
+}
+.fr-detection-feed img {
+    width: 100%; height: 100%; object-fit: cover;
+}
+.fr-detection-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(0,0,0,0.65);
+    color: #0f0;
+    font-family: monospace;
+    font-size: 0.62rem;
+    padding: 4px 6px;
+    display: flex; flex-direction: column; gap: 1px;
+}
+
+/* ═════════════════════════════════════
+   MAPA (más grande, ocupa el ancho de la card)
+═════════════════════════════════════ */
+.fr-map-canvas {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #e0e0e0;
+    border: 2px solid var(--red);
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ═════════════════════════════════════
+   POSICIÓN DEL ROBOT (más visible)
+═════════════════════════════════════ */
+.fr-position-block {
+    margin-top: 0.7rem;
+    text-align: center;
+}
+.fr-position-title {
+    font-family: var(--font);
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 0.3rem;
+}
+.fr-position-values {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.6rem;
+}
+.fr-pos-label {
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--red);
+}
+.fr-pos-value {
+    font-family: 'Courier New', monospace;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #111;
+    min-width: 50px;
+    text-align: left;
+}
+
+/* fr-right-card: wrapper neutro, el fondo lo da el main */
+.fr-right-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.fr-right-card .fr-mt { margin-top: 1.6rem; }
+.fr-right-card .fr-btn-sos { margin-top: 1rem; }
+
+/* ═════════════════════════════════════
+   ÍNDICE DE RIESGO (más grande)
+═════════════════════════════════════ */
+.fr-gauge-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+}
+.fr-gauge-svg {
+    width: 100%;
+    max-width: 240px;    /* más grande que antes */
+}
+.fr-risk-label {
+    font-family: var(--font);
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+/* ═════════════════════════════════════
+   FOOTER
+═════════════════════════════════════ */
+.fr-footer {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 0.78rem;
+    color: #555;
+    border-top: 1px solid #bbb;
+}
+
+/* ═════════════════════════════════════
+   POPUP BASE (SOS y notificaciones)
+═════════════════════════════════════ */
+.fr-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.52);
+    z-index: 20000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fr-popup {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 1.6rem;
+    max-width: 480px;
+    width: 92%;
+    box-shadow: 0 8px 36px rgba(0,0,0,0.28);
+}
+.fr-popup-title {
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    font-weight: bold;
+    line-height: 1.45;
+    margin-bottom: 0.5rem;
+}
+.fr-popup-subtitle {
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    color: #444;
+    margin-bottom: 1.2rem;
+}
+
+/* Acciones SOS: botones compactos y con separación */
+.fr-popup-actions {
+    display: flex;
+    gap: 1rem;           /* separación entre columnas */
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.fr-popup-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    flex: 0 1 130px;     /* ancho fijo, no ocupan todo */
+    text-align: center;
+}
+.fr-popup-action .fr-btn {
+    width: 130px;         /* botones compactos */
+    font-size: 0.75rem;
+    padding: 0.5rem 0.5rem;
+    white-space: normal;
+    line-height: 1.2;
+    text-align: center;
+    border-radius: 20px;
+}
+.fr-popup-action p {
+    font-size: 0.67rem;
+    color: #555;
+    font-family: Arial, sans-serif;
+    line-height: 1.3;
+}
+
+.fr-btn-confirm { background: var(--red); color: #fff; border-color: var(--red-dark); font-weight: bold; }
+.fr-btn-confirm:hover { background: var(--red-dark); color: #fff; }
+.fr-btn-alarm   { background: #d48000; color: #fff; border-color: #a06000; font-weight: bold; }
+.fr-btn-alarm:hover { background: #a06000; color: #fff; }
+.fr-btn-cancel  { background: #555; color: #fff; border-color: #333; }
+.fr-btn-cancel:hover { background: #333; color: #fff; }
+
+/* ═════════════════════════════════════
+   POPUP NOTIFICACIONES
+═════════════════════════════════════ */
+.fr-notif-popup {
+    max-width: 440px;
+    padding: 0;
+    overflow: hidden;
+}
+.fr-notif-header {
+    background: var(--red);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.2rem;
+}
+.fr-notif-header-title {
+    font-family: var(--font);
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    font-weight: bold;
+}
+.fr-notif-close {
+    background: #fff;
+    color: var(--red);
+    border: none;
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    font-size: 1.2rem; font-weight: bold;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+}
+.fr-notif-list {
+    list-style: none;
+    padding: 0.6rem 1.2rem;
+    max-height: 320px;
+    overflow-y: auto;
+}
+.fr-notif-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #ddd;
+}
+.fr-notif-item:last-child { border-bottom: none; }
+.fr-notif-label {
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    display: block;
+}
+.fr-notif-emergency .fr-notif-label { color: var(--red); }
+.fr-notif-error .fr-notif-label     { color: #b07000; }
+.fr-notif-info .fr-notif-label      { color: #1a7abf; }
+.fr-notif-text {
+    font-family: Arial, sans-serif;
+    font-size: 0.78rem;
+    color: #333;
+    line-height: 1.4;
+    margin: 0;
+}
+.fr-notif-text em { color: #777; font-style: normal; }
+
+.fr-notif-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.7rem;
+    padding: 0.8rem 1.2rem;
+    border-top: 1px solid #ddd;
+}
+.fr-notif-footer .fr-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
+}
+
+/* ═════════════════════════════════════
+   RESPONSIVE
+═════════════════════════════════════ */
+@media (max-width: 860px) {
+    .fr-main { grid-template-columns: 1fr 1fr; }
+    .fr-col-right { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; gap: 1rem; }
+}
+@media (max-width: 560px) {
+    .fr-main { grid-template-columns: 1fr; }
+    .fr-col-right { flex-direction: column; }
+}
