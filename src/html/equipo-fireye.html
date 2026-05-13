@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!-- Declaración del idioma del documento (Español) para mejorar el SEO y la accesibilidad -->
+<html lang="es">
+<head>
+    <!-- Metadatos básicos y configuración del viewport para diseño responsivo en móviles -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo Fireye</title>
+    
+    <!-- ========================================== -->
+    <!-- PRECARGA Y ENLACES DE RECURSOS EXTERNOS    -->
+    <!-- ========================================== -->
+    
+    <!-- Conexión anticipada a los servidores de Google para optimizar la carga de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Importación de la familia tipográfica 'Rajdhani' con sus distintos pesos (wght) -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Importación de la librería de iconos de Bootstrap (para el icono de usuario) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Importación del framework CSS Bootstrap 5 (versión minificada para mayor velocidad) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Hoja de estilos personalizada para la página del equipo -->
+    <link rel="stylesheet" href="../css/equipo-fireye.css">
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- ENCABEZADO Y NAVEGACIÓN PRINCIPAL          -->
+    <!-- ========================================== -->
+    <header class="custom-header">
+        <nav class="navbar navbar-light">
+            <!-- Contenedor fluido que ocupa el 100% del ancho con padding en los laterales (px-4) -->
+            <div class="container-fluid px-4 header-container d-flex">
+                
+                <!-- Sección Izquierda: Logo y enlaces de navegación -->
+                <div class="header-interactive-menu">
+                    <!-- Enlace al inicio con el logotipo de la marca -->
+                    <a class="navbar-brand m-0 p-0" href="../index.html">
+                        <img src="../img/logo-ojo.png" alt="FireEye Logo" class="logo-image">
+                    </a>
+                    
+                    <!-- Menú de navegación principal -->
+                    <div class="header-links">
+                        <a href="quien-es.html" class="nav-link-custom">¿Quién es Fireye?</a>
+                        <!-- Se aplica 'nav-link-active' para resaltar en qué página se encuentra el usuario -->
+                        <a href="equipo-fireye.html" class="nav-link-custom nav-link-active">Equipo Fireye</a>
+                        <a href="faq.html" class="nav-link-custom">Preguntas Frecuentes</a>
+                    </div>
+                </div>
+
+                <!-- Sección Derecha: Botón de acceso al área personal (Login) -->
+                <div class="header-actions">
+                    <a href="login.html" class="btn border-0 text-dark user-icon-btn d-flex align-items-center justify-content-center" aria-label="Iniciar Sesión">
+                        <!-- Icono de usuario de Bootstrap Icons -->
+                        <i class="bi bi-person-circle fs-2"></i>
+                    </a>
+                </div>
+                
+            </div>
+        </nav>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- CONTENIDO PRINCIPAL: INFORMACIÓN DEL EQUIPO-->
+    <!-- ========================================== -->
+    <main class="team-section my-5">
+        <div class="container">
+            
+            <!-- Fila principal con alineación vertical centrada ('align-items-center') -->
+            <div class="row align-items-center">
+                
+                <!-- Bloque de Texto: Ocupa 7 de 12 columnas en pantallas grandes (lg) -->
+                <!-- 'pe-lg-5' añade padding derecho en escritorio; 'mb-5' añade margen inferior en móviles -->
+                <div class="col-lg-7 pe-lg-5 mb-5 mb-lg-0">
+                    <h1 class="team-title mb-4">EQUIPO FIREYE</h1>
+                    
+                    <!-- Párrafos descriptivos sobre la filosofía y metodología del equipo -->
+                    <p class="team-text">Somos un equipo compacto, híbrido y con el hambre de quien sabe que las cosas se pueden hacer mejor. Venimos de diferentes sectores, pero nos une una misma obsesión: la seguridad digital no debería ser un dolor de cabeza, sino una ventaja competitiva.</p>
+                    
+                    <p class="team-text">En Fireye, no solo reaccionamos ante incidentes, diseñamos arquitecturas de resiliencia que se adaptan al ritmo de crecimiento de nuestros clientes. Porque una empresa que no teme por su integridad digital es una empresa que se atreve a innovar sin límites.</p>
+                    
+                    <p class="team-text">Nuestra metodología combina la experiencia en entornos críticos con una capacidad de adaptación constante. No esperamos a que los problemas aparezcan para diseñar la defensa; nos anticipamos a los fallos antes de que se conviertan en crisis. En Fireye, transformamos la incertidumbre tecnológica en una hoja de ruta clara y segura.</p>
+                </div>
+                
+                <!-- Bloque de Imagen: Ocupa 5 de 12 columnas en pantallas grandes (lg) -->
+                <div class="col-lg-5 text-center">
+                    <!-- Clase 'img-fluid' para asegurar que la imagen escale correctamente sin romper el layout -->
+                    <img src="../img/robot-detalle.png" alt="Robot Fireye" class="img-fluid team-robot-image">
+                </div>
+                
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- PIE DE PÁGINA (FOOTER)                     -->
+    <!-- ========================================== -->
+    <footer class="custom-footer">
+        <div class="container">
+            
+            <!-- Comportamiento Flexbox responsivo: 
+                 En móviles se apilan (flex-column), en escritorio se alinean en fila (flex-md-row) -->
+            <div class="footer-content d-flex flex-column flex-md-row align-items-center justify-content-center">
+                
+                <!-- Contenedor del logotipo inferior -->
+                <div class="footer-logo-container me-md-4 mb-4 mb-md-0">
+                    <img src="../img/logo.png" alt="FireEye Logo" class="footer-logo">
+                </div>
+                
+                <!-- Navegación secundaria (Mapa de sitio) -->
+                <div class="footer-links-container ps-md-4">
+                    <ul class="footer-links list-unstyled mb-0">
+                        <li><a href="../html/quien-es.html">¿Quién es Fireye?</a></li>
+                        <li><a href="../html/equipo-fireye.html">Equipo Fireye</a></li>
+                        <li><a href="../html/faq.html">Preguntas frecuentes</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+            
+            <!-- Derechos de autor -->
+            <div class="footer-copyright text-center mt-3">
+                <p>&copy; 2026 Fireye. Todos los derechos reservados.</p>
+            </div>
+            
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- SCRIPTS AL FINAL DEL DOCUMENTO             -->
+    <!-- ========================================== -->
+    
+    <!-- Integración del JavaScript de Bootstrap (necesario para componentes interactivos móviles) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

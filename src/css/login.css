@@ -1,0 +1,142 @@
+/* =========================================
+FUENTES Y VARIABLES GLOBALES
+========================================= */
+
+@font-face {
+    font-family: 'EFour Digital';
+    src: url('../fonts/EFourDigital.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --primary-color: #800000; /* Borgoña oscuro */
+    --background-gray: #f0f0f0; /* Gris claro de fondo */
+    --text-color-dark: #333;
+    --text-color-light: #fff;
+    --border-color: #fff;
+}
+
+body {
+    background-color: var(--background-gray);
+    color: var(--text-color-dark);
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================
+HEADER SIMPLIFICADO
+========================================= */
+
+.logo-image {
+    max-height: 65px;
+    width: auto;
+}
+
+
+/* =========================================
+ESTRUCTURA PRINCIPAL DEL LOGIN
+========================================= */
+
+/* Altura mínima para centrar el círculo verticalmente */
+.login-main {
+    min-height: calc(100vh - 100px); 
+    padding: 20px;
+}
+
+/* El círculo rojo gigante */
+.login-circle {
+    background-color: var(--primary-color);
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    /* Sombreado sutil */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+}
+
+/* Título */
+.login-title {
+    font-family: 'EFour Digital', sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 2.5rem;
+}
+
+
+/* =========================================
+   FORMULARIO
+   ========================================= */
+
+.login-form {
+    width: 70%;
+}
+
+/* Etiquetas (ID y Contraseña) */
+.login-form .form-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+/* Campos de entrada (Inputs) */
+.login-input {
+    background-color: transparent !important;
+    border: 2px solid #fff !important;
+    border-radius: 30px !important;
+    color: #fff !important;
+    padding: 10px 20px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+}
+
+.login-input:focus {
+    box-shadow: none;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Botón de Enviar / Cerrar Sesión */
+.login-submit-btn {
+    font-family: 'EFour Digital', sans-serif;
+    background-color: #fff;
+    color: var(--primary-color);
+    border-radius: 30px;
+    padding: 8px 30px;
+    font-size: 1.2rem;
+    border: 2px solid #fff;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.login-submit-btn:hover {
+    background-color: transparent;
+    color: #fff;
+    transform: scale(1.05);
+    border-radius: 30px;
+    border: 2px solid #fff;
+}
+
+
+/* =========================================
+DISEÑO ADAPTATIVO (MÓVILES)
+========================================= */
+
+@media (max-width: 650px) {
+    .login-circle {
+        width: 90vw;
+        height: 90vw;
+        padding: 20px;
+    }
+    .login-form {
+        width: 85%;
+    }
+    .login-title {
+        font-size: 1.5rem;
+    }
+}

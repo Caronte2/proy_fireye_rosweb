@@ -1,0 +1,240 @@
+/* FUENTES */
+@font-face {
+    font-family: 'EFour Digital';
+    src: url('../fonts/EFourDigital.ttf') format('truetype');
+}
+
+:root {
+    --primary-color: #800000;
+    --background-gray: #e6e6e6;
+    --folder-border: #800000;
+    --folder-bg: #b0b0b0; /* Gris un poco más oscuro para el interior */
+}
+
+body {
+    background-color: var(--background-gray);
+    font-family: 'Rajdhani', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* =========================================
+HEADER FIJO NORMAL (ALINEADO A LA IZQUIERDA)
+========================================= */
+
+.custom-header {
+    background-color: var(--background-gray);
+    width: 100%;
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+    padding: 10px 30px; /* Un poco más compacto */
+}
+
+/* Forzamos que el contenido se pegue a la izquierda */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Logo/links a la izquierda, icono usuario a la derecha */
+    align-items: center;
+}
+
+/* Quitamos el espaciador que empujaba desde la izquierda */
+.header-left-spacer {
+    display: none !important;
+}
+
+.header-interactive-menu {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* Espacio generoso entre logo y menú */
+    flex-grow: 1; /* Esto hace que ocupe el espacio sobrante */
+}
+
+.logo-image {
+    max-height: 60px; /* Reducido un poco para que sea menos intrusivo al ser fijo */
+    width: auto;
+}
+
+.header-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-link-custom {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 800;
+    color: #000;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.nav-link-custom:hover {
+    color: var(--primary-color);
+}
+
+.nav-link-active {
+    color: var(--primary-color) !important;
+    border-bottom: 2px solid var(--primary-color); /* Un detalle visual para la página activa */
+}
+
+/* El icono de usuario se queda a la derecha */
+.header-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+/* SECCIÓN FAQ */
+
+.duda-item h4 {
+    font-weight: 800;
+    color: #000;
+    margin-bottom: 5px;
+    font-size: 1.3rem; /* Un pelín más grande para destacar */
+}
+
+.duda-item p {
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(128, 0, 0, 0.1); /* Una línea sutil para separar cada duda */
+    padding-bottom: 15px;
+}
+.faq-section { 
+    flex: 1;
+    padding: 3rem 0 8rem 0; 
+}
+.faq-title { 
+    font-family: 'EFour Digital', 
+    sans-serif; 
+    font-size: 2.5rem; 
+}
+
+/* DISEÑO DE CARPETA */
+.folder-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.tab-folder {
+    background-color: var(--background-gray) !important;
+    border: 2px solid var(--folder-border) !important;
+    border-bottom: none !important;
+    border-radius: 15px 15px 0 0 !important;
+    color: #000 !important;
+    font-weight: 700;
+    margin-right: 5px;
+    padding: 10px 25px;
+}
+
+.tab-folder.active {
+    background-color: var(--folder-bg) !important; /* El color de la pestaña activa coincide con el cuerpo */
+}
+
+.folder-body {
+    background-color: var(--folder-bg);
+    border: 2px solid var(--folder-border);
+    border-radius: 0 15px 15px 15px;
+    min-height: 400px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+/* FORMULARIO */
+.text-label { 
+    font-weight: 800; 
+    font-size: 1.4rem; 
+    color: #fff; 
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); 
+}
+
+.faq-form {
+    padding: 3.7rem;
+}
+
+.custom-input, .custom-textarea {
+    background-color: transparent !important;
+    border: 2px solid var(--folder-border) !important;
+    border-radius: 15px !important;
+    color: #000;
+    font-weight: 600;
+}
+
+.btn-enviar {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-family: 'EFour Digital', sans-serif;
+    border: none;
+    padding: 8px 40px;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+}
+
+.btn-enviar:hover { 
+    transform: scale(1.05); 
+}
+
+/* =========================================
+FOOTER (PIE DE PÁGINA)
+========================================= */
+.custom-footer {
+    background-color: #a8a8a8; /* Fondo blanco puro */
+    padding: 20px 0 20px 0;
+}
+
+.footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Estructura del logo y el texto FIREYE debajo */
+.footer-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo {
+    max-height: 130px;
+    width: auto;
+}
+
+/* La línea roja que separa el logo de los enlaces */
+.footer-links-container {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 800;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 25px;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #000;
+    font-weight: 800;
+    text-decoration: underline;
+    font-size: 1.1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.footer-copyright p {
+    font-size: 0.8rem;
+    color: #555;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Ajustes para móviles */
+@media (max-width: 991px) {
+    .about-title {
+        font-size: 2.5rem;
+    }
+    .about-image {
+        max-height: 400px;
+    }
+}
