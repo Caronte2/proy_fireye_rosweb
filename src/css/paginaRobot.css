@@ -13,12 +13,7 @@ body{
 header {
     height: 15vh;
 }
-main{
-    height: 75vh;
-}
-footer{
-    height: 10vh;
-}
+
 
 button{
     width: 8rem;
@@ -48,13 +43,14 @@ header button img{
     border-radius: 1rem;
     background-color: #fff;
 }
-#radar img{
-    border: 10px solid #870000;
-    border-radius: 2rem;
-}
 
 #sistema-critico img{
     width: 10rem;
     height: 10rem;
+}
+
+#mapCanvas{
+    width: 100%;
+    height: 100%;
 }
 

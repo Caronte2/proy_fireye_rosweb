@@ -35,7 +35,7 @@
                 </a>
             </div>
             <div class="col d-flex justify-content-end align-items-center">
-                <button id="toggleMenuBtn" class="toggle-menu-btn">
+            <button id="toggleMenuBtn" class="toggle-menu-btn">
                 ☰ 
             </button>
 
@@ -87,34 +87,38 @@
                 <div class="row" id="sistema-critico">
                     <h3>Sistema Críticos</h3>
                     <img src="../img/bateria.svg" alt="">
-                    <img src="../img/cantidadRed.svg" alt="">
                     <img src="../img/velocidad.svg" alt="">
                 </div>
-                <div class="row"></div>
+                <div class="row">
+                    <div class="col">
+                        <h3>Posición del Robot</h3>    
+                        <span>X: 
+                        <span id="pos_x"></span>
+		                </span>
+                        <span>Y: 
+                        <span id="pos_y"></span>
+		                </span>
+                    </div>
+                </div>
             </div>
-            <div class="col" id="radar">
-                <h3>Mapa de Movimiento</h3>
-                <div class="text-center">
-                    <canvas id="mapCanvas"></canvas>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <h3>Mapa de Movimiento</h3>
+                    </div>
+                    <div class="col">                
+                        <h3>Mapa de Movimiento</h3>
+                        <div class="text-center">
+                        <canvas id="mapCanvas"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-    <div class="col">
-        <h3>Posición del Robot</h3>    
-        <span>X: 
-            <span id="pos_x"></span>
-		</span>
-        <span>Y: 
-            <span id="pos_y"></span>
-		</span>
-    </div>
-</div>
     </main>
     <footer class="container-fluid text-center">
         Copyright © 2024 Fireye. Todos los derechos reservados.
     </footer>
-     <!-- Contenedor principal del menú lateral (posicionado a la derecha) -->
+     <!-- Contenedor principal del menú lateral (posicionado a la derecha)
     <aside class="menu-container" id="mainMenu" aria-label="Menú principal de la aplicación">
         <header class="menu-header">
             <button class="close-btn" id="closeMenuBtn" aria-label="Cerrar menú">×</button>
@@ -160,10 +164,10 @@
         <button class="logout-btn" aria-label="Cerrar sesión de la cuenta">
             cerrar sesión
         </button>
-    </aside>
+    </aside> -->
 
 
-    <aside class="menu-container notification-menu" id="notificationMenu">
+    <!-- <aside class="menu-container notification-menu" id="notificationMenu">
         <header class="menu-header notification-header">
             <button class="close-btn close-notification-btn" id="closeNotificationBtn">×</button>
             <h3 class="menu-title notification-title">NOTIFICACIONES</h3>
@@ -182,6 +186,6 @@
             <button class="logout-btn clear-notifications-btn" id="clearNotificationsBtn">LIMPIAR</button>
         </div>
     </aside>
-    <script src="../js/menu.js"></script>
+    <script src="../js/menu.js"></script> -->
 </body>
 </html>
