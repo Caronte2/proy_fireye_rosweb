@@ -1,189 +1,356 @@
 /**
- * @file configuracion.css
- * @brief Estilos finales corregidos: posicionamiento de botón, iconos y ocultación de pestañas.
+ * configuracion.css – Fireye Configuración (v3)
+ * Alineado visualmente con paginaRobot y las imágenes de referencia
  */
 
 :root {
-    --primary-red: #8b0000;
-    --bg-gray: #cfcfcf;
-    --panel-gray: #b7b7b7;
-    --white: #ffffff;
+    --red:       #870000;
+    --red-dark:  #5a0000;
+    --red-light: #c0392b;
+    --bg:        #DFDFDF;
+    --white:     #fff;
+    --panel-bg:  #c8c8c8;
+    --tab-bg:    #fff;
+    --font:      'Segoe UI', Arial, sans-serif;
 }
 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: var(--bg-gray);
-    margin: 0;
-    padding: 20px;
+    font-family: var(--font);
+    background-color: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* HEADER: Logo a la izquierda, iconos a la derecha */
+/* Reset botones — elimina el azul por defecto del navegador */
+button {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+}
+button:focus { outline: none; box-shadow: none; }
+
+/* ═══════════════════════════════════
+   HEADER — igual que paginaRobot
+═══════════════════════════════════ */
 .header {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    padding: 10px 40px;
-    margin-bottom: 20px;
-    height: 70px; /* Ajusta esta altura según necesites */
-}
-.main-logo {
-    width: 11rem;
-  height: 8rem;
-}
-
-/* Ajuste para el contenedor del logo */
-.logo-container {
-    max-width: 90px; /* Ajusta este ancho a tu gusto */
+    height: 68px;
+    background: var(--bg);
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 1.4rem;
+    border-bottom: 2px solid #bbb;
 }
 
-/* Ajuste para la imagen dentro del contenedor */
-.main-logo {
-    width: 11rem;      /* Obliga a la imagen a no ser más ancha que el contenedor */
-    height: 8rem;     /* Mantiene la proporción para que no se vea estirada */
+.logo-container { display: flex; align-items: center; }
+.main-logo { height: 50px; width: auto; }
+
+.header-icons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.icon-btn {
+    width: 42px; height: 42px;
+    background: var(--red);
+    border: none;
+    border-radius: 8px;
+    padding: 9px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+}
+.icon-btn:hover { background: var(--red-light); }
+
+.icon-img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    filter: invert(1);
     display: block;
 }
 
+/* ═══════════════════════════════════
+   LAYOUT PRINCIPAL
+═══════════════════════════════════ */
+.config-container {
+    flex: 1;
+    padding: 1.4rem 2rem 2rem;
+}
+
 h1 {
-    font-family: 'Arial Black', sans-serif;
-    margin-left: 40px; /* Igual que tus pestañas y el panel */
-    color: #333;
-    font-size: 1.8rem;
+    font-family: 'Arial Black', Arial, sans-serif;
+    color: #222;
+    font-size: 1.7rem;
     text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.8rem;
 }
 
-/* Forzamos el tamaño de los iconos del header */
-.icon-img {
-    width: 3rem ; 
-    height: 3rem ;
-    
-    object-fit: contain;
-    display: inline-block; /* Cambiado de block para mejor alineación */
-    cursor: pointer;
-}
-
-/* Aseguramos que el contenedor no deje que las imágenes se desborden */
-.header-icons {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    max-height: 70px; /* No permite que el contenedor sea más alto que el header */
-}
-
-.main-title {
-    font-family: 'Arial Black', sans-serif;
-    letter-spacing: -1px;
-    margin-left: 40px;
-}
-
-/* TABS */
+/* ═══════════════════════════════════
+   PESTAÑAS
+═══════════════════════════════════ */
 .tabs {
-    margin-left: 40px;
     display: flex;
+    gap: 0;
 }
 
 .tab-link {
-    background: var(--panel-gray);
-    border: 2px solid var(--primary-red);
+    background: var(--white);
+    border: 2px solid var(--red);
     border-bottom: none;
-    padding: 10px 30px;
-    border-radius: 15px 15px 0 0;
+    padding: 9px 28px;
+    border-radius: 12px 12px 0 0;
     font-weight: bold;
+    font-size: 0.82rem;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.2s;
+    color: #333;
+    font-family: var(--font);
 }
 
 .tab-link.active {
-    background: var(--panel-gray);
-    box-shadow: inset 0px 4px 0px var(--primary-red);
+    background: var(--white);
+    box-shadow: inset 0px 4px 0px var(--red);
+    color: #111;
 }
 
-/* --- LÓGICA DE VISIBILIDAD DE SECCIONES --- */
-.tab-content {
-    display: none; /* Oculta todas las secciones por defecto */
-}
+.tab-link:hover:not(.active) { background: #f0f0f0; }
 
-.tab-content.active {
-    display: block; /* Solo muestra la que tiene la clase .active */
-}
-
-/* PANEL PRINCIPAL */
+/* ═══════════════════════════════════
+   PANEL CONTENIDO
+═══════════════════════════════════ */
 .content-wrapper {
-    background: var(--panel-gray);
-    border: 2px solid var(--primary-red);
-    border-radius: 0 25px 25px 25px;
-    margin: 0 40px;
-    padding: 30px;
-    padding-bottom: 90px; /* Espacio para que el botón no pise el contenido */
-    position: relative;   /* Necesario para posicionar el botón GUARDAR */
-    min-height: 400px;
+    background: #c8c8c8;
+    border: 2px solid var(--red);
+    border-radius: 0 16px 16px 16px;
+    padding: 1.6rem 1.8rem 5rem;
+    position: relative;
+    min-height: 420px;
 }
 
+/* ═══════════════════════════════════
+   TABS VISIBILIDAD
+═══════════════════════════════════ */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ═══════════════════════════════════
+   FILAS DE CONFIGURACIÓN
+═══════════════════════════════════ */
 .settings-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
     align-items: flex-start;
+    padding-bottom: 1.2rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid #ddd;
+}
+.settings-row.no-border {
+    border-bottom: none;
 }
 
-.settings-info { flex: 1.2; }
-.description { font-size: 0.85rem; line-height: 1.3; color: #333; }
+.settings-info {
+    flex: 1.4;
+    padding-right: 1.5rem;
+}
+
+.settings-info h3 {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 0.95rem;
+    color: #111;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.03em;
+}
+
+.description,
+.small-text {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: #444;
+}
 
 .settings-actions {
     flex: 1;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-/* BOTÓN GUARDAR: Dentro del recuadro gris, esquina inferior derecha */
+.settings-actions.flex-col {
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* ═══════════════════════════════════
+   BOTONES
+═══════════════════════════════════ */
+.btn {
+    border: 2px solid var(--red);
+    border-radius: 25px;
+    padding: 7px 22px;
+    font-weight: bold;
+    font-size: 0.82rem;
+    font-family: var(--font);
+    min-width: 100px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+
+.btn-red   { background: var(--red); color: #fff; }
+.btn-red:hover { background: var(--red-dark); }
+.btn-white { background: var(--white); color: #111; }
+.btn-white:hover { background: var(--red); color: #fff; }
+
+/* ═══════════════════════════════════
+   BOTÓN GUARDAR
+═══════════════════════════════════ */
 .btn-save {
     position: absolute;
-    bottom: 20px;
-    right: 30px;
-    background: var(--primary-red);
-    color: white;
+    bottom: 1.2rem;
+    right: 1.5rem;
+    background: var(--red);
+    color: #fff;
     border: none;
-    padding: 12px 50px;
-    border-radius: 20px;
-    font-family: 'Arial Black', sans-serif;
-    font-size: 1rem;
+    padding: 10px 44px;
+    border-radius: 22px;
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 0.92rem;
     cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    letter-spacing: 0.06em;
+    transition: background 0.2s;
 }
+.btn-save:hover { background: var(--red-dark); }
 
-.btn-save:hover {
-    background: #a00000;
+/* ═══════════════════════════════════
+   ESTACIÓN DE CARGA — iconos de estado
+═══════════════════════════════════ */
+.status-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    font-size: 0.82rem;
 }
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-weight: normal;
+    color: #333;
+}
+.status-item strong { color: #111; }
 
-/* Estilos de botones de opciones */
-.btn {
-    border: 2px solid var(--primary-red);
-    border-radius: 25px;
-    padding: 8px 25px;
+/* ═══════════════════════════════════
+   ZONA SELECTOR + MAPA
+═══════════════════════════════════ */
+.zone-selector { margin-top: 0.7rem; }
+.zone-selector label {
+    font-size: 0.78rem;
     font-weight: bold;
-    min-width: 120px;
-    cursor: pointer;
-    background: white;
+    color: #555;
+    display: block;
+    margin-bottom: 4px;
 }
-
-.btn-red { background: var(--primary-red); color: white; }
-.btn-white { background: white; color: black; }
-
-/* Otros elementos específicos */
-.flex-col { flex-direction: column; align-items: flex-end; }
-.status-icons { font-size: 0.85rem; display: flex; gap: 15px; font-weight: bold; }
+.zone-input {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1.5px solid var(--red);
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 0.82rem;
+    background: var(--white);
+    color: #222;
+    cursor: pointer;
+}
+.zone-input span { color: var(--red); font-size: 1rem; }
 
 .map-container {
-    background: white;
-    border: 2px solid var(--primary-red);
-    border-radius: 20px;
-    width: 160px;
-    height: 160px;
+    background: var(--white);
+    border: 2px solid var(--red);
+    border-radius: 14px;
+    width: 150px;
+    height: 150px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.map-img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ═══════════════════════════════════
+   CONTACTOS DE CONFIANZA
+═══════════════════════════════════ */
+.contact-list {
+    list-style: none;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.contact-list li {
+    font-size: 0.82rem;
+    color: #333;
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 4px 10px;
 }
 
-.map-img { width: 100%; height: 100%; object-fit: cover; }
+.btn-agregar {
+    border: 2px solid var(--red);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--red);
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 5px 16px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.2s, color 0.2s;
+    align-self: flex-start;
+}
+.btn-agregar:hover { background: var(--red); color: #fff; }
+
+/* ═══════════════════════════════════
+   ACTUALIZACIÓN DE SOFTWARE
+═══════════════════════════════════ */
+.update-box {
+    border: 1.5px solid #bbb;
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    margin-top: 0.6rem;
+    background: #f7f7f7;
+    font-size: 0.8rem;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.update-box .update-pending { color: var(--red); font-weight: bold; }
+.update-box .update-last    { color: #666; }
+
+.btn-actualizar {
+    border: 2px solid var(--red);
+    border-radius: 8px;
+    background: var(--white);
+    color: #333;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 5px 18px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    align-self: flex-start;
+    transition: background 0.2s, color 0.2s;
+}
+.btn-actualizar:hover { background: var(--red); color: #fff; }
