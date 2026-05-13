@@ -21,6 +21,13 @@ body {
     display: flex;
     flex-direction: column;
 }
+#detectionFeed {
+    width: 320px;
+    height: 240px;
+    border: 8px solid #990000;
+    border-radius: 25px;
+    object-fit: cover;
+}
 
 /* ═════════════════════════════════════
    HEADER
