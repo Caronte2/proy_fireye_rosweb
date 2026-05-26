@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const cors = require('cors'); // Instala con: npm install cors
-app.use(cors()); // Esto permite que tu Web local acceda a tu API local sin bloqueos
+const cors = require('cors'); 
+app.use(cors()); 
 
-// 1. Llamamos explícitamente al archivo index y lo ejecutamos
+// 1. Cargador dinámico de scripts
 const db = require('./consultas/index')(); 
 
 app.use(express.json());
@@ -21,12 +21,37 @@ const run = async (res, script, metodo, datos) => {
     }
 };
 
-// 3. Endpoints ultra-compactos
+// 3. Endpoint de testeo
 app.get('/api/test-carga', (req, res) => res.json({ scripts_activos: Object.keys(db) }));
 
-// Ejemplos de uso(Estructura): (req, res) => run(respuesta, 'nombre_archivo', 'nombre_funcion_exportada', datos)
-app.get('/api/usuarios/:id', (req, res) => run(res, 'usuarios', 'obtenerPorId', req.params.id));
-app.post('/api/login',       (req, res) => run(res, 'usuarios', 'login', req.body));
-app.post('/api/alerta',      (req, res) => run(res, 'alertas', 'registrar', req.body));
+// ==========================================
+// 4. ENDPOINTS DE LA API FirEye
+// Estructura: run(res, 'nombre_archivo', 'metodo_exportado', datos)
+// ==========================================
 
-app.listen(3000, () => console.log(`🚀 API en puerto 3000 | Scripts: ${Object.keys(db)}`));
+// --- USUARIOS (Operadores) ---
+app.post('/api/login', (req, res) => run(res, 'usuarios', 'login', req.body));
+
+// --- ROBOT ---
+// Actualiza telemetría (batería, estado: 'activo', 'cargando', 'error')
+app.post('/api/robot/estado',  (req, res) => run(res, 'robot', 'actualizarEstado', req.body));
+// Obtiene la info del robot y del operador asignado
+app.get('/api/robot/:id',      (req, res) => run(res, 'robot', 'obtenerInfo', req.params.id));
+
+// --- MISIONES Y TRAYECTORIAS ---
+// Inicia una misión y devuelve el ID
+app.post('/api/misiones/iniciar',   (req, res) => run(res, 'misiones', 'iniciar', req.body));
+// Finaliza la misión (estado: completada o abortada)
+app.post('/api/misiones/finalizar', (req, res) => run(res, 'misiones', 'finalizar', req.body));
+// Guarda un array de puntos cartesianos de la misión
+app.post('/api/misiones/puntos',    (req, res) => run(res, 'misiones', 'guardarTrayectoria', req.body));
+
+// --- ALERTAS ---
+// Registra una nueva alerta (fuego, humo, bateria_baja)
+app.post('/api/alertas/registrar', (req, res) => run(res, 'alertas', 'registrar', req.body));
+// Obtiene el histórico de alertas
+app.get('/api/alertas',            (req, res) => run(res, 'alertas', 'obtenerTodas', null));
+
+// ==========================================
+
+app.listen(3000, () => console.log(`API en puerto 3000 | Scripts montados: ${Object.keys(db)}`));

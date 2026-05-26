@@ -9,7 +9,7 @@ module.exports = () => {
             try { 
                 db[path.basename(file, '.js')] = require(path.join(__dirname, file)); 
             } catch (e) { 
-                console.error(`⚠️ Error en [${file}]: ${e.message}`); 
+                console.error(`========Error en [${file}]: ${e.message}`); 
             }
         }
     });
