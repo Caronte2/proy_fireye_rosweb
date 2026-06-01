@@ -37,6 +37,8 @@ app.post('/api/login', (req, res) => run(res, 'usuarios', 'login', req.body));
 app.post('/api/robot/estado',  (req, res) => run(res, 'robot', 'actualizarEstado', req.body));
 // Obtiene la info del robot y del operador asignado
 app.get('/api/robot/:id',      (req, res) => run(res, 'robot', 'obtenerInfo', req.params.id));
+// Registra la posición actual del robot
+app.post('/api/robot/posicion', (req, res) => run(res, 'robot', 'registrarPosicion', req.body));
 
 // --- MISIONES Y TRAYECTORIAS ---
 // Inicia una misión y devuelve el ID
