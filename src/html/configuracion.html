@@ -31,7 +31,6 @@
         </nav>
 
         <div class="content-wrapper">
-
             <section id="patrullaje" class="tab-content active">
 
                 <div class="settings-row">
@@ -78,8 +77,11 @@
                             <div class="status-text">
                                 <span class="status-label">Hora de descanso</span>
                                 <div class="time-wrapper">
-                                    <input type="time" id="horaDescanso" class="time-input" value="05:00">
-                                    <span class="time-caret">⌃</span>
+                                    <input type="time" id="horaDescanso" class="time-input" value="05:00" step="1800" required>
+                                    <div class="time-spinners">
+                                        <span class="spinner-btn" id="btnTimeUp">▲</span>
+                                        <span class="spinner-btn" id="btnTimeDown">▼</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -105,9 +107,93 @@
             </section>
 
             <section id="notificaciones" class="tab-content">
+                <div class="settings-row">
+                    <div class="settings-info">
+                        <h3 class="tech-title">PROTOCOLO DE EMERGENCIA</h3>
+                        <p class="description">Es el protocolo de reacción inmediata. Aquí configuras si quieres que
+                            el sistema envíe una alerta automática a los Bomberos y a las
+                            autoridades en cuanto se confirme la presencia de Fuego, reduciendo
+                            el tiempo de respuesta al mínimo.</p>
+                    </div>
+                    <div class="settings-actions">
+                        <button class="btn btn-red" data-type="protocolo" data-value="on">Activo</button>
+                        <button class="btn btn-white" data-type="protocolo" data-value="off">Inactivo</button>
+                    </div>
+                </div>
+
+                <div class="settings-row">
+                    <div class="settings-info">
+                        <h3 class="tech-title">SENSIBILIDAD DE DETECCIÓN</h3>
+                        <p class="description">Es el ajuste de precisión de los sensores. Puedes calibrar qué cantidad
+                            de Humo o qué nivel de Calor debe detectar el robot para saltar la alarma,
+                            evitando falsos avisos por polvo o niebla en días de mucho viento.</p>
+                    </div>
+                    <div class="settings-actions">
+                        <button class="btn btn-red" data-type="sensibilidad" data-value="alto">Alto</button>
+                        <button class="btn btn-white" data-type="sensibilidad" data-value="medio">Medio</button>
+                        <button class="btn btn-white" data-type="sensibilidad" data-value="bajo">Bajo</button>
+                    </div>
+                </div>
+
+                <div class="settings-row no-border">
+                    <div class="settings-info">
+                        <h3 class="tech-title">CONTACTO DE CONFIANZA</h3>
+                        <p class="description">Tu red de apoyo más cercana. Aquí añades los números de teléfono de
+                            familiares o vecinos que recibirán una Alerta Crítica por SMS o llamada
+                            si tú no respondes a la primera notificación de peligro.</p>
+                        
+                        <div class="contact-list-container">
+                            <ul class="contact-list">
+                                <li>Mamá &rarr; Tlf: 123456789</li>
+                                <li>Hijo &rarr; Tlf: 987654321</li>
+                                <li>Esposa &rarr; Tlf: 546789321</li>
+                            </ul>
+                            <button class="btn btn-white btn-small">Agregar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-actions">
+                        <button class="btn btn-red" data-type="contacto" data-value="llamada">Llamada</button>
+                        <button class="btn btn-red" data-type="contacto" data-value="sms">SMS</button>
+                    </div>
+                </div>
+
             </section>
 
             <section id="mantenimiento" class="tab-content">
+                <div class="settings-row">
+                    <div class="settings-info">
+                        <h3 class="tech-title">LIMPIEZA DE SENSORES</h3>
+                        <p class="description">El sistema de autodiagnóstico de visión. Esta sección te avisa si el cristal
+                            de la Cámara o el sensor LiDAR tienen polvo o suciedad, garantizando
+                            que la detección de Humo sea siempre nítida y sin errores.</p>
+                    </div>
+                    <div class="settings-actions actions-column">
+                        <button class="btn btn-white" data-type="mantenimiento" data-value="autodiagnostico">Hacer autodiagnóstico</button>
+                        <button class="btn btn-white" data-type="mantenimiento" data-value="limpieza">Solicitar limpieza profunda</button>
+                    </div>
+                </div>
+
+                <div class="settings-row no-border">
+                    <div class="settings-info">
+                        <h3 class="tech-title">ACTUALIZACIÓN DE SOFTWARE</h3>
+                        <p class="description">Desde aquí descargas las nuevas versiones del Sistema Operativo de Fireye,
+                            optimizando la inteligencia del robot y añadiendo nuevas funciones de Seguridad
+                            de forma automática.</p>
+                        
+                        <div class="status-list-container">
+                            <ul class="status-list">
+                                <li>Actualización pendiente: 22/03/2026</li>
+                                <li>Última actualización: 25/02/2026</li>
+                            </ul>
+                            <button class="btn btn-white btn-small" data-type="mantenimiento" data-value="actualizar">Actualizar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-actions">
+                        </div>
+                </div>
+
             </section>
 
             <button class="btn-save tech-title">GUARDAR</button>

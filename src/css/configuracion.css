@@ -243,8 +243,7 @@ body {
 .time-wrapper {
     display: flex;
     align-items: center;
-    gap: 4px;
-    position: relative; /* Necesario para que el truco funcione */
+    gap: 8px;
 }
 
 .time-input {
@@ -255,28 +254,102 @@ body {
     background-color: transparent;
     border: none;
     outline: none;
-    cursor: pointer;
     padding: 0;
-    margin-top: -2px;
     width: 75px; 
-    /* Hemos quitado el pointer-events: none; */
 }
 
-/* El truco mágico: estiramos el botón nativo, lo hacemos transparente y lo ponemos encima */
-.time-input::-webkit-calendar-picker-indicator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0; /* Invisible pero clickeable */
-    cursor: pointer;
+/* Ocultamos cualquier botón o flecha nativa del navegador */
+.time-input::-webkit-calendar-picker-indicator,
+.time-input::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
 }
 
-.time-caret {
-    font-size: 1.2rem;
-    font-weight: 900;
+/* Contenedor de nuestras flechas personalizadas */
+.time-spinners {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+}
+
+/* Estilo de las flechas */
+.spinner-btn {
+    font-size: 0.7rem;
     color: #111;
-    margin-top: -5px;
-    pointer-events: none; /* Para que el clic pase a través de él al input invisible */
+    cursor: pointer;
+    line-height: 1;
+    user-select: none; /* Evita que se seleccione como texto al hacer clics rápidos */
+    transition: color 0.2s;
+}
+
+.spinner-btn:hover {
+    color: var(--primary-red);
+}
+
+/* --- LISTA DE CONTACTOS DE EMERGENCIA --- */
+.contact-list-container {
+    margin-top: 15px;
+}
+
+.contact-list {
+    list-style-type: none; /* Quita los puntos típicos de la lista */
+    padding-left: 15px;
+    margin: 0 0 15px 0;
+    border-left: 2px solid var(--primary-red); /* La línea roja lateral */
+}
+
+.contact-list li {
+    font-size: 0.85rem;
+    color: #111;
+    margin-bottom: 15px;
+    font-weight: bold; /* Para que coincida con la imagen */
+}
+
+.contact-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* Botón más pequeño para "Agregar" */
+.btn-small {
+    padding: 6px 20px;
+    font-size: 0.8rem;
+    min-width: auto;
+}
+
+/* --- SECCIÓN MANTENIMIENTO --- */
+
+/* Apilar botones verticalmente en la derecha */
+.actions-column {
+    flex-direction: column;
+    align-items: flex-end; /* Alinea los botones a la derecha */
+    gap: 12px;
+}
+
+/* Hacemos que los botones de esta columna sean un poco más anchos para que quepa el texto */
+.actions-column .btn {
+    min-width: 240px; 
+}
+
+/* Lista de actualizaciones (mismo estilo que contactos) */
+.status-list-container {
+    margin-top: 15px;
+}
+
+.status-list {
+    list-style-type: none; 
+    padding-left: 15px;
+    margin: 0 0 15px 0;
+    border-left: 2px solid var(--primary-red);
+}
+
+.status-list li {
+    font-size: 0.85rem;
+    color: #111;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.status-list li:last-child {
+    margin-bottom: 0;
 }
