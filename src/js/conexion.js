@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', event => {
 
 	document.getElementById("btn_con").addEventListener("click", connect)
 	document.getElementById("btn_dis").addEventListener("click", disconnect)
-	document.getElementById("btn_mision").addEventListener("click", empezarMisionService);
+	document.getElementById("btn_mision").addEventListener("click", empezarMision)
 	document.getElementById("btn_delante").addEventListener("click", movimientoAdelante)
 	document.getElementById("btn_atras").addEventListener("click", movimientoAtras)
 	document.getElementById("btn_derecha").addEventListener("click", movimientoDerecha)
@@ -98,82 +98,45 @@ document.addEventListener('DOMContentLoaded', event => {
 	}
 
 	//Serivicios
-	function empezarMision() {
-		if (!data.connected) {
-			console.warn('No hay conexión con ROS.')
-			return
-		}
+function empezarMision() {
+    if (!data.connected) {
+        console.warn('No hay conexión con ROS.')
+        alert('No hay conexión con ROSBridge.')
+        return
+    }
 
-		console.log('Enviando misión: inspeccion_a')
+    if (data.service_busy) {
+        console.warn('Ya hay un servicio en curso.')
+        return
+    }
 
-		const actionClient = new ROSLIB.ActionClient({
-			ros: data.ros,
-			serverName: '/ejecutar_mision',
-			actionName: 'proy_fireye_interfaces/action/Mision'
-		})
+    console.log('Llamando al servicio /follow_waypoints...')
 
-		const goal = new ROSLIB.Goal({
-			actionClient: actionClient,
-			goalMessage: {
-				nombre_ruta: 'inspeccion_a'
-			}
-		})
+    data.service_busy = true
 
-		goal.on('feedback', function (feedback) {
-			console.log('[Feedback] ' + feedback.etapa_actual
-				+ ' — ' + (feedback.progreso * 100).toFixed(0) + '%')
-		})
+    const service = new ROSLIB.Service({
+        ros: data.ros,
+        name: '/follow_waypoints',
+        serviceType: 'std_srvs/srv/Trigger'
+    })
 
-		goal.on('result', function (result) {
-			console.log('Resultado: ' + result.mensaje)
-		})
+    const request = new ROSLIB.ServiceRequest({})
 
-		goal.send()
-	}
+    service.callService(request, (result) => {
+        data.service_busy = false
+        console.log('Respuesta:', result)
 
-
-	function empezarMisionService() {
-		if (!data.connected) {
-			console.warn('No hay conexión con ROS.')
-			alert('No hay conexión con ROSBridge.')
-			return
-		}
-
-		if (data.service_busy) {
-			console.warn('Ya hay un servicio en curso.')
-			return
-		}
-
-		console.log('Llamando al servicio /fireye/start_mission...')
-
-		data.service_busy = true
-		data.service_response = ''
-
-		const startMissionService = new ROSLIB.Service({
-			ros: data.ros,
-			name: '/fireye/start_mission',
-			serviceType: 'std_srvs/srv/Trigger'
-		})
-
-		const request = new ROSLIB.ServiceRequest({})
-
-		startMissionService.callService(request, (result) => {
-			data.service_busy = false
-			data.service_response = JSON.stringify(result)
-
-			console.log('Respuesta de /fireye/start_mission:', result)
-
-			if (result.success) {
-				alert('Misión completada correctamente: ' + result.message)
-			} else {
-				alert('Error en la misión: ' + result.message)
-			}
-
-		}, (error) => {
-			console.error('Error llamando a /fireye/start_mission:', error)
-			alert('Error llamando a /fireye/start_mission: ' + error)
-		}, 30000)
-	}
+        if (result.success) {
+            alert('Misión iniciada: ' + result.message)
+        } else {
+            alert('Error: ' + result.message)
+        }
+    }, (error) => {
+        data.service_busy = false
+        console.error('Error llamando a /follow_waypoints:', error)
+        alert('Error: ' + error)
+    })
+}
 
 	function movimientoAdelante() {
 		data.service_busy = true
