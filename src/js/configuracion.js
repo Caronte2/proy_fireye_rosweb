@@ -107,3 +107,49 @@ function ejecutarAccion(tipo, valor) {
             break;
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const timeInput = document.getElementById('horaDescanso');
+    const btnUp = document.getElementById('btnTimeUp');
+    const btnDown = document.getElementById('btnTimeDown');
+
+    if (timeInput && btnUp && btnDown) {
+        
+        // Al pulsar flecha arriba, sumamos 1 "step" (30 min)
+        btnUp.addEventListener('click', () => {
+            timeInput.stepUp();
+            forzarFormato(timeInput);
+        });
+
+        // Al pulsar flecha abajo, restamos 1 "step" (30 min)
+        btnDown.addEventListener('click', () => {
+            timeInput.stepDown();
+            forzarFormato(timeInput);
+        });
+
+        // También validamos si el usuario escribe el número con el teclado
+        timeInput.addEventListener('change', function() {
+            forzarFormato(this);
+        });
+    }
+
+    // Extraemos tu lógica de redondeo a una función para poder usarla en los 3 casos
+    function forzarFormato(inputElement) {
+        if (!inputElement.value) return; 
+        
+        let [hours, minutes] = inputElement.value.split(':');
+        let mins = parseInt(minutes);
+        let hrs = parseInt(hours);
+
+        let roundedMins = '00';
+        
+        if (mins >= 15 && mins < 45) {
+            roundedMins = '30';
+        } else if (mins >= 45) {
+            hrs = (hrs + 1) % 24; 
+        }
+
+        const formattedHours = hrs.toString().padStart(2, '0');
+        inputElement.value = `${formattedHours}:${roundedMins}`;
+    }
+});

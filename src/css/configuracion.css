@@ -3,6 +3,16 @@
  * Alineado visualmente con paginaRobot y las imágenes de referencia
  */
 
+/* =========================================
+   1. IMPORTACIÓN DE FUENTES LOCALES
+   ========================================= */
+@font-face {
+    font-family: 'EFour Digital';
+    src: url('../fonts/EFourDigital.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --red:       #870000;
     --red-dark:  #5a0000;
