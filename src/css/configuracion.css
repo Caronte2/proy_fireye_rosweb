@@ -3,9 +3,6 @@
  * @brief Estilos ajustados para replicar fielmente el diseño de Fireye.
  */
 
-/* =========================================
-   1. IMPORTACIÓN DE FUENTES LOCALES
-   ========================================= */
 @font-face {
     font-family: 'EFour Digital';
     src: url('../fonts/EFourDigital.ttf') format('truetype');
@@ -124,7 +121,6 @@ body {
     z-index: 1;
 }
 
-/* --- LÓGICA DE VISIBILIDAD --- */
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
@@ -209,14 +205,13 @@ body {
     gap: 10px;
 }
 
-/* Protegemos los iconos por si no cargan */
 .status-icon-img {
     width: 2.2rem;
     height: 2.2rem;
-    min-width: 2.2rem; /* Evita que se encoja si el texto alt es muy largo */
+    min-width: 2.2rem; 
     object-fit: contain;
     display: block;
-    color: transparent; /* Oculta el texto alt roto para que no manche el diseño */
+    color: transparent; 
 }
 
 .status-text {
@@ -229,7 +224,7 @@ body {
     font-size: 0.65rem;
     font-weight: bold;
     color: #111;
-    white-space: nowrap; /* Evita que el texto salte a la línea siguiente */
+    white-space: nowrap; 
 }
 
 .status-value {
@@ -258,14 +253,12 @@ body {
     width: 75px; 
 }
 
-/* Ocultamos cualquier botón o flecha nativa del navegador */
 .time-input::-webkit-calendar-picker-indicator,
 .time-input::-webkit-inner-spin-button {
     display: none;
     -webkit-appearance: none;
 }
 
-/* Contenedor de nuestras flechas personalizadas */
 .time-spinners {
     display: flex;
     flex-direction: column;
@@ -273,13 +266,12 @@ body {
     gap: 2px;
 }
 
-/* Estilo de las flechas */
 .spinner-btn {
     font-size: 0.7rem;
     color: #111;
     cursor: pointer;
     line-height: 1;
-    user-select: none; /* Evita que se seleccione como texto al hacer clics rápidos */
+    user-select: none; 
     transition: color 0.2s;
 }
 
@@ -287,69 +279,46 @@ body {
     color: var(--primary-red);
 }
 
-/* --- LISTA DE CONTACTOS DE EMERGENCIA --- */
-.contact-list-container {
+/* --- LISTAS CON LÍNEA ROJA (CONTACTOS Y MANTENIMIENTO) --- */
+.contact-list-container,
+.status-list-container {
     margin-top: 15px;
 }
 
-.contact-list {
-    list-style-type: none; /* Quita los puntos típicos de la lista */
+.contact-list,
+.status-list {
+    list-style-type: none; 
     padding-left: 15px;
     margin: 0 0 15px 0;
-    border-left: 2px solid var(--primary-red); /* La línea roja lateral */
+    border-left: 2px solid var(--primary-red); 
 }
 
-.contact-list li {
+.contact-list li,
+.status-list li {
     font-size: 0.85rem;
     color: #111;
     margin-bottom: 15px;
-    font-weight: bold; /* Para que coincida con la imagen */
+    font-weight: bold; 
 }
 
-.contact-list li:last-child {
+.contact-list li:last-child,
+.status-list li:last-child {
     margin-bottom: 0;
 }
 
-/* Botón más pequeño para "Agregar" */
 .btn-small {
     padding: 6px 20px;
     font-size: 0.8rem;
     min-width: auto;
 }
 
-/* --- SECCIÓN MANTENIMIENTO --- */
-
-/* Apilar botones verticalmente en la derecha */
+/* --- SECCIÓN MANTENIMIENTO (BOTONES) --- */
 .actions-column {
     flex-direction: column;
-    align-items: flex-end; /* Alinea los botones a la derecha */
+    align-items: flex-end; 
     gap: 12px;
 }
 
-/* Hacemos que los botones de esta columna sean un poco más anchos para que quepa el texto */
 .actions-column .btn {
     min-width: 240px; 
-}
-
-/* Lista de actualizaciones (mismo estilo que contactos) */
-.status-list-container {
-    margin-top: 15px;
-}
-
-.status-list {
-    list-style-type: none; 
-    padding-left: 15px;
-    margin: 0 0 15px 0;
-    border-left: 2px solid var(--primary-red);
-}
-
-.status-list li {
-    font-size: 0.85rem;
-    color: #111;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-
-.status-list li:last-child {
-    margin-bottom: 0;
 }
