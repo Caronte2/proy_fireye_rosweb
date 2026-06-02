@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuración - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/configuracion.css">
 </head>
 
@@ -12,17 +13,16 @@
 
     <header class="header">
         <div class="logo-container" id="logo">
-            <img src="../img/logoFireyeNegro.png" alt="Logo de la empresa" class="main-logo">
+            <img src="../img/logo-ojo.png" alt="Logo de la empresa" class="main-logo">
         </div>
         <div class="header-icons">
             <img src="../img/bell-svgrepo-com.svg" alt="Notificaciones" class="icon-img">
-
             <img src="../img/menu-svgrepo-com.svg" alt="Menú" class="icon-img">
         </div>
     </header>
 
     <main class="config-container">
-        <h1>CONFIGURACIÓN</h1>
+        <h1 class="main-title">CONFIGURACIÓN</h1>
 
         <nav class="tabs">
             <button class="tab-link active" onclick="openTab(event, 'patrullaje')">Parámetros de patrullaje</button>
@@ -36,8 +36,8 @@
 
                 <div class="settings-row">
                     <div class="settings-info">
-                        <h3>MODO DE OPERACIÓN</h3>
-                        <p class="description">Aquí eliges si Fineye patrulla de forma Automática siguiendo una ruta, si
+                        <h3 class="tech-title">MODO DE OPERACIÓN</h3>
+                        <p class="description">Aquí eliges si Fireye patrulla de forma Automática siguiendo una ruta, si
                             lo manejas tú mismo en Manual, o si lo dejas fijo como un Centinela vigilando un punto
                             específico.</p>
                     </div>
@@ -50,41 +50,51 @@
 
                 <div class="settings-row">
                     <div class="settings-info">
-                        <h3>ESTACIÓN DE CARGA</h3>
+                        <h3 class="tech-title">ESTACIÓN DE CARGA</h3>
                         <p class="description">En este apartado puedes ver si la Placa Solar está recibiendo suficiente
                             luz y programar las horas en las que el robot debe volver a descansar y recargar sus
-                            baterías.</p>
+                            Baterías.</p>
                     </div>
-                    <div class="settings-actions status-icons">
-                        <div class="status-item">🔋 Batería de Fireye <strong>90%</strong></div>
-                        <div class="status-item">☀️ Energía solar <strong>OPTIMA</strong></div>
-                        <div class="status-item">🌙 Hora de descanso <strong>05:00 ⌃</strong></div>
+                    <div class="settings-actions status-container">
+                        
+                        <div class="status-item">
+                            <img src="../img/battery-black.svg" alt="Batería" class="status-icon-img">
+                            <div class="status-text">
+                                <span class="status-label">Batería de Fireye</span>
+                                <span class="status-value">90%</span>
+                            </div>
+                        </div>
+
+                        <div class="status-item">
+                            <img src="../img/sun-black.svg" alt="Energía Solar" class="status-icon-img">
+                            <div class="status-text">
+                                <span class="status-label">Energía de placa solar</span>
+                                <span class="status-value">ÓPTIMA</span>
+                            </div>
+                        </div>
+
+                        <div class="status-item">
+                            <img src="../img/moon-black.svg" alt="Hora descanso" class="status-icon-img">
+                            <div class="status-text">
+                                <span class="status-label">Hora de descanso</span>
+                                <div class="time-wrapper">
+                                    <input type="time" id="horaDescanso" class="time-input" value="05:00">
+                                    <span class="time-caret">⌃</span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
+                <!-- ELIMINADO EL DIV EXTRA QUE ROMPÍA EL DISEÑO AQUÍ -->
 
                 <div class="settings-row no-border">
                     <div class="settings-info">
-                        <h3>SECTORES PRIORITARIOS</h3>
-                        <p class="description">Aquí marcas en el mapa las zonas de tu finca que más te preocupan. El
-                            robot pasará más veces por estas áreas para asegurar una Vigilancia Extra.</p>
-
-                        <div class="zone-selector">
-                            <label>Zonas de prioridad</label>
-                            <div class="zone-input">Zona 6, Zona 1 <span>✎</span></div>
-                        </div>
-                    </div>
-                    <div class="settings-actions">
-                        <div class="map-container">
-                            <img src="ruta/al/mapa.png" alt="Mapa de zonas" class="map-img">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="settings-row">
-                    <div class="settings-info">
-                        <h3>CIFRADO DE DATOS</h3>
+                        <h3 class="tech-title">CIFRADO DE DATOS</h3>
                         <p class="description">Este sistema asegura que solo tú puedas ver las imágenes de tu finca,
-                            protegiendo toda la información con un Cifrado de Extremo a Extremo.</p>
+                            protegiendo toda la información con un Cifrado de Extremo a Extremo
+                            para que nadie ajeno pueda acceder al sistema.</p>
                     </div>
                     <div class="settings-actions">
                         <button class="btn btn-red" data-type="cifrado" data-value="on">Activo</button>
@@ -95,70 +105,12 @@
             </section>
 
             <section id="notificaciones" class="tab-content">
-                <div class="settings-row">
-                    <div class="settings-info">
-                        <h3>PROTOCOLO DE EMERGENCIA</h3>
-                        <p class="small-text">Configura si quieres que el sistema envíe alertas automáticas.</p>
-                    </div>
-                    <div class="settings-actions">
-                        <button class="btn btn-red" data-type="protocolo" data-value="on">Activo</button>
-                        <button class="btn btn-white" data-type="protocolo" data-value="off">Inactivo</button>
-                    </div>
-                </div>
-
-                <div class="settings-row">
-                    <div class="settings-info">
-                        <h3>SENSIBILIDAD DE DETECCIÓN</h3>
-                        <p class="small-text">Calibra qué cantidad de humo o calor debe detectar el robot.</p>
-                    </div>
-                    <div class="settings-actions">
-                        <button class="btn btn-red" data-type="sensibilidad" data-value="alto">Alto</button>
-                        <button class="btn btn-white" data-type="sensibilidad" data-value="medio">Medio</button>
-                        <button class="btn btn-white" data-type="sensibilidad" data-value="bajo">Bajo</button>
-                    </div>
-                </div>
-
-                <div class="settings-row">
-                    <div class="settings-info">
-                        <h3>CONTACTO DE CONFIANZA</h3>
-                        <ul class="contact-list">
-                            <li>Mamá — Tlf: 123456789</li>
-                            <li>Hija — Tlf: 987654321</li>
-                        </ul>
-                    </div>
-                    <div class="settings-actions">
-                        <button class="btn btn-red" data-type="contacto" data-value="llamada">Llamada</button>
-                        <button class="btn btn-red" data-type="contacto" data-value="sms">SMS</button>
-                    </div>
-                </div>
             </section>
 
             <section id="mantenimiento" class="tab-content">
-                <div class="settings-row">
-                    <div class="settings-info">
-                        <h3>LIMPIEZA DE SENSORES</h3>
-                        <p class="small-text">El sistema revisará la cámara o el sensor LiDAR.</p>
-                    </div>
-                    <div class="settings-actions flex-col">
-                        <button class="btn btn-white" data-type="mantenimiento" data-value="autodiagnostico">Hacer
-                            autodiagnóstico</button>
-                        <button class="btn btn-white" data-type="mantenimiento" data-value="limpieza">Solicitar limpieza
-                            profunda</button>
-                    </div>
-                </div>
-
-                <div class="settings-row">
-                    <div class="settings-info">
-                        <h3>ACTUALIZACIÓN DE SOFTWARE</h3>
-                        <p class="small-text">Actualización pendiente: 22/03/2026</p>
-                    </div>
-                    <div class="settings-actions">
-                        <button class="btn btn-red" data-type="mantenimiento" data-value="update">Actualizar</button>
-                    </div>
-                </div>
             </section>
 
-            <button class="btn-save">GUARDAR</button>
+            <button class="btn-save tech-title">GUARDAR</button>
 
         </div>
     </main>
