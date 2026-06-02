@@ -1,0 +1,47 @@
+========================================================================
+   INSTRUCCIONES PARA EJECUTAR EL SERVIDOR DE IA (YOLO + WEBCAM)
+========================================================================
+
+Este documento explica cómo iniciar el servidor de detección con diferentes modelos y opciones desde la terminal.
+
+IMPORTANTE: Ejecuta siempre los comandos desde la raíz del proyecto:
+C:\Users\manup\OneDrive\Escritorio\proy_fireye_rosweb
+
+---
+1. EJECUCIÓN BÁSICA (Modelo por defecto)
+---
+Inicia el servidor usando el modelo estándar 'yolov8n.pt' y la webcam 0:
+> python src/ia/ia_server.py
+
+---
+2. EJECUTAR CON UN MODELO PERSONALIZADO
+---
+Si tienes un modelo entrenado propio (por ejemplo, 'mi_modelo.pt' o 'best.pt') y lo has guardado dentro de la carpeta 'src/ia/', usa el parámetro --model indicando la ruta correcta:
+
+> python src/ia/ia_server.py --model src/ia/best.pt
+
+Si el modelo está en otra ubicación (por ejemplo, la raíz del proyecto):
+> python src/ia/ia_server.py --model mi_modelo.pt
+
+---
+3. CAMBIAR DE CÁMARA / WEBCAM
+---
+Por defecto se utiliza la cámara 0. Si tienes varias cámaras (por ejemplo, una webcam externa que es la cámara 1 o 2), usa el parámetro --camera:
+
+> python src/ia/ia_server.py --camera 1
+> python src/ia/ia_server.py --model src/ia/best.pt --camera 1
+
+---
+4. CAMBIAR EL PUERTO DEL SERVIDOR
+---
+Si el puerto 5000 está ocupado, puedes iniciarlo en otro puerto (por ejemplo, el 5001) usando --port:
+
+> python src/ia/ia_server.py --port 5001
+
+---
+5. AJUSTAR EL UMBRAL DE CONFIANZA DE DETECCIÓN (Confidence Threshold)
+---
+Por defecto es 0.5 (50%). Puedes exigir más confianza (ej. 70%) o menos (ej. 30%) usando --conf:
+
+> python src/ia/ia_server.py --conf 0.7
+> python src/ia/ia_server.py --model src/ia/best.pt --conf 0.3
