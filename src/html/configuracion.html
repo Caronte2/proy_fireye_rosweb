@@ -6,18 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuración - Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/configuracion.css">
+    <link rel="stylesheet" href="../css/paginaRobot.css"> <link rel="stylesheet" href="../css/configuracion.css">
+    <link rel="stylesheet" href="../css/menu.css">
 </head>
 
 <body>
 
     <header class="header">
-        <div class="logo-container" id="logo">
+        <a href="../index.html" class="logo-container" id="logo" style="text-decoration: none;">
             <img src="../img/logo-ojo.png" alt="Logo de la empresa" class="main-logo">
-        </div>
+        </a>
         <div class="header-icons">
-            <img src="../img/bell-svgrepo-com.svg" alt="Notificaciones" class="icon-img">
-            <img src="../img/menu-svgrepo-com.svg" alt="Menú" class="icon-img">
+            <img src="../img/bell-svgrepo-com.svg" alt="Notificaciones" class="icon-img" id="notificationBtn" title="Notificaciones" tabindex="0">
+            <img src="../img/menu-svgrepo-com.svg" alt="Menú" class="icon-img" id="toggleMenuBtn" title="Menú" tabindex="0">
         </div>
     </header>
 
@@ -134,7 +135,6 @@
                         <p class="description">Tu red de apoyo más cercana. Aquí añades los números de teléfono de
                             familiares o vecinos que recibirán una Alerta Crítica por SMS o llamada
                             si tú no respondes a la primera notificación de peligro.</p>
-                        
                         <div class="contact-list-container">
                             <ul class="contact-list">
                                 <li>Mamá &rarr; Tlf: 123456789</li>
@@ -171,7 +171,6 @@
                         <p class="description">Desde aquí descargas las nuevas versiones del Sistema Operativo de Fireye,
                             optimizando la inteligencia del robot y añadiendo nuevas funciones de Seguridad
                             de forma automática.</p>
-                        
                         <div class="status-list-container">
                             <ul class="status-list">
                                 <li>Actualización pendiente: 22/03/2026</li>
@@ -180,17 +179,112 @@
                             <button class="btn btn-white btn-small" data-type="mantenimiento" data-value="actualizar">Actualizar</button>
                         </div>
                     </div>
-                    <div class="settings-actions">
-                        </div>
+                    <div class="settings-actions"></div>
                 </div>
             </section>
 
             <button class="btn-save tech-title">GUARDAR</button>
-
         </div>
     </main>
 
-    <script src="../js/configuracion.js"></script>
-</body>
+    <div id="sosOverlay" class="fr-overlay" style="display:none;">
+        <div class="fr-popup">
+            <p class="fr-popup-title">Has pulsado el botón de Pánico. Fireye está preparado para iniciar el Protocolo de Emergencia.</p>
+            <p class="fr-popup-subtitle">Por favor, confirma la acción para proceder.</p>
+            <div class="fr-popup-actions">
+                <div class="fr-popup-action">
+                    <button id="btn_confirmar" class="fr-btn fr-btn-confirm">CONFIRMAR</button>
+                    <p>Se enviará tu ubicación exacta y la imagen en vivo a los Bomberos y a tus Contactos de Confianza.</p>
+                </div>
+                <div class="fr-popup-action">
+                    <button id="btn_alarma_sonora" class="fr-btn fr-btn-alarm">ACTIVAR ALARMA SONORA</button>
+                    <p>El robot emitirá una señal acústica de Alta Potencia en la finca para disuadir posibles intrusos o alertar a vecinos.</p>
+                </div>
+                <div class="fr-popup-action">
+                    <button id="btn_cancelar" class="fr-btn fr-btn-cancel">CANCELAR</button>
+                    <p>Detener el protocolo y volver al modo de vigilancia normal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div id="notifOverlay" class="fr-overlay" style="display:none;">
+        <div class="fr-popup fr-notif-popup">
+            <div class="fr-notif-header">
+                <span class="fr-notif-header-title">🔔 NOTIFICACIONES</span>
+                <button id="btn_closeNotifPopup" class="fr-notif-close">×</button>
+            </div>
+            <ul id="notifPopupList" class="fr-notif-list">
+                <li class="fr-notif-item fr-notif-emergency">
+                    <span class="fr-notif-label">EMERGENCIA:</span>
+                    <p class="fr-notif-text">Foco de incendio confirmado. Protocolo de Aviso y Emergencias activado automáticamente. <em>01:20</em></p>
+                </li>
+                <li class="fr-notif-item fr-notif-error">
+                    <span class="fr-notif-label">ERROR DE SISTEMA:</span>
+                    <p class="fr-notif-text">Conexión perdida con el Módulo GPS. Por favor, compruebe la ubicación del robot. <em>20:54</em></p>
+                </li>
+            </ul>
+            <div class="fr-notif-footer">
+                <button id="btn_clearNotifPopup" class="fr-btn fr-btn-cancel">LIMPIAR TODO</button>
+                <button id="btn_closeNotifPopup2" class="fr-btn fr-btn-dark">CERRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <aside class="menu-container" id="mainMenu" aria-label="Menú principal">
+        <header class="menu-header">
+            <button class="close-btn" id="closeMenuBtn" aria-label="Cerrar menú">×</button>
+            <h3 class="menu-title">menú</h3>
+        </header>
+        <nav class="menu-navigation">
+            <ul class="menu-options">
+                <li class="menu-option has-submenu">
+                    <div class="menu-option-header" role="button" tabindex="0">
+                        <span>Perfil</span><span class="submenu-toggle">+</span>
+                    </div>
+                    <ul class="submenu">
+                        <li class="submenu-item"><a href="#perfil/editar">Editar Perfil</a></li>
+                        <li class="submenu-item"><a href="#perfil/contraseña">Cambiar Contraseña</a></li>
+                        <li class="submenu-item"><a href="#perfil/datos">Mis Datos</a></li>
+                    </ul>
+                </li>
+                <li class="menu-option has-submenu">
+                    <div class="menu-option-header" role="button" tabindex="0">
+                        <span>Configuración</span><span class="submenu-toggle">+</span>
+                    </div>
+                    <ul class="submenu">
+                        <li class="submenu-item"><a href="configuracion.html">Configuración</a></li>
+                        <li class="submenu-item"><a href="#config/idioma">Idioma</a></li>
+                        <li class="submenu-item"><a href="paginaRobot.html">PaginaRobot</a></li>
+                    </ul>
+                </li>
+                <li class="menu-option has-submenu">
+                    <div class="menu-option-header" role="button" tabindex="0">
+                        <span>Soporte Técnico</span><span class="submenu-toggle">+</span>
+                    </div>
+                    <ul class="submenu">
+                        <li class="submenu-item"><a href="#soporte/faq">FAQ</a></li>
+                        <li class="submenu-item"><a href="#soporte/contacto">Contactar Soporte</a></li>
+                        <li class="submenu-item"><a href="#soporte/tickets">Mis Tickets</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <button class="logout-btn">cerrar sesión</button>
+    </aside>
+
+    <aside class="menu-container notification-menu" id="notificationMenu" style="display:none !important; pointer-events:none;">
+        <header class="menu-header notification-header">
+            <button class="close-btn close-notification-btn" id="closeNotificationBtn">×</button>
+            <h3 class="menu-title notification-title">NOTIFICACIONES</h3>
+        </header>
+        <ul class="menu-options notification-list" id="notificationList"></ul>
+        <div class="notification-footer">
+            <button class="logout-btn clear-notifications-btn" id="clearNotificationsBtn">LIMPIAR</button>
+        </div>
+    </aside>
+
+    <script src="../js/configuracion.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/dashboard.js"></script> </body>
 </html>

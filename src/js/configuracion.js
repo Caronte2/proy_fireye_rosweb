@@ -106,3 +106,36 @@ function forzarFormato(inputElement) {
     const formattedHours = hrs.toString().padStart(2, '0');
     inputElement.value = `${formattedHours}:${roundedMins}`;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Referencias a los elementos del DOM
+    const notificationBtn = document.getElementById('notificationBtn');
+    const notifOverlay = document.getElementById('notifOverlay');
+    const btnCloseNotif = document.getElementById('btn_closeNotifPopup');
+    const btnCloseNotif2 = document.getElementById('btn_closeNotifPopup2');
+    const btnClearNotif = document.getElementById('btn_clearNotifPopup');
+    const notifList = document.getElementById('notifPopupList');
+
+    // 1. Abrir popup al hacer clic en la campana
+    if (notificationBtn && notifOverlay) {
+        notificationBtn.addEventListener('click', () => {
+            notifOverlay.style.display = 'flex';
+        });
+    }
+
+    // 2. Función para cerrar el popup
+    const closeNotifPopup = () => {
+        if (notifOverlay) notifOverlay.style.display = 'none';
+    };
+
+    // Asignar el cierre a la "X" y al botón "CERRAR"
+    if (btnCloseNotif) btnCloseNotif.addEventListener('click', closeNotifPopup);
+    if (btnCloseNotif2) btnCloseNotif2.addEventListener('click', closeNotifPopup);
+
+    // 3. Botón para limpiar todas las notificaciones
+    if (btnClearNotif && notifList) {
+        btnClearNotif.addEventListener('click', () => {
+            notifList.innerHTML = '<li class="fr-notif-item"><p class="fr-notif-text" style="text-align:center;">No hay notificaciones nuevas.</p></li>';
+        });
+    }
+});

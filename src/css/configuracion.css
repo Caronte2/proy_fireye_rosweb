@@ -322,3 +322,79 @@ body {
 .actions-column .btn {
     min-width: 240px; 
 }
+
+/* =========================================
+   POPUP DE NOTIFICACIONES
+   ========================================= */
+.fr-notif-popup {
+    max-width: 440px;
+    padding: 0;
+    overflow: hidden;
+}
+.fr-notif-header {
+    background: var(--red);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.2rem;
+}
+.fr-notif-header-title {
+    font-family: var(--font);
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    font-weight: bold;
+}
+.fr-notif-close {
+    background: #fff;
+    color: var(--red);
+    border: none;
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    font-size: 1.2rem; font-weight: bold;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+}
+.fr-notif-list {
+    list-style: none;
+    padding: 0.6rem 1.2rem;
+    max-height: 320px;
+    overflow-y: auto;
+}
+.fr-notif-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #ddd;
+}
+.fr-notif-item:last-child { border-bottom: none; }
+.fr-notif-label {
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    display: block;
+}
+.fr-notif-emergency .fr-notif-label { color: var(--red); }
+.fr-notif-error .fr-notif-label     { color: #b07000; }
+.fr-notif-info .fr-notif-label      { color: #1a7abf; }
+.fr-notif-text {
+    font-family: Arial, sans-serif;
+    font-size: 0.78rem;
+    color: #333;
+    line-height: 1.4;
+    margin: 0;
+}
+.fr-notif-text em { color: #777; font-style: normal; }
+
+.fr-notif-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.7rem;
+    padding: 0.8rem 1.2rem;
+    border-top: 1px solid #ddd;
+}
+.fr-notif-footer .fr-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
+}
