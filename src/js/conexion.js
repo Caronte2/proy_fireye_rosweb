@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', event => {
 	document.getElementById("btn_parar").addEventListener("click", movimientoParar)
 	document.getElementById("btn_toggle_ia").addEventListener("click", toggleReconocimientoIA)
 
-	data = {
+	var data = {
 		// ros connection
 		ros: null,
 		rosbridge_address: 'ws://localhost:9090',
@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', event => {
 		mision_activa: false,
 		mision_goal_handle: null,
 		ia_activa: false,
-	}
+	};
+	window.data = data;
 
 	const mapYamlUrl = '../mapas/my_map.yaml'; // poner ubicación
 	const mapImageUrl = '../mapas/my_map.png';
@@ -57,13 +58,21 @@ document.addEventListener('DOMContentLoaded', event => {
 			messageType: 'nav_msgs/msg/Odometry'
 		})
 
+		let lastOdomTime = 0;
+		const odomSampleInterval = 500; // actualizar cada 500ms
+
 		topic.subscribe((message) => {
+			const now = Date.now();
+			if (now - lastOdomTime < odomSampleInterval) return;
+			lastOdomTime = now;
+
 			console.log("Recibiendo mensaje de /odom")
 			data.position = message.pose.pose.position
 			document.getElementById("pos_x").innerHTML = data.position.x.toFixed(2)
 			document.getElementById("pos_y").innerHTML = data.position.y.toFixed(2)
 			robotPosition.x = message.pose.pose.position.x;
 			robotPosition.y = message.pose.pose.position.y;
+			updateZoneDisplay(data.position.x, data.position.y);
 			draw()  // redibuja mapa + posición del robot
 		})
 	}
@@ -89,6 +98,24 @@ document.addEventListener('DOMContentLoaded', event => {
 		ctx.fillStyle = 'green';
 		ctx.arc(pixelX, pixelY, 5, 0, 2 * Math.PI);
 		ctx.fill();
+	}
+
+	function updateZoneDisplay(x, y) {
+		const el = document.getElementById("pos_zone");
+		if (!el) return;
+		if (x < 0.5 && y >= 0.5) {
+			el.textContent = "Zona delantera";
+			el.style.color = "#2ecc71";
+		} else if (x >= 0.5 && y >= 0.5) {
+			el.textContent = "Zona de árboles";
+			el.style.color = "#27ae60";
+		} else if (x < 0.5 && y < 0.5) {
+			el.textContent = "Zona trasera";
+			el.style.color = "#e67e22";
+		} else {
+			el.textContent = "Zona descampado";
+			el.style.color = "#9b59b6";
+		}
 	}
 
 	function disconnect() {
@@ -129,6 +156,49 @@ document.addEventListener('DOMContentLoaded', event => {
 		})
 
 		goal.send()
+	}
+
+	function empezarMisionService() {
+		if (!data.connected) {
+			console.warn('No hay conexión con ROS.')
+			alert('No hay conexión con ROSBridge.')
+			return
+		}
+
+		if (data.service_busy) {
+			console.warn('Ya hay un servicio en curso.')
+			return
+		}
+
+		console.log('Llamando al servicio /fireye/start_mission...')
+
+		data.service_busy = true
+		data.service_response = ''
+
+		const startMissionService = new ROSLIB.Service({
+			ros: data.ros,
+			name: '/fireye/start_mission',
+			serviceType: 'std_srvs/srv/Trigger'
+		})
+
+		const request = new ROSLIB.ServiceRequest({})
+
+		startMissionService.callService(request, (result) => {
+			data.service_busy = false
+			data.service_response = JSON.stringify(result)
+
+			console.log('Respuesta de /fireye/start_mission:', result)
+
+			if (result.success) {
+				alert('Misión completada correctamente: ' + result.message)
+			} else {
+				alert('Error en la misión: ' + result.message)
+			}
+
+		}, (error) => {
+			console.error('Error llamando a /fireye/start_mission:', error)
+			alert('Error llamando a /fireye/start_mission: ' + error)
+		}, 30000)
 	}
 
 
@@ -259,16 +329,20 @@ document.addEventListener('DOMContentLoaded', event => {
 	═══════════════════════════════════════════ */
 
 	// URL base del servidor Python de IA (Flask con YOLO + webcam)
-	const IA_SERVER = 'http://localhost:5000';
+	const IA_SERVER = 'http://127.0.0.1:5000';
 
 	// Envía POST al servidor Flask para activar/desactivar la inferencia YOLO,
 	// y opcionalmente notifica al robot vía ROSBridge si está conectado.
 	function toggleReconocimientoIA() {
+		console.log('Se pulsó el botón de reconocimiento IA. Servidor:', IA_SERVER, 'Estado local previo:', data.ia_activa);
 		// Enviar POST al servidor Flask para cambiar el estado de la inferencia
 		fetch(`${IA_SERVER}/toggle`, { method: 'POST' })
-			.then(res => res.json())
+			.then(res => {
+				console.log('Respuesta cruda recibida de /toggle:', res);
+				return res.json();
+			})
 			.then(result => {
-				console.log('Respuesta /toggle:', result);
+				console.log('Respuesta parseada de /toggle:', result);
 				data.ia_activa = result.active;
 				updateIaUI();
 
