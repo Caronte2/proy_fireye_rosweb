@@ -103,13 +103,13 @@ document.addEventListener('DOMContentLoaded', event => {
 	function updateZoneDisplay(x, y) {
 		const el = document.getElementById("pos_zone");
 		if (!el) return;
-		if (x < 0.5 && y >= 0.5) {
+		if (x < 5.0 && y >= 5.0) {
 			el.textContent = "Zona delantera";
 			el.style.color = "#2ecc71";
-		} else if (x >= 0.5 && y >= 0.5) {
+		} else if (x >= 5.0 && y >= 5.0) {
 			el.textContent = "Zona de árboles";
 			el.style.color = "#27ae60";
-		} else if (x < 0.5 && y < 0.5) {
+		} else if (x < 5.0 && y < 5.0) {
 			el.textContent = "Zona trasera";
 			el.style.color = "#e67e22";
 		} else {
