@@ -45,8 +45,9 @@ print(f'[IA Server] Cargando modelo: {args.model}')
 model = YOLO(args.model)
 print(f'[IA Server] Modelo cargado correctamente.')
 
-# Estado de la inferencia (activada/desactivada)
+# Estado de la inferencia (activada/desactivada) y últimas detecciones
 ia_active = False
+latest_detections = []
 ia_lock = threading.Lock()
 
 # Captura de la webcam
@@ -68,6 +69,7 @@ def generate_frames():
     Si no, envía el frame sin procesar.
     Devuelve cada frame codificado como JPEG dentro de un boundary MJPEG.
     """
+    global latest_detections
     while True:
         success, frame = cap.read()
         if not success:
@@ -77,10 +79,20 @@ def generate_frames():
         with ia_lock:
             active = ia_active
 
+        current_detections = []
         if active:
             # Ejecutar YOLO sobre el frame y dibujar las bounding boxes
             results = model.predict(frame, conf=args.conf, verbose=False)
             frame = results[0].plot()  # Devuelve el frame con las detecciones dibujadas
+
+            # Obtener nombres de las clases detectadas en este frame
+            names = results[0].names
+            for c in results[0].boxes.cls:
+                class_name = names[int(c)]
+                current_detections.append(class_name)
+
+        with ia_lock:
+            latest_detections = current_detections
 
         # Codificar el frame como JPEG
         ret, buffer = cv2.imencode('.jpg', frame)
@@ -120,9 +132,13 @@ def toggle():
 
 @app.route('/status')
 def status():
-    """Devuelve el estado actual de la inferencia."""
+    """Devuelve el estado actual de la inferencia y las últimas detecciones."""
+    global latest_detections
     with ia_lock:
-        return jsonify({'active': ia_active})
+        return jsonify({
+            'active': ia_active,
+            'detections': latest_detections if ia_active else []
+        })
 
 
 # ═══════════════════════════════════════════
