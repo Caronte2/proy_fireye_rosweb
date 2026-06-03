@@ -283,37 +283,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const posYEl = document.getElementById('pos_y');
     let rosListenerAttached = false;
 
-    let currentZone = null;
-
-    function getZoneName(x, y) {
-        if (x < 5.0 && y >= 5.0) return "Zona delantera";
-        if (x >= 5.0 && y >= 5.0) return "Zona de árboles";
-        if (x < 5.0 && y < 5.0) return "Zona trasera";
-        return "Zona descampado";
-    }
-
-    function getZoneColor(zoneName) {
-        const colors = {
-            "Zona delantera": "#2ecc71",
-            "Zona de árboles": "#27ae60",
-            "Zona trasera": "#e67e22",
-            "Zona descampado": "#9b59b6"
-        };
-        return colors[zoneName] || "#2ecc71";
-    }
-
     function updateZoneDisplay(x, y) {
         const el = document.getElementById("pos_zone");
         if (!el) return;
-        const newZone = getZoneName(x, y);
-        el.textContent = newZone;
-        el.style.color = getZoneColor(newZone);
-
-        if (currentZone !== null && currentZone !== newZone) {
-            pushNotif('info', 'CAMBIO DE ZONA', `Entrando en la ${newZone}.`);
-            appendLog(`📍 Entrando en la ${newZone}.`, '');
+        if (x < 5.0 && y >= 5.0) {
+            el.textContent = "Zona delantera";
+            el.style.color = "#2ecc71";
+        } else if (x >= 5.0 && y >= 5.0) {
+            el.textContent = "Zona de árboles";
+            el.style.color = "#27ae60";
+        } else if (x < 5.0 && y < 5.0) {
+            el.textContent = "Zona trasera";
+            el.style.color = "#e67e22";
+        } else {
+            el.textContent = "Zona descampado";
+            el.style.color = "#9b59b6";
         }
-        currentZone = newZone;
     }
 
     function tryAttachRosListener() {
