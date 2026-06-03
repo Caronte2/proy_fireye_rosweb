@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!camTimestamp) return;
         const d = new Date();
         camTimestamp.textContent =
-            `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} ` +
+            `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ` +
             `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
     }
     setInterval(updateTimestamp, 1000);
@@ -41,14 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
        2. ÍNDICE DE RIESGO (simulado)
     ═══════════════════════════════════════════ */
     const riskLevels = [
-        { label: 'BAJO',     angle: -90, color: '#27ae60' },
+        { label: 'BAJO', angle: -90, color: '#27ae60' },
         { label: 'MODERADO', angle: -45, color: '#d4ac0d' },
-        { label: 'ALTO',     angle:   0, color: '#e67e22' },
-        { label: 'MUY ALTO', angle:  40, color: '#e74c3c' },
-        { label: 'EXTREMO',  angle:  75, color: '#8e44ad' },
+        { label: 'ALTO', angle: 0, color: '#e67e22' },
+        { label: 'MUY ALTO', angle: 40, color: '#e74c3c' },
+        { label: 'EXTREMO', angle: 75, color: '#8e44ad' },
     ];
     const riskNeedle = document.getElementById('riskNeedle');
-    const riskLabel  = document.getElementById('riskLabel');
+    const riskLabel = document.getElementById('riskLabel');
 
     function setRiskLevel(idx) {
         if (!riskNeedle || !riskLabel) return;
@@ -58,16 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         riskLabel.style.color = lvl.color;
     }
 
-    function randomRisk() {
-        // Pesos: BAJO 40%, MODERADO 30%, ALTO 20%, MUY ALTO 7%, EXTREMO 3%
-        const w = [40, 30, 20, 7, 3];
-        let r = Math.random() * 100;
-        for (let i = 0; i < w.length; i++) { r -= w[i]; if (r <= 0) return i; }
-        return 0;
-    }
-
     setRiskLevel(0);
-    setInterval(() => setRiskLevel(randomRisk()), 8000);
 
     /* ═══════════════════════════════════════════
        3. LOG DE ANÁLISIS EN DIRECTO (simulado)
@@ -75,45 +66,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const analysisLog = document.getElementById('analysisLog');
 
     const logPool = [
-        { text: 'Temperatura del suelo actualizada: 23°C.',             risk: '' },
-        { text: 'Señal de vigilancia estable. Transmitiendo datos.',     risk: '' },
-        { text: 'Objeto detectado en el camino. Analizando imagen...',  risk: 'med' },
-        { text: 'Obstáculo identificado. El robot continúa la ruta.',    risk: '' },
-        { text: 'Nivel de Riesgo actualizado: Bajo.',                    risk: '' },
-        { text: 'Nivel de Riesgo actualizado: Moderado.',                risk: 'med' },
-        { text: 'Nivel de Riesgo actualizado: ALTO. Revisando zona.',    risk: 'high' },
-        { text: 'Batería al 78%. Autonomía calculada: 9 horas.',         risk: '' },
-        { text: 'Patrulla continuando por Sector Este.',                 risk: '' },
-        { text: 'Zona de pasto seco revisada. Sin anomalías.',           risk: '' },
-        { text: 'GPS recalibrado. Precisión: ±0.5 m.',                  risk: '' },
-        { text: 'Posible foco de calor detectado. Comprobando...',       risk: 'high' },
-        { text: 'Falsa alarma descartada. Continuando patrulla.',        risk: '' },
+        { text: 'Temperatura del suelo actualizada: 23°C.', risk: '' },
+        { text: 'Señal de vigilancia estable. Transmitiendo datos.', risk: '' },
+        { text: 'Obstáculo identificado. El robot continúa la ruta.', risk: '' },
+        { text: 'Batería al 78%. Autonomía calculada: 9 horas.', risk: '' },
+        { text: 'Patrulla continuando por Sector Este.', risk: '' },
+        { text: 'Zona de pasto seco revisada. Sin anomalías.', risk: '' },
+        { text: 'GPS recalibrado. Precisión: ±0.5 m.', risk: '' },
         { text: 'Velocidad de viento: 12 km/h. Ajustando trayectoria.', risk: '' },
     ];
-
-    function addLogEntry() {
-        if (!analysisLog) return;
-        const item = logPool[Math.floor(Math.random() * logPool.length)];
-        const p = document.createElement('p');
-        p.textContent = `${nowStr()} ${item.text}`;
-        if (item.risk === 'high') p.classList.add('log-risk-high');
-        if (item.risk === 'med')  p.classList.add('log-risk-med');
-        analysisLog.appendChild(p);
-        while (analysisLog.children.length > 30) analysisLog.removeChild(analysisLog.firstChild);
-        analysisLog.scrollTop = analysisLog.scrollHeight;
-    }
-    setInterval(addLogEntry, 12000);
 
     /* ═══════════════════════════════════════════
        4. POPUP SOS
     ═══════════════════════════════════════════ */
-    const sosOverlay      = document.getElementById('sosOverlay');
-    const btnSos          = document.getElementById('btn_sos');
-    const btnConfirmar    = document.getElementById('btn_confirmar');
+    const sosOverlay = document.getElementById('sosOverlay');
+    const btnSos = document.getElementById('btn_sos');
+    const btnConfirmar = document.getElementById('btn_confirmar');
     const btnAlarmaSonora = document.getElementById('btn_alarma_sonora');
-    const btnCancelar     = document.getElementById('btn_cancelar');
+    const btnCancelar = document.getElementById('btn_cancelar');
 
-    function openSos()  { if (sosOverlay) sosOverlay.style.display = 'flex'; }
+    function openSos() { if (sosOverlay) sosOverlay.style.display = 'flex'; }
     function closeSos() { if (sosOverlay) sosOverlay.style.display = 'none'; }
 
     btnSos?.addEventListener('click', openSos);
@@ -140,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const p = document.createElement('p');
         p.textContent = `${nowStr()} ${text}`;
         if (risk === 'high') p.classList.add('log-risk-high');
-        if (risk === 'med')  p.classList.add('log-risk-med');
+        if (risk === 'med') p.classList.add('log-risk-med');
         analysisLog.appendChild(p);
         analysisLog.scrollTop = analysisLog.scrollHeight;
     }
@@ -148,12 +120,12 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ═══════════════════════════════════════════
        5. POPUP NOTIFICACIONES
     ═══════════════════════════════════════════ */
-    const notifOverlay       = document.getElementById('notifOverlay');
-    const notifPopupList     = document.getElementById('notifPopupList');
-    const btnCloseNotif      = document.getElementById('btn_closeNotifPopup');
-    const btnCloseNotif2     = document.getElementById('btn_closeNotifPopup2');
-    const btnClearNotif      = document.getElementById('btn_clearNotifPopup');
-    const notificationBtn    = document.getElementById('notificationBtn');
+    const notifOverlay = document.getElementById('notifOverlay');
+    const notifPopupList = document.getElementById('notifPopupList');
+    const btnCloseNotif = document.getElementById('btn_closeNotifPopup');
+    const btnCloseNotif2 = document.getElementById('btn_closeNotifPopup2');
+    const btnClearNotif = document.getElementById('btn_clearNotifPopup');
+    const notificationBtn = document.getElementById('notificationBtn');
     // badge contador
     let notifCount = 2; // las dos iniciales
     const badge = document.createElement('span');
@@ -216,26 +188,118 @@ document.addEventListener('DOMContentLoaded', () => {
         updateBadge();
     }
 
-    /* Notificaciones simuladas aleatorias cada ~30 s */
-    const randomNotifs = [
-        { type: 'info',      label: 'INFO',           text: 'Patrulla completada. Iniciando nuevo ciclo de vigilancia.' },
-        { type: 'info',      label: 'INFO',           text: 'Batería al 65%. Continuando operación normal.' },
-        { type: 'error',     label: 'AVISO',          text: 'Temperatura del motor elevada. Revisión recomendada.' },
-        { type: 'emergency', label: 'ALERTA',         text: 'Objeto no identificado detectado en Sector Sur.' },
-        { type: 'info',      label: 'INFO',           text: 'GPS recalibrado correctamente. Precisión óptima.' },
-        { type: 'error',     label: 'ERROR DE SENSOR','text': 'Sensor de temperatura suelo desconectado momentáneamente.' },
-    ];
-    setInterval(() => {
-        const n = randomNotifs[Math.floor(Math.random() * randomNotifs.length)];
-        pushNotif(n.type, n.label, n.text);
-    }, 30000);
+    /* ═══════════════════════════════════════════
+       MONITORIZACIÓN Y CÁLCULO DE RIESGO DE IA
+    ═══════════════════════════════════════════ */
+    // Lista de objetos a buscar para determinar el riesgo (latas y botellas)
+    const threatObjects = ['bottle', 'can', 'cup', 'botella', 'lata', 'vaso'];
+
+    // Traducciones de los nombres de los objetos detectados
+    const threatTranslations = {
+        'bottle': 'Botella',
+        'botella': 'Botella',
+        'can': 'Lata',
+        'lata': 'Lata',
+        'cup': 'Lata/Vaso',
+        'vaso': 'Vaso'
+    };
+
+    let currentRiskIdx = 0;
+
+    async function checkIADetections() {
+        // Solo consultar si la IA está activa
+        if (typeof window.data === 'undefined' || !window.data.ia_activa) {
+            if (currentRiskIdx !== 0) {
+                currentRiskIdx = 0;
+                setRiskLevel(0);
+            }
+            return;
+        }
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/status');
+            const result = await response.json();
+
+            if (result.active && result.detections) {
+                // Loguear detecciones recibidas para depuración
+                console.log('IA Detections (raw):', result.detections);
+
+                // Filtrar las detecciones que están en nuestra lista de amenazas (insensible a mayúsculas/minúsculas y espacios)
+                const detectedThreats = result.detections.filter(item => 
+                    threatObjects.includes(item.toLowerCase().trim())
+                );
+                
+                console.log('Amenazas filtradas:', detectedThreats);
+
+                // El nivel de riesgo sube 1 nivel por cada objeto detectado de la lista
+                // Mapea a: 0 (BAJO), 1 (MODERADO), 2 (ALTO), 3 (MUY ALTO), 4 (EXTREMO)
+                const newRiskIdx = Math.min(detectedThreats.length, riskLevels.length - 1);
+                console.log('Índice de riesgo calculado:', newRiskIdx, 'Índice actual anterior:', currentRiskIdx);
+
+                if (newRiskIdx !== currentRiskIdx) {
+                    const oldLevel = riskLevels[currentRiskIdx].label;
+                    const newLevel = riskLevels[newRiskIdx].label;
+
+                    console.log('Cambiando nivel de riesgo a:', newLevel);
+                    setRiskLevel(newRiskIdx);
+
+                    if (newRiskIdx > currentRiskIdx) {
+                        // El peligro ha aumentado: enviar alerta al chat
+                        const namesInSpanish = detectedThreats.map(t => {
+                            const key = t.toLowerCase().trim();
+                            return threatTranslations[key] || t;
+                        }).join(', ');
+                        pushNotif(
+                            newRiskIdx >= 3 ? 'emergency' : 'error',
+                            'PELIGRO DETECTADO',
+                            `Objetos detectados: ${namesInSpanish}. Nivel de riesgo sube a ${newLevel}.`
+                        );
+                        appendLog(`⚠️ RIESGO ELEVADO a ${newLevel} por detección de: ${namesInSpanish}.`, newRiskIdx >= 3 ? 'high' : 'med');
+                    } else {
+                        // El peligro ha disminuido: notificar reducción
+                        pushNotif(
+                            'info',
+                            'RIESGO REDUCIDO',
+                            `Zona despejada. Nivel de riesgo bajó a ${newLevel}.`
+                        );
+                        appendLog(` Nivel de riesgo estabilizado en ${newLevel}.`, '');
+                    }
+
+                    currentRiskIdx = newRiskIdx;
+                }
+            }
+        } catch (error) {
+            console.warn('Error al conectar con ia_server para leer detecciones:', error);
+        }
+    }
+
+    // Polling cada 1.5 segundos para rastrear cambios en tiempo real
+    setInterval(checkIADetections, 1500);
 
     /* ═══════════════════════════════════════════
        6. POSICIÓN DEL ROBOT (ROS2 via rosbridge)
     ═══════════════════════════════════════════ */
-    const posXEl = document.getElementById('posX');
-    const posYEl = document.getElementById('posY');
+    const posXEl = document.getElementById('pos_x');
+    const posYEl = document.getElementById('pos_y');
     let rosListenerAttached = false;
+
+    function updateZoneDisplay(x, y) {
+        const el = document.getElementById("pos_zone");
+        if (!el) return;
+        if (x < 5.0 && y >= 5.0) {
+            el.textContent = "Zona delantera";
+            el.style.color = "#2ecc71";
+        } else if (x >= 5.0 && y >= 5.0) {
+            el.textContent = "Zona de árboles";
+            el.style.color = "#27ae60";
+        } else if (x < 5.0 && y < 5.0) {
+            el.textContent = "Zona trasera";
+            el.style.color = "#e67e22";
+        } else {
+            el.textContent = "Zona descampado";
+            el.style.color = "#9b59b6";
+        }
+    }
 
     function tryAttachRosListener() {
         if (rosListenerAttached) return;
@@ -248,8 +312,11 @@ document.addEventListener('DOMContentLoaded', () => {
             name: '/odom',
             messageType: 'nav_msgs/Odometry',
         }).subscribe(msg => {
-            if (posXEl) posXEl.textContent = msg.pose.pose.position.x.toFixed(2);
-            if (posYEl) posYEl.textContent = msg.pose.pose.position.y.toFixed(2);
+            const x = msg.pose.pose.position.x;
+            const y = msg.pose.pose.position.y;
+            if (posXEl) posXEl.textContent = x.toFixed(2);
+            if (posYEl) posYEl.textContent = y.toFixed(2);
+            updateZoneDisplay(x, y);
         });
 
         // /robot_position  (geometry_msgs/Point) — topic personalizado opcional
@@ -260,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).subscribe(msg => {
             if (posXEl) posXEl.textContent = msg.x.toFixed(2);
             if (posYEl) posYEl.textContent = msg.y.toFixed(2);
+            updateZoneDisplay(msg.x, msg.y);
         });
     }
     setInterval(tryAttachRosListener, 1000);

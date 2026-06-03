@@ -1,104 +1,84 @@
 /**
- * configuracion.js – Fireye Configuración v2
- * - Gestión de pestañas
- * - Selección de botones radio
- * - Guardado/restauración de estado con localStorage
+ * @file configuracion.js
+ * @brief Control de interfaz para el sistema de pestañas y botones.
  */
 
-/* ═══════════════════════════════════════
-   PESTAÑAS
-═══════════════════════════════════════ */
 function openTab(evt, tabName) {
-    document.querySelectorAll('.tab-content').forEach(el => {
-        el.style.display = 'none';
-        el.classList.remove('active');
-    });
-    document.querySelectorAll('.tab-link').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    document.getElementById(tabName).style.display = 'block';
-    document.getElementById(tabName).classList.add('active');
-    evt.currentTarget.classList.add('active');
+    let i, tabcontent, tablinks;
+
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+        tabcontent[i].classList.remove("active");
+    }
+
+    tablinks = document.getElementsByClassName("tab-link");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
 }
 
-/* ═══════════════════════════════════════
-   ESTADO — clave única por botón
-═══════════════════════════════════════ */
-const STORAGE_KEY = 'fireye_config_v1';
+document.addEventListener("DOMContentLoaded", () => {
+    // Lógica para los grupos de botones (cambio de colores y alertas)
+    const buttonGroups = document.querySelectorAll('.settings-actions');
 
-function cargarEstado() {
-    try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    } catch { return {}; }
-}
+    buttonGroups.forEach(group => {
+        const buttons = group.querySelectorAll('.btn');
 
-function guardarEstado(estado) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
-}
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tipo = button.getAttribute('data-type');
+                const valor = button.getAttribute('data-value');
 
-/* ═══════════════════════════════════════
-   BOTONES RADIO — selección visual
-═══════════════════════════════════════ */
-const TIPOS_RADIO = ['modo', 'cifrado', 'protocolo', 'sensibilidad'];
+                if (["modo", "cifrado", "protocolo", "sensibilidad"].includes(tipo)) {
+                    buttons.forEach(btn => {
+                        btn.classList.remove('btn-red');
+                        btn.classList.add('btn-white');
+                    });
+                    button.classList.add('btn-red');
+                    button.classList.remove('btn-white');
+                }
 
-function aplicarSeleccion(tipo, valor) {
-    document.querySelectorAll(`[data-type="${tipo}"]`).forEach(btn => {
-        const activo = btn.getAttribute('data-value') === valor;
-        btn.classList.toggle('btn-red',   activo);
-        btn.classList.toggle('btn-white', !activo);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    /* — Restaurar estado guardado — */
-    const estado = cargarEstado();
-    TIPOS_RADIO.forEach(tipo => {
-        if (estado[tipo]) aplicarSeleccion(tipo, estado[tipo]);
-    });
-
-    /* — Eventos de botones — */
-    document.querySelectorAll('.settings-actions .btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const tipo  = btn.getAttribute('data-type');
-            const valor = btn.getAttribute('data-value');
-            if (!tipo || !valor) return;
-
-            if (TIPOS_RADIO.includes(tipo)) {
-                aplicarSeleccion(tipo, valor);
-            }
-
-            ejecutarAccion(tipo, valor);
+                ejecutarAccion(tipo, valor);
+            });
         });
     });
 
-    /* — Botón GUARDAR — */
-    document.querySelector('.btn-save')?.addEventListener('click', () => {
-        const estado = cargarEstado();
+    // Lógica para el selector de hora personalizado
+    const timeInput = document.getElementById('horaDescanso');
+    const btnUp = document.getElementById('btnTimeUp');
+    const btnDown = document.getElementById('btnTimeDown');
 
-        // Recorrer todos los botones activos y guardar su tipo/valor
-        TIPOS_RADIO.forEach(tipo => {
-            const activo = document.querySelector(`[data-type="${tipo}"].btn-red`);
-            if (activo) estado[tipo] = activo.getAttribute('data-value');
+    if (timeInput && btnUp && btnDown) {
+        btnUp.addEventListener('click', () => {
+            timeInput.stepUp();
+            forzarFormato(timeInput);
         });
 
-        guardarEstado(estado);
+        btnDown.addEventListener('click', () => {
+            timeInput.stepDown();
+            forzarFormato(timeInput);
+        });
 
-        // Feedback visual en el botón
-        const btnSave = document.querySelector('.btn-save');
-        const textoOriginal = btnSave.textContent;
-        btnSave.textContent = '✓ GUARDADO';
-        btnSave.style.background = '#2a7a2a';
-        setTimeout(() => {
-            btnSave.textContent = textoOriginal;
-            btnSave.style.background = '';
-        }, 1800);
-    });
-
+        timeInput.addEventListener('change', function() {
+            forzarFormato(this);
+        });
+    }
 });
 
 function ejecutarAccion(tipo, valor) {
+    console.log(`Ejecutando: ${tipo} -> ${valor}`);
+    
     switch (tipo) {
+        case 'modo':
+            // Lógica para cambiar el movimiento del robot
+            break;
+        case 'sensibilidad':
+            // Lógica para ajustar umbrales térmicos
+            break;
         case 'mantenimiento':
             alert(`Iniciando proceso de ${valor}...`);
             break;
@@ -107,3 +87,55 @@ function ejecutarAccion(tipo, valor) {
             break;
     }
 }
+
+function forzarFormato(inputElement) {
+    if (!inputElement.value) return; 
+    
+    let [hours, minutes] = inputElement.value.split(':');
+    let mins = parseInt(minutes);
+    let hrs = parseInt(hours);
+
+    let roundedMins = '00';
+    
+    if (mins >= 15 && mins < 45) {
+        roundedMins = '30';
+    } else if (mins >= 45) {
+        hrs = (hrs + 1) % 24; 
+    }
+
+    const formattedHours = hrs.toString().padStart(2, '0');
+    inputElement.value = `${formattedHours}:${roundedMins}`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Referencias a los elementos del DOM
+    const notificationBtn = document.getElementById('notificationBtn');
+    const notifOverlay = document.getElementById('notifOverlay');
+    const btnCloseNotif = document.getElementById('btn_closeNotifPopup');
+    const btnCloseNotif2 = document.getElementById('btn_closeNotifPopup2');
+    const btnClearNotif = document.getElementById('btn_clearNotifPopup');
+    const notifList = document.getElementById('notifPopupList');
+
+    // 1. Abrir popup al hacer clic en la campana
+    if (notificationBtn && notifOverlay) {
+        notificationBtn.addEventListener('click', () => {
+            notifOverlay.style.display = 'flex';
+        });
+    }
+
+    // 2. Función para cerrar el popup
+    const closeNotifPopup = () => {
+        if (notifOverlay) notifOverlay.style.display = 'none';
+    };
+
+    // Asignar el cierre a la "X" y al botón "CERRAR"
+    if (btnCloseNotif) btnCloseNotif.addEventListener('click', closeNotifPopup);
+    if (btnCloseNotif2) btnCloseNotif2.addEventListener('click', closeNotifPopup);
+
+    // 3. Botón para limpiar todas las notificaciones
+    if (btnClearNotif && notifList) {
+        btnClearNotif.addEventListener('click', () => {
+            notifList.innerHTML = '<li class="fr-notif-item"><p class="fr-notif-text" style="text-align:center;">No hay notificaciones nuevas.</p></li>';
+        });
+    }
+});

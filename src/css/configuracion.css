@@ -1,177 +1,147 @@
 /**
- * configuracion.css – Fireye Configuración (v3)
- * Alineado visualmente con paginaRobot y las imágenes de referencia
+ * @file configuracion.css
+ * @brief Estilos ajustados para replicar fielmente el diseño de Fireye.
  */
 
-:root {
-    --red:       #870000;
-    --red-dark:  #5a0000;
-    --red-light: #c0392b;
-    --bg:        #DFDFDF;
-    --white:     #fff;
-    --panel-bg:  #c8c8c8;
-    --tab-bg:    #fff;
-    --font:      'Segoe UI', Arial, sans-serif;
+@font-face {
+    font-family: 'EFour Digital';
+    src: url('../fonts/EFourDigital.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+    --primary-red: #9e0000;
+    --bg-gray: #e6e6e6;
+    --panel-gray: #c4c4c4;
+    --tab-inactive: #f0f0f0;
+    --text-dark: #222222;
+    --white: #ffffff;
+}
 
 body {
-    font-family: var(--font);
-    background-color: var(--bg);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-gray);
+    margin: 0;
+    padding: 20px 40px;
+    color: var(--text-dark);
 }
 
-/* Reset botones — elimina el azul por defecto del navegador */
-button {
-    -webkit-appearance: none;
-    appearance: none;
-    outline: none;
-}
-button:focus { outline: none; box-shadow: none; }
-
-/* ═══════════════════════════════════
-   HEADER — igual que paginaRobot
-═══════════════════════════════════ */
+/* --- HEADER --- */
 .header {
-    height: 68px;
-    background: var(--bg);
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 10px;
+    height: 80px;
+}
+
+.logo-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 1.4rem;
-    border-bottom: 2px solid #bbb;
 }
 
-.logo-container { display: flex; align-items: center; }
-.main-logo { height: 50px; width: auto; }
+.main-logo {
+    width: 140px;
+    object-fit: contain;
+}
 
 .header-icons {
     display: flex;
-    gap: 0.5rem;
+    gap: 25px;
     align-items: center;
 }
 
-.icon-btn {
-    width: 42px; height: 42px;
-    background: var(--red);
-    border: none;
-    border-radius: 8px;
-    padding: 9px;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s;
-}
-.icon-btn:hover { background: var(--red-light); }
-
 .icon-img {
-    width: 100%; height: 100%;
-    object-fit: contain;
-    filter: invert(1);
-    display: block;
+    width: 2.2rem; 
+    height: 2.2rem;
+    cursor: pointer;
 }
 
-/* ═══════════════════════════════════
-   LAYOUT PRINCIPAL
-═══════════════════════════════════ */
 .config-container {
-    flex: 1;
-    padding: 1.4rem 2rem 2rem;
+    max-width: 90rem;
+    margin: 0 auto;
 }
 
-h1 {
-    font-family: 'Arial Black', Arial, sans-serif;
-    color: #222;
-    font-size: 1.7rem;
+/* --- TIPOGRAFÍA TECNOLÓGICA --- */
+.main-title {
+    font-family: 'EFour Digital', 'Arial Black', sans-serif;
+    font-size: 2rem;
+    margin-left: 40px;
+    letter-spacing: 1px;
+    color: black;
+}
+
+.tech-title {
+    font-family: 'EFour Digital', 'Arial Black', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.8rem;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: black;
 }
 
-/* ═══════════════════════════════════
-   PESTAÑAS
-═══════════════════════════════════ */
+/* --- TABS (Pestañas) --- */
 .tabs {
+    margin-left: 40px;
     display: flex;
-    gap: 0;
+    position: relative;
+    z-index: 2;
+    transform: translateY(2px);
 }
 
 .tab-link {
-    background: var(--white);
-    border: 2px solid var(--red);
-    border-bottom: none;
-    padding: 9px 28px;
-    border-radius: 12px 12px 0 0;
+    background: var(--tab-inactive);
+    border: 2px solid var(--primary-red);
+    border-radius: 15px 15px 0 0;
+    padding: 12px 30px;
     font-weight: bold;
-    font-size: 0.82rem;
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: 0.2s;
-    color: #333;
-    font-family: var(--font);
+    margin-right: 5px;
+    color: black;
+    transition: background 0.3s;
 }
 
 .tab-link.active {
-    background: var(--white);
-    box-shadow: inset 0px 4px 0px var(--red);
-    color: #111;
+    background: var(--panel-gray);
+    border-bottom: 2px solid var(--panel-gray);
 }
 
-.tab-link:hover:not(.active) { background: #f0f0f0; }
-
-/* ═══════════════════════════════════
-   PANEL CONTENIDO
-═══════════════════════════════════ */
+/* --- PANEL PRINCIPAL --- */
 .content-wrapper {
-    background: #c8c8c8;
-    border: 2px solid var(--red);
-    border-radius: 0 16px 16px 16px;
-    padding: 1.6rem 1.8rem 5rem;
-    position: relative;
-    min-height: 420px;
+    background: var(--panel-gray);
+    border: 2px solid var(--primary-red);
+    border-radius: 0 25px 25px 25px;
+    margin: 0 40px;
+    padding: 40px;
+    padding-bottom: 90px; 
+    position: relative;   
+    min-height: 350px;
+    z-index: 1;
 }
 
-/* ═══════════════════════════════════
-   TABS VISIBILIDAD
-═══════════════════════════════════ */
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-/* ═══════════════════════════════════
-   FILAS DE CONFIGURACIÓN
-═══════════════════════════════════ */
+/* --- FILAS DE CONFIGURACIÓN --- */
 .settings-row {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    padding-bottom: 1.2rem;
-    margin-bottom: 1.2rem;
-    border-bottom: 1px solid #ddd;
-}
-.settings-row.no-border {
-    border-bottom: none;
+    margin-bottom: 35px;
+    align-items: center;
 }
 
-.settings-info {
-    flex: 1.4;
-    padding-right: 1.5rem;
+.settings-info { 
+    flex: 1.1; 
+    padding-right: 20px;
 }
 
-.settings-info h3 {
-    font-family: 'Arial Black', Arial, sans-serif;
-    font-size: 0.95rem;
-    color: #111;
-    text-transform: uppercase;
-    margin-bottom: 0.35rem;
-    letter-spacing: 0.03em;
-}
-
-.description,
-.small-text {
-    font-size: 0.8rem;
-    line-height: 1.45;
-    color: #444;
+.description { 
+    font-size: 0.85rem; 
+    line-height: 1.4; 
+    color: #333; 
+    margin: 0;
 }
 
 .settings-actions {
@@ -179,178 +149,252 @@ h1 {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 15px;
 }
 
-.settings-actions.flex-col {
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-/* ═══════════════════════════════════
-   BOTONES
-═══════════════════════════════════ */
+/* --- BOTONES DE OPCIONES --- */
 .btn {
-    border: 2px solid var(--red);
+    border: 2px solid var(--primary-red);
     border-radius: 25px;
-    padding: 7px 22px;
+    padding: 8px 25px;
     font-weight: bold;
-    font-size: 0.82rem;
-    font-family: var(--font);
-    min-width: 100px;
+    font-size: 0.9rem;
+    min-width: 110px;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-    white-space: nowrap;
+    transition: 0.2s;
 }
 
-.btn-red   { background: var(--red); color: #fff; }
-.btn-red:hover { background: var(--red-dark); }
-.btn-white { background: var(--white); color: #111; }
-.btn-white:hover { background: var(--red); color: #fff; }
+.btn-red { 
+    background: var(--primary-red); 
+    color: white; 
+}
 
-/* ═══════════════════════════════════
-   BOTÓN GUARDAR
-═══════════════════════════════════ */
+.btn-white { 
+    background: white; 
+    color: black; 
+}
+
+/* --- BOTÓN GUARDAR --- */
 .btn-save {
     position: absolute;
-    bottom: 1.2rem;
-    right: 1.5rem;
-    background: var(--red);
-    color: #fff;
+    bottom: 25px;
+    right: 35px;
+    background: var(--primary-red);
+    color: white;
     border: none;
-    padding: 10px 44px;
-    border-radius: 22px;
-    font-family: 'Arial Black', Arial, sans-serif;
-    font-size: 0.92rem;
+    padding: 10px 40px;
+    border-radius: 25px;
+    font-size: 1rem;
     cursor: pointer;
-    letter-spacing: 0.06em;
-    transition: background 0.2s;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    letter-spacing: 1px;
 }
-.btn-save:hover { background: var(--red-dark); }
 
-/* ═══════════════════════════════════
-   ESTACIÓN DE CARGA — iconos de estado
-═══════════════════════════════════ */
-.status-icons {
+.btn-save:hover { background: #7a0000; }
+
+/* --- ESTACIÓN DE CARGA (Iconos y Textos) --- */
+.status-container {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
-    font-size: 0.82rem;
+    gap: 20px;
+    justify-content: flex-end;
 }
+
 .status-item {
     display: flex;
     align-items: center;
-    gap: 6px;
-    background: var(--bg);
-    border-radius: 8px;
-    padding: 5px 12px;
-    font-weight: normal;
-    color: #333;
+    gap: 10px;
 }
-.status-item strong { color: #111; }
 
-/* ═══════════════════════════════════
-   ZONA SELECTOR + MAPA
-═══════════════════════════════════ */
-.zone-selector { margin-top: 0.7rem; }
-.zone-selector label {
-    font-size: 0.78rem;
-    font-weight: bold;
-    color: #555;
+.status-icon-img {
+    width: 2.2rem;
+    height: 2.2rem;
+    min-width: 2.2rem; 
+    object-fit: contain;
     display: block;
-    margin-bottom: 4px;
+    color: transparent; 
 }
-.zone-input {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    border: 1.5px solid var(--red);
-    border-radius: 8px;
-    padding: 4px 12px;
-    font-size: 0.82rem;
-    background: var(--white);
-    color: #222;
-    cursor: pointer;
-}
-.zone-input span { color: var(--red); font-size: 1rem; }
 
-.map-container {
-    background: var(--white);
-    border: 2px solid var(--red);
-    border-radius: 14px;
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
+.status-text {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
 }
-.map-img { width: 100%; height: 100%; object-fit: cover; }
 
-/* ═══════════════════════════════════
-   CONTACTOS DE CONFIANZA
-═══════════════════════════════════ */
-.contact-list {
-    list-style: none;
-    margin-top: 0.5rem;
+.status-label {
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: #111;
+    white-space: nowrap; 
+}
+
+.status-value {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #111;
+    white-space: nowrap;
+}
+
+/* --- SELECTOR DE HORA FUNCIONAL --- */
+.time-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.time-input {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #111;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    width: 75px; 
+}
+
+.time-input::-webkit-calendar-picker-indicator,
+.time-input::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.time-spinners {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-}
-.contact-list li {
-    font-size: 0.82rem;
-    color: #333;
-    background: var(--bg);
-    border-radius: 6px;
-    padding: 4px 10px;
+    justify-content: center;
+    gap: 2px;
 }
 
-.btn-agregar {
-    border: 2px solid var(--red);
-    border-radius: 8px;
-    background: var(--white);
+.spinner-btn {
+    font-size: 0.7rem;
+    color: #111;
+    cursor: pointer;
+    line-height: 1;
+    user-select: none; 
+    transition: color 0.2s;
+}
+
+.spinner-btn:hover {
+    color: var(--primary-red);
+}
+
+/* --- LISTAS CON LÍNEA ROJA (CONTACTOS Y MANTENIMIENTO) --- */
+.contact-list-container,
+.status-list-container {
+    margin-top: 15px;
+}
+
+.contact-list,
+.status-list {
+    list-style-type: none; 
+    padding-left: 15px;
+    margin: 0 0 15px 0;
+    border-left: 2px solid var(--primary-red); 
+}
+
+.contact-list li,
+.status-list li {
+    font-size: 0.85rem;
+    color: #111;
+    margin-bottom: 15px;
+    font-weight: bold; 
+}
+
+.contact-list li:last-child,
+.status-list li:last-child {
+    margin-bottom: 0;
+}
+
+.btn-small {
+    padding: 6px 20px;
+    font-size: 0.8rem;
+    min-width: auto;
+}
+
+/* --- SECCIÓN MANTENIMIENTO (BOTONES) --- */
+.actions-column {
+    flex-direction: column;
+    align-items: flex-end; 
+    gap: 12px;
+}
+
+.actions-column .btn {
+    min-width: 240px; 
+}
+
+/* =========================================
+   POPUP DE NOTIFICACIONES
+   ========================================= */
+.fr-notif-popup {
+    max-width: 440px;
+    padding: 0;
+    overflow: hidden;
+}
+.fr-notif-header {
+    background: var(--red);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.2rem;
+}
+.fr-notif-header-title {
+    font-family: var(--font);
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    font-weight: bold;
+}
+.fr-notif-close {
+    background: #fff;
     color: var(--red);
-    font-weight: bold;
-    font-size: 0.8rem;
-    padding: 5px 16px;
+    border: none;
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    font-size: 1.2rem; font-weight: bold;
     cursor: pointer;
-    margin-top: 0.5rem;
-    transition: background 0.2s, color 0.2s;
-    align-self: flex-start;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
 }
-.btn-agregar:hover { background: var(--red); color: #fff; }
-
-/* ═══════════════════════════════════
-   ACTUALIZACIÓN DE SOFTWARE
-═══════════════════════════════════ */
-.update-box {
-    border: 1.5px solid #bbb;
-    border-radius: 8px;
-    padding: 0.6rem 0.9rem;
-    margin-top: 0.6rem;
-    background: #f7f7f7;
+.fr-notif-list {
+    list-style: none;
+    padding: 0.6rem 1.2rem;
+    max-height: 320px;
+    overflow-y: auto;
+}
+.fr-notif-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #ddd;
+}
+.fr-notif-item:last-child { border-bottom: none; }
+.fr-notif-label {
+    font-family: Arial, sans-serif;
     font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    display: block;
+}
+.fr-notif-emergency .fr-notif-label { color: var(--red); }
+.fr-notif-error .fr-notif-label     { color: #b07000; }
+.fr-notif-info .fr-notif-label      { color: #1a7abf; }
+.fr-notif-text {
+    font-family: Arial, sans-serif;
+    font-size: 0.78rem;
     color: #333;
+    line-height: 1.4;
+    margin: 0;
+}
+.fr-notif-text em { color: #777; font-style: normal; }
+
+.fr-notif-footer {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    justify-content: flex-end;
+    gap: 0.7rem;
+    padding: 0.8rem 1.2rem;
+    border-top: 1px solid #ddd;
 }
-.update-box .update-pending { color: var(--red); font-weight: bold; }
-.update-box .update-last    { color: #666; }
-
-.btn-actualizar {
-    border: 2px solid var(--red);
-    border-radius: 8px;
-    background: var(--white);
-    color: #333;
+.fr-notif-footer .fr-btn {
     font-size: 0.8rem;
-    font-weight: bold;
-    padding: 5px 18px;
-    cursor: pointer;
-    margin-top: 0.5rem;
-    align-self: flex-start;
-    transition: background 0.2s, color 0.2s;
+    padding: 0.4rem 1rem;
 }
-.btn-actualizar:hover { background: var(--red); color: #fff; }

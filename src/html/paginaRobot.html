@@ -33,17 +33,14 @@
 <body>
 
 <!-- ══════════ HEADER ══════════ -->
-<header class="fr-header">
-    <a href="../index.html" class="fr-logo-link">
-        <img src="../img/logoFireyeNegro.png" alt="Fireye Logo" class="fr-logo">
+<header class="header">
+    <a href="../index.html" class="logo-container" id="logo" style="text-decoration: none;">
+        <img src="../img/logo-ojo.png" alt="Logo de la empresa" class="main-logo">
     </a>
-    <div class="fr-header-actions">
-        <button id="notificationBtn" class="fr-icon-btn" title="Notificaciones">
-            <img src="../img/bell-svgrepo-com.svg" alt="Notificaciones">
-        </button>
-        <button id="toggleMenuBtn" class="fr-icon-btn" title="Menú">
-            <img src="../img/menu-svgrepo-com.svg" alt="Menú">
-        </button>
+    
+    <div class="header-icons">
+        <img src="../img/bell-svgrepo-com.svg" alt="Notificaciones" class="icon-img" id="notificationBtn" title="Notificaciones" tabindex="0">
+        <img src="../img/menu-svgrepo-com.svg" alt="Menú" class="icon-img" id="toggleMenuBtn" title="Menú" tabindex="0">
     </div>
 </header>
 
@@ -75,14 +72,6 @@
         <!-- Análisis en directo -->
         <h3 class="fr-section-title">Análisis en Directo</h3>
         <div id="analysisLog" class="fr-analysis-log">
-            <p>[09:00] Sistema encendido. Revisión de sensores completada.</p>
-            <p>[09:05] Conexión establecida. GPS activo en Sector Norte.</p>
-            <p>[09:15] Carga solar activa. Rendimiento de batería óptimo.</p>
-            <p>[09:30] Patrulla iniciada. Vigilando perímetro de la finca.</p>
-            <p>[09:45] Temperatura del suelo: 24°C. Nivel de Riesgo: Bajo.</p>
-            <p>[10:10] Objeto detectado en el camino. Analizando imagen...</p>
-            <p>[10:12] Obstáculo identificado. El robot continúa la ruta.</p>
-            <p>[10:30] Señal de vigilancia estable. Transmitiendo datos.</p>
         </div>
 
     </section>
@@ -132,13 +121,13 @@
         <h3 class="fr-section-title">Mapa movimiento</h3>
         <canvas id="mapCanvas" class="fr-map-canvas"></canvas>
 
-        <div class="fr-position-block">
-            <p class="fr-position-title">Posición del robot:</p>
-            <div class="fr-position-values">
-                <span class="fr-pos-label">X:</span>
-                <span class="fr-pos-value" id="pos_x">0.00</span>
-                <span class="fr-pos-label">Y:</span>
-                <span class="fr-pos-value" id="pos_y">0.00</span>
+        <div class="fr-position-block text-center">
+            <p class="fr-position-title mb-1">Zona actual:</p>
+            <p id="pos_zone" class="fr-position-zone mb-2" style="font-size: 1.15rem; font-weight: bold; color: var(--green, #27ae60);">Calculando...</p>
+            <div class="fr-position-values-small" style="font-size: 0.8rem; color: #666;">
+                <span>X: <span id="pos_x">0.00</span></span>
+                <span class="mx-2">|</span>
+                <span>Y: <span id="pos_y">0.00</span></span>
             </div>
         </div>
 

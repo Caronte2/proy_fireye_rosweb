@@ -41,38 +41,48 @@ body {
     border: none;
     border-radius: 0;
 }
+/* =========================================
+   HEADER ESTILO CONFIGURACIÓN
+   ========================================= */
+.header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 20px; /* Margen para separar del dashboard */
+    height: 80px;
+    padding: 0 40px; /* Replicamos el padding lateral de configuración */
+    background-color: transparent;
+}
 
-/* ═════════════════════════════════════
-   HEADER
-═════════════════════════════════════ */
-.fr-header {
-    height: 68px;
-    background: var(--bg);
+.logo-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 1.4rem;
-    border-bottom: 2px solid #bbb;
-    position: relative;
-    z-index: 100;
+    text-decoration: none;
 }
-.fr-logo { height: 50px; width: auto; }
-.fr-logo-link { display: flex; align-items: center; }
 
-.fr-header-actions { display: flex; align-items: center; gap: 0.5rem; }
+.main-logo {
+    width: 140px;
+    object-fit: contain;
+    margin-top: 15px;
+}
 
-.fr-icon-btn {
-    width: 42px; height: 42px;
-    background: var(--red);
-    border: none; border-radius: 8px;
+.header-icons {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+/* Estilos de los iconos con efecto hover para que parezcan botones interactivos */
+.icon-img {
+    width: 2.2rem; 
+    height: 2.2rem;
     cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s;
-    padding: 7px;
+    transition: transform 0.2s ease;
 }
-.fr-icon-btn:hover { background: var(--red-light); }
-.fr-icon-btn img { width: 22px; height: 22px; filter: invert(1); }
 
+.icon-img:hover {
+    transform: scale(1.1);
+}
 /* ═════════════════════════════════════
    MAIN – grid 3 columnas, sin cards
 ═════════════════════════════════════ */
