@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
         // Obtenemos los valores de los inputs
-        const user = document.getElementById('userId').value;
-        const pass = document.getElementById('password').value;
+        const user = document.getElementById('inputId').value;
+        const pass = document.getElementById('inputPassword').value;
 
         // El "puente": Validamos con un IF
         // Cambia 'admin' y '1234' por lo que tú quieras
